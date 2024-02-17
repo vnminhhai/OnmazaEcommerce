@@ -81,7 +81,7 @@ Description varchar(255)
  First_Name nvarchar(255),
  Last_Name nvarchar(255),
  Email varchar(255),
- Mobile_phone varchar(255),
+ Mobile_Phone varchar(255),
  Address nvarchar(255),
  Country nvarchar(255)
  );

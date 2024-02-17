@@ -16,6 +16,8 @@ public class Customer {
     private String mobile_phone;
     private String address;
     private String country;
+    private String user_name;
+    private String password;
 
     public Customer() {
     }
@@ -84,6 +86,22 @@ public class Customer {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

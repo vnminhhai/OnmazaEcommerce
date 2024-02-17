@@ -57,14 +57,23 @@ Description varchar(255)
  
  create table Items(
  ID int primary key,
+ Name nvarchar(255),
  Description varchar(255),
  Price float not null,
- Stock_Amount date,
  Category_ID int,
  FOREIGN KEY (Category_ID) REFERENCES Category(ID),
  check(Price>=0)
  );
  
+ create table Variants(
+ Name nvarchar(255),
+ Image image,
+ Item_ID int references Items(ID),
+ Stock_Amount int not null,
+ check(Stock_Amount>=0),
+ primary key(Name, Item_ID)
+ );
+
  create table Customers(
  ID int primary key,
  User_Name varchar(255) unique not null,
@@ -116,16 +125,29 @@ VALUES
     (4, 'Beauty', 'Beauty category');
 
 -- Inserting data into Items table
-INSERT INTO Items (ID, Description, Price, Stock_Amount, Category_ID)
+INSERT INTO Items (ID, Name, Description, Price, Category_ID)
 VALUES
-    (1, 'Smartphone', 500, '2024-02-15', 1),
-    (2, 'Laptop', 1000, '2024-02-15', 1),
-    (3, 'T-Shirt', 20, '2024-02-15', 2),
-    (4, 'Jeans', 50, '2024-02-15', 2),
-    (5, 'Sofa', 800, '2024-02-15', 3),
-    (6, 'Bed Frame', 600, '2024-02-15', 3),
-    (7, 'Lipstick', 15, '2024-02-15', 4),
-    (8, 'Shampoo', 10, '2024-02-15', 4);
+    (1, 'Iphone', 'Smartphone from Apple', 500, 1),
+    (2, 'Laptop', 'Demo', 1000, 1),
+    (3, 'T-Shirt', 'Demo', 20, 2),
+    (4, 'Jeans', 'Demo', 50, 2),
+    (5, 'Sofa', 'Demo', 800, 3),
+    (6, 'Bed Frame', 'Demo', 600, 3),
+    (7, 'Lipstick', 'Demo', 15, 4),
+    (8, 'Shampoo', 'Demo', 10, 4);
+
+	-- Inserting data into Variants table
+INSERT INTO Variants (Name, Image, Stock_Amount, Item_ID)
+VALUES
+    ('Black', NULL, 500, 1),
+	('Blue', NULL, 200, 1),
+    ('Laptop', 'Demo', 1000, 2),
+    ('T-Shirt', 'Demo', 20, 3),
+    ('Jeans', 'Demo', 50, 4),
+    ('Sofa', 'Demo', 800, 5),
+    ('Bed Frame', 'Demo', 600, 6),
+    ('Lipstick', 'Demo', 15, 7),
+    ('Shampoo', 'Demo', 10, 8);
 
 -- Inserting data into Customers table
 INSERT INTO Customers (ID, User_Name, Password, First_Name, Last_Name, Email, Mobile_phone, Address, Country)

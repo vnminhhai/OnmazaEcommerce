@@ -4,10 +4,26 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author ADMIN
  */
 public class Payment {
+    private int id;
+    private float amount;
+    private Date date;
+    private int order_id;
+
+    public Payment() {
+    }
+
+    public Payment(int id, float amount, Date date, int order_id) {
+        this.id = id;
+        this.amount = amount;
+        this.date = date;
+        this.order_id = order_id;
+    }
     
 }

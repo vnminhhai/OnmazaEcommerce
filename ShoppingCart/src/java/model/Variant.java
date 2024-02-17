@@ -8,18 +8,18 @@ package model;
  *
  * @author ADMIN
  */
-public class Category {
-    private int id;
+public class Variant {
     private String name;
-    private String description;
+    private byte[] image;
+    private int stock_amount;
 
-  
-    public Category(int id, String name, String description) {
-        this.id = id;
+    public Variant(String name, byte[] image, int stock_amount) {
         this.name = name;
-        this.description = description;
+        this.image = image;
+        this.stock_amount = stock_amount;
     }
-  public Category() {
+
+    public Variant() {
     }
-    
+
 }

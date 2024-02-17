@@ -104,13 +104,11 @@ Description varchar(255)
  );
  
  create table Payments(
- Payment_ID int primary key,
+ ID int primary key,
  Amount float NOT NULL,
  Date date NOT NULL,
  Order_ID int,
- Customer_ID int,
  FOREIGN KEY (Order_ID) REFERENCES Orders(ID),
- FOREIGN KEY (Customer_ID) REFERENCES Customers(ID),
  check(Amount>0)
  );
 
@@ -175,8 +173,8 @@ VALUES
     (3, 7, 15, 4);
 
 -- Inserting data into Payments table
-INSERT INTO Payments (Payment_ID, Amount, Date, Order_ID, Customer_ID)
+INSERT INTO Payments (ID, Amount, Date, Order_ID)
 VALUES
-    (1, 1100, '2024-02-15', 1, 1),
-    (2, 110, '2024-02-15', 2, 2),
-    (3, 815, '2024-02-15', 3, 3);
+    (1, 1100, '2024-02-15', 1),
+    (2, 110, '2024-02-15', 2),
+    (3, 815, '2024-02-15', 3);

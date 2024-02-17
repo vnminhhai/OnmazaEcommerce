@@ -27,5 +27,45 @@ public class Order {
         this.required_date = required_date;
         this.ship_address = ship_address;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCustomer_id() {
+        return customer_id;
+    }
+
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
+    }
+
+    public Date getOrder_date() {
+        return order_date;
+    }
+
+    public void setOrder_date(Date order_date) {
+        this.order_date = order_date;
+    }
+
+    public Date getRequired_date() {
+        return required_date;
+    }
+
+    public void setRequired_date(Date required_date) {
+        this.required_date = required_date;
+    }
+
+    public String getShip_address() {
+        return ship_address;
+    }
+
+    public void setShip_address(String ship_address) {
+        this.ship_address = ship_address;
+    }
     
 }

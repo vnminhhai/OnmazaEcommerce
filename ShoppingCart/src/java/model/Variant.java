@@ -22,4 +22,28 @@ public class Variant {
     public Variant() {
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public int getStock_amount() {
+        return stock_amount;
+    }
+
+    public void setStock_amount(int stock_amount) {
+        this.stock_amount = stock_amount;
+    }
+
 }

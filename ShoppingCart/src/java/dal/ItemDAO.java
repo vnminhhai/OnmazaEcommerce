@@ -83,28 +83,15 @@ public class ItemDAO extends DBContext{
         }
     }
     public void update(int id, Item c) {
-        String sql = "update Items set User_Name=?, Password=?, First_Name=?,"+
-                " Last_Name=?, Email=?, Mobile_Phone=?, Address=?, Country=?)"+
+        String sql = "update Items set Name=?, Description=?, "+
+                " Price=?, Category_ID=?)"+
                 " where ID="+id;
-        String un = c.getUser_name();
-        String pass = c.getPassword();
-        String first = c.getFirst_name();
-        String last = c.getLast_name();
-        String email = c.getEmail();
-        String add = c.getAddress();
-        String country = c.getCountry();
-        String phone = c.getMobile_phone();
         try {
-            PreparedStatement ps  = connection.prepareStatement(sql);
-            ps.setInt(9, id);
-            ps.setString(1, un);
-            ps.setString(2, pass);
-            ps.setString(3, first);
-            ps.setString(4, last);
-            ps.setString(5, email);
-            ps.setString(6, phone);
-            ps.setString(7, add);
-            ps.setString(8, country);
+            PreparedStatement ps  = connection.prepareStatement(sql); ps.setInt(4, id);
+            ps.setString(1, c.getName());
+            ps.setString(2, c.getDescription());
+            ps.setFloat(3, c.getPrice());
+            ps.setInt(4, c.getCategory().getId());
             ps.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);

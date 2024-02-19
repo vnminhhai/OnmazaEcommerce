@@ -8,10 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Category;
 import model.Item;
+import model.Variant;
 
 /**
  *
@@ -23,6 +25,7 @@ public class ItemDAO extends DBContext{
         ResultSet rs;
         ArrayList<Item> l = new ArrayList<>();
         try {
+            VariantDAO vd = new VariantDAO();
             PreparedStatement ps  = connection.prepareStatement(sql);
             rs=ps.executeQuery();
             while (rs.next()) {
@@ -32,7 +35,8 @@ public class ItemDAO extends DBContext{
                 String name = rs.getString("Name");
                 String des = rs.getString("Description");
                 float price = rs.getFloat("Price");
-                l.add( new Item(id, name, des, price, cat));
+                List<Variant> var = vd.getItemVariantList(id);
+                l.add( new Item(id, name, des, price, cat, var));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,6 +48,7 @@ public class ItemDAO extends DBContext{
         ResultSet rs;
         ArrayList<Item> l = new ArrayList<>();
         try {
+            VariantDAO vd = new VariantDAO();
             PreparedStatement ps  = connection.prepareStatement(sql);
             rs=ps.executeQuery();
             while (rs.next()) {
@@ -53,7 +58,8 @@ public class ItemDAO extends DBContext{
                 String name = rs.getString("Name");
                 String des = rs.getString("Description");
                 float price = rs.getFloat("Price");
-                l.add( new Item(id, name, des, price, cat));
+                List<Variant> var = vd.getItemVariantList(id);
+                l.add( new Item(id, name, des, price, cat, var));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,6 +85,7 @@ public class ItemDAO extends DBContext{
         String sql = "select * from Items where ID="+id;
         ResultSet rs;
         try {
+            VariantDAO vd = new VariantDAO();
             PreparedStatement ps  = connection.prepareStatement(sql);
             rs=ps.executeQuery();
             while (rs.next()) {
@@ -87,7 +94,8 @@ public class ItemDAO extends DBContext{
                 String name = rs.getString("Name");
                 String des = rs.getString("Description");
                 float price = rs.getFloat("Price");
-                return new Item(id, name, des, price, cat);
+                List<Variant> var = vd.getItemVariantList(id);
+                return new Item(id, name, des, price, cat,var);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);

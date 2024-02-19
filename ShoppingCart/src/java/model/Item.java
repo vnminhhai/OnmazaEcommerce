@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author ADMIN
@@ -14,16 +16,18 @@ public class Item {
     private String description;
     private float price;
     private Category category;
+    private List<Variant> variants;
 
     public Item() {
     }
 
-    public Item(int id, String name, String description, float price, Category category) {
+    public Item(int id, String name, String description, float price, Category category, List<Variant> variants) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.category = category;
+        this.variants = variants;
     }
 
     public int getId() {
@@ -65,6 +69,12 @@ public class Item {
     public void setCategory(Category category) {
         this.category = category;
     }
-    
-    
+
+    public List<Variant> getVariants() {
+        return variants;
+    }
+
+    public void setVariants(List<Variant> variants) {
+        this.variants = variants;
+    }
 }

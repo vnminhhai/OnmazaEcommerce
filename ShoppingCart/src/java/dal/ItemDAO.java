@@ -39,6 +39,27 @@ public class ItemDAO extends DBContext{
         }
         return l;
     }
+    public ArrayList<Item> searchItemList(String keyword){
+        String sql = "select * from Items where Name like '%"+keyword+"%'";
+        ResultSet rs;
+        ArrayList<Item> l = new ArrayList<>();
+        try {
+            PreparedStatement ps  = connection.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                int cid = rs.getInt("Category_ID");
+                int id= rs.getInt("ID");
+                Category cat = new CategoryDAO().getRecordById(cid);
+                String name = rs.getString("Name");
+                String des = rs.getString("Description");
+                float price = rs.getFloat("Price");
+                l.add( new Item(id, name, des, price, cat));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
     public void save(Item c) {
         String sql = "insert into Items(ID, Name, Description, Price, Category_ID)"
                 + "values(?,?,?,?,?)";
@@ -83,7 +104,7 @@ public class ItemDAO extends DBContext{
         }
     }
     public void update(int id, Item c) {
-        String sql = "update Items set Name=?, Description=?, "+
+        String sql = "update Items set Name='?', Description='?', "+
                 " Price=?, Category_ID=?)"+
                 " where ID="+id;
         try {

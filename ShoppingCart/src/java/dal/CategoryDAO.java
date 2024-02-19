@@ -58,8 +58,8 @@ public class CategoryDAO extends DBContext{
             PreparedStatement ps  = connection.prepareStatement(sql);
             rs=ps.executeQuery();
             while (rs.next()) {
-                String name = rs.getString("User_Name");
-                String des = rs.getString("Password");
+                String name = rs.getString("Label");
+                String des = rs.getString("Description");
                 return new Category(id, name, des);
             }
         } catch (SQLException ex) {

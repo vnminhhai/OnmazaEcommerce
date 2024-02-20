@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.VariantDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -30,7 +31,12 @@ public class ConfirmOrder extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session==null || session.getAttribute("User_Name")==null) response.sendRedirect("login");
-        
+        else {
+            VariantDAO vd = new VariantDAO();
+            int id = Integer.parseInt(request.getParameter("item"));
+            int left = vd.getRecordByName(id, request.getParameter("variant")).getStock_amount()-Integer.parseInt(request.getParameter("quantity"));
+            vd.updateAmount(id, request.getParameter("variant"), left);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

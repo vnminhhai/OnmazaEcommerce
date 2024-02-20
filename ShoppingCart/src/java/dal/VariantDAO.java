@@ -36,7 +36,7 @@ public class VariantDAO extends DBContext{
         return l;
     }
     public Variant getRecordByName(int id, String name) {
-        String sql = "select * from Variants where Item_ID="+id+"and Name="+name;
+        String sql = "select * from Variants where Item_ID="+id+"and Name='"+name+"'";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -51,7 +51,7 @@ public class VariantDAO extends DBContext{
         return null;
     }
     public void updateAmount(int id, String name, int update_number) {
-        String sql = "update Variants set Stock_Amount="+update_number+" where Item_ID="+id+"and Name="+name;
+        String sql = "update Variants set Stock_Amount="+update_number+" where Item_ID="+id+"and Name='"+name+"'";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.executeUpdate(); 

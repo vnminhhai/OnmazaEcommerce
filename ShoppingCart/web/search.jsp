@@ -28,13 +28,6 @@
             </span>
         </div>
         <div id="body" style="display: flex;">
-<!--            <table border = "1px" width = "80%" margin-left = "2%">
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Price</th>
-            </tr>-->
             <c:forEach items="${requestScope.display_list}" var = "c">
                 <div class="item-container" style="margin: 5px; border: solid black 1px; width: 30%; padding: 5px;">
                     <p>${c.name}</p>
@@ -47,7 +40,6 @@
                     </form>
                 </div>
             </c:forEach>
-        </table>
         </div>
     </body>
 </html>

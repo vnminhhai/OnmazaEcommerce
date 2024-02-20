@@ -6,6 +6,7 @@
 package controller;
 
 import dal.ItemDAO;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,8 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-@WebServlet(name="Buy", urlPatterns={"/buy"})
-public class Buy extends HttpServlet {
+@WebServlet(name="Purchase", urlPatterns={"/purchase"})
+public class Purchase extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,10 +31,18 @@ public class Buy extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        ItemDAO id = new ItemDAO();
-        request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item_id"))));
-        request.getRequestDispatcher("item.jsp").forward(request, response);
-    }
+        HttpSession session = request.getSession();
+        if (session==null|| session.getAttribute("User_Name")==null) {
+            session.setAttribute("current", "order.jsp");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+        else {
+            ItemDAO id = new ItemDAO();
+            request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item"))));
+            request.setAttribute("variant", request.getParameter("variant"));
+            request.getRequestDispatcher("order.jsp").forward(request, response);
+        }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -70,4 +79,5 @@ public class Buy extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

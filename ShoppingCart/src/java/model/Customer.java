@@ -22,7 +22,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, String first_name, String last_name, String email, String mobile_phone, String address, String country) {
+    public Customer(int id, String first_name, String last_name, String email, String mobile_phone, String address, String country, String un, String pass) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -30,6 +30,8 @@ public class Customer {
         this.mobile_phone = mobile_phone;
         this.address = address;
         this.country = country;
+        this.user_name=un;
+        this.password=pass;
     }
 
     public int getId() {

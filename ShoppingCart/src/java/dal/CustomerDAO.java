@@ -34,7 +34,7 @@ public class CustomerDAO extends DBContext{
                 String add = rs.getString("Address");
                 String phone = rs.getString("Mobile_Phone");
                 String country = rs.getString("Country");
-                l.add( new Customer(id, first, last, email, phone, add, country));
+                l.add( new Customer(id, first, last, email, phone, add, country, un, pass));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,7 +85,29 @@ public class CustomerDAO extends DBContext{
                 String add = rs.getString("Address");
                 String phone = rs.getString("Mobile_Phone");
                 String country = rs.getString("Country");
-                return new Customer(id, first, last, email, phone, add, country);
+                return new Customer(id, first, last, email, phone, add, country, un, pass);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Customer getRecordByName(String un) {
+        String sql = "select * from Customers where User_Name='"+un+"'";
+        ResultSet rs;
+        try {
+            PreparedStatement ps  = connection.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                String pass = rs.getString("Password");
+                String first = rs.getString("First_Name");
+                String last = rs.getString("Last_Name");
+                String email = rs.getString("Email");
+                String add = rs.getString("Address");
+                String phone = rs.getString("Mobile_Phone");
+                String country = rs.getString("Country");
+                return new Customer(id, first, last, email, phone, add, country, un, pass);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);

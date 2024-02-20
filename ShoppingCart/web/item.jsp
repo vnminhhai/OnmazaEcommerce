@@ -19,11 +19,14 @@
         <p>Price: ${item.price}</p>
         <form name="var" action="purchase" method="post">
             Types:
-            <c:forEach items="${requestScope.item.variants}" var="v">
-                <input type="radio" name="variant" value="${v.name}" />
-                <span>${v.image}</span>
-                <span>${v.name}</span>
+            <c:forEach var="i" begin="0" end="${requestScope.item.variants.size()-1}" step="1">
+                <input type="radio" name="variant" value="${requestScope.item.variants[i].name}" ${i==0?"checked":""}/>
+                <span>${requestScope.item.variants[i].image}</span>
+                <span>${requestScope.item.variants[i].name}</span>
             </c:forEach>
+            <br>
+            Quantity: <input type="number" value="1" name="quantity">
+            <br>
             <input type="hidden" name="item" value="${item.id}">
             <br>
             <div style="margin-top: 10px">

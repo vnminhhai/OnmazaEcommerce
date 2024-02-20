@@ -40,6 +40,7 @@ public class Purchase extends HttpServlet {
             ItemDAO id = new ItemDAO();
             request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item"))));
             request.setAttribute("variant", request.getParameter("variant"));
+            request.setAttribute("quantity", request.getParameter("quantity"));
             request.getRequestDispatcher("order.jsp").forward(request, response);
         }
     } 

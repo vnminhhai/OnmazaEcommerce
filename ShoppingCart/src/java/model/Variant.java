@@ -45,5 +45,8 @@ public class Variant {
     public void setStock_amount(int stock_amount) {
         this.stock_amount = stock_amount;
     }
-
+@Override
+    public String toString() {
+        return "Variant [name=" + name + ", image=" + image + "]";
+    }
 }

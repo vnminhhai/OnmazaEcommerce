@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
  * @author ADMIN
  */
 public class ConfirmOrder extends HttpServlet {
-   
+    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -30,7 +30,8 @@ public class ConfirmOrder extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session==null || session.getAttribute("User_Name")==null) response.sendRedirect("login");
-    } 
+        
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

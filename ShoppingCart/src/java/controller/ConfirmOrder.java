@@ -42,7 +42,10 @@ public class ConfirmOrder extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session==null || session.getAttribute("User_Name")==null) response.sendRedirect("login");
+        if (session==null || session.getAttribute("User_Name")==null) {
+            session.setAttribute("current", "");
+            response.sendRedirect("login");
+        }
         else {
             ItemDAO itd = new ItemDAO();
             VariantDAO vd = new VariantDAO();

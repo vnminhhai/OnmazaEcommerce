@@ -33,7 +33,7 @@ public class Purchase extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session==null|| session.getAttribute("User_Name")==null) {
-            session.setAttribute("current", "order.jsp");
+            session.setAttribute("current", "");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         else {

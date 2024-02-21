@@ -34,7 +34,7 @@
                     <p>${c.category.name}</p>
                     <p>${c.description}</p>
                     <p>${c.price}</p>
-                    <form action="buy" method="post">
+                    <form action="buy" method="get">
                         <input type="hidden" value="${c.id}" name="item_id">
                         <input type="submit" value="Buy">
                     </form>

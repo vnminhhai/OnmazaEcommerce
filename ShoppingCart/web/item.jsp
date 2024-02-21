@@ -17,7 +17,7 @@
         <p>Category: ${item.category.name}</p>
         <p>Description: ${item.description}</p>
         <p>Price: ${item.price}</p>
-        <form name="var" action="purchase" method="post">
+        <form name="var" action="purchase" method="get">
             Types:
             <c:forEach var="i" begin="0" end="${requestScope.item.variants.size()-1}" step="1">
                 <input type="radio" name="variant" value="${requestScope.item.variants[i].name}" ${i==0?"checked":""}/>

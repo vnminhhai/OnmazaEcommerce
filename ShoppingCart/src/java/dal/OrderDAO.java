@@ -17,6 +17,10 @@ import model.Item;
  * @author ADMIN
  */
 public class OrderDAO extends DBContext{
+
+    public OrderDAO() {
+    }
+    
     public void save(Order o, int cid) {
         String sql = "INSERT INTO Orders (Customer_ID, Order_Date, Required_Date, Ship_Address)\n" +
         "VALUES\n" +
@@ -35,14 +39,20 @@ public class OrderDAO extends DBContext{
                 if (rs.next()) {
                     generatedId = rs.getInt(1); // Retrieve the generated ID
                 }
-                if (generatedId==-1) throw new SQLException("Khong nhan duoc id vua gen");
+                if (generatedId==-1) {
+                    System.out.println("Loi~ OrderDAO");
+                    throw new SQLException("Khong nhan duoc id vua gen");
+                }
             }
+            else System.out.println("ResultSet null");
             sql = "INSERT INTO Detail (Order_ID, Item_ID, Unit_Prices, Quantity)"+
         "VALUES (?, ?, ?, ?)";
             ps = connection.prepareStatement(sql);
             for (Item i : o.getDetail().getItem_list()) {
                 ps.setInt(1, generatedId);
+                System.out.println(generatedId);
                 ps.setInt(2, i.getId());
+                System.out.println(i.getId());
                 ps.setFloat(3, i.getPrice());
                 ps.setInt(4, i.getQuantity());
                 ps.executeUpdate();

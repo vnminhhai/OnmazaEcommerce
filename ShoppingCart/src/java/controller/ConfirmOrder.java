@@ -18,7 +18,9 @@ import jakarta.servlet.http.HttpSession;
 import model.Order;
 import java.util.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import model.Customer;
 import model.Detail;
 import model.Item;
@@ -54,9 +56,16 @@ public class ConfirmOrder extends HttpServlet {
                     v.setStock_amount(Integer.parseInt(request.getParameter("quantity")));
                 else v.setStock_amount(0);
             }
-            Detail d = new Detail(Arrays.asList(i));
+            List<Item> l = new ArrayList<>();
+            l.add(i);
+            Detail d = new Detail(l);
             Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
                     LocalDate.now().plusDays(5), request.getParameter("address"), d);
+            try {
+                od.save(o, ((Customer)session.getAttribute("customer")).getId());
+            } catch (Exception e) {
+                System.out.println(e.getStackTrace());
+            }
         }
     }
 

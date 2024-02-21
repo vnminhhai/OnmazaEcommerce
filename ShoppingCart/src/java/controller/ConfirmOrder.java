@@ -66,6 +66,7 @@ public class ConfirmOrder extends HttpServlet {
             } catch (Exception e) {
                 System.out.println(e.getStackTrace());
             }
+            request.getRequestDispatcher("done.jsp").forward(request, response);
         }
     }
 

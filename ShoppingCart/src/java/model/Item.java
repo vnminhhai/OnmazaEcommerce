@@ -77,4 +77,12 @@ public class Item {
     public void setVariants(List<Variant> variants) {
         this.variants = variants;
     }
+    
+    public int getQuantity() {
+        int q =0;
+        for (Variant v : getVariants()) {
+            q+=v.getStock_amount();
+        }
+        return q;
+    }
 }

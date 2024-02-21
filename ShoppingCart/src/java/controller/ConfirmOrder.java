@@ -5,6 +5,8 @@
 
 package controller;
 
+import dal.ItemDAO;
+import dal.OrderDAO;
 import dal.VariantDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +15,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Order;
+import java.util.Date;
+import java.time.LocalDate;
+import java.util.Arrays;
+import model.Customer;
+import model.Detail;
+import model.Item;
+import model.Variant;
 
 /**
  *
@@ -32,10 +42,21 @@ public class ConfirmOrder extends HttpServlet {
         HttpSession session = request.getSession();
         if (session==null || session.getAttribute("User_Name")==null) response.sendRedirect("login");
         else {
+            ItemDAO itd = new ItemDAO();
             VariantDAO vd = new VariantDAO();
             int id = Integer.parseInt(request.getParameter("item"));
             int left = vd.getRecordByName(id, request.getParameter("variant")).getStock_amount()-Integer.parseInt(request.getParameter("quantity"));
             vd.updateAmount(id, request.getParameter("variant"), left);
+            OrderDAO od = new OrderDAO();
+            Item i = itd.getRecordById(id);
+            for (Variant v : i.getVariants()) {
+                if (v.getName().equals(request.getParameter("variant")))
+                    v.setStock_amount(Integer.parseInt(request.getParameter("quantity")));
+                else v.setStock_amount(0);
+            }
+            Detail d = new Detail(Arrays.asList(i));
+            Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
+                    LocalDate.now().plusDays(5), request.getParameter("address"), d);
         }
     }
 

@@ -5,6 +5,7 @@
 package model;
 
 import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,19 +14,21 @@ import java.util.Date;
 public class Order {
     private int id;
     private int customer_id;
-    private Date order_date;
-    private Date required_date;
+    private LocalDate order_date;
+    private LocalDate required_date;
     private String ship_address;
+    private Detail detail;
 
     public Order() {
     }
 
-    public Order(int id, int customer_id, Date order_date, Date required_date, String ship_address) {
+    public Order(int id, int customer_id, LocalDate order_date, LocalDate required_date, String ship_address, Detail detail) {
         this.id = id;
         this.customer_id = customer_id;
         this.order_date = order_date;
         this.required_date = required_date;
         this.ship_address = ship_address;
+        this.detail = detail;
     }
 
     public int getId() {
@@ -44,19 +47,19 @@ public class Order {
         this.customer_id = customer_id;
     }
 
-    public Date getOrder_date() {
+    public LocalDate getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(LocalDate order_date) {
         this.order_date = order_date;
     }
 
-    public Date getRequired_date() {
+    public LocalDate getRequired_date() {
         return required_date;
     }
 
-    public void setRequired_date(Date required_date) {
+    public void setRequired_date(LocalDate required_date) {
         this.required_date = required_date;
     }
 
@@ -66,6 +69,14 @@ public class Order {
 
     public void setShip_address(String ship_address) {
         this.ship_address = ship_address;
+    }
+
+    public Detail getDetail() {
+        return detail;
+    }
+
+    public void setDetail(Detail detail) {
+        this.detail = detail;
     }
     
 }

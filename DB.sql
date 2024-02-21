@@ -87,7 +87,7 @@ Description varchar(255)
  );
 
  create table Orders(
- ID int primary key,
+ ID int primary key identity(1,1),
  Customer_ID int references Customers(ID),
  Order_Date date not null,
  Required_Date date not null,

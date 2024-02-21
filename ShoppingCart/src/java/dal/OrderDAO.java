@@ -34,17 +34,37 @@ public class OrderDAO extends DBContext{
             ps.setDate(3, Date.valueOf(o.getRequired_date()));
             ps.setString(4, o.getShip_address());
             int affectedRows = ps.executeUpdate();
-            if (affectedRows > 0) {
-                rs = ps.getGeneratedKeys();
+//            if (affectedRows > 0) {
+//                try {
+//                    rs = ps.getGeneratedKeys();
+//                    if (rs.next()) {
+//                        generatedId = rs.getInt(1); // Retrieve the generated ID
+//                        System.out.println(generatedId);
+//                    }
+//                    if (generatedId==-1) {
+//                        System.out.println("Loi~ OrderDAO");
+//                        throw new SQLException("Khong nhan duoc id vua gen");
+//                    }
+//                } catch (Exception e) {
+//                    System.out.println(e.getMessage());
+//                }
+//            }
+//            else System.out.println("ResultSet null");
+            if (affectedRows>0)
+            try {
+                sql = "select max(ID) from Orders";
+                ps = connection.prepareStatement(sql);
+                rs = ps.executeQuery();
                 if (rs.next()) {
                     generatedId = rs.getInt(1); // Retrieve the generated ID
+                    System.out.println(generatedId);
                 }
                 if (generatedId==-1) {
-                    System.out.println("Loi~ OrderDAO");
                     throw new SQLException("Khong nhan duoc id vua gen");
                 }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            else System.out.println("ResultSet null");
             sql = "INSERT INTO Detail (Order_ID, Item_ID, Unit_Prices, Quantity)"+
         "VALUES (?, ?, ?, ?)";
             ps = connection.prepareStatement(sql);

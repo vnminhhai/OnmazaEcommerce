@@ -37,7 +37,7 @@
         </div>
         
         <header>
-            <h1>Welcome to Onemaza</h1>
+            <h1>Welcome to Onmaza</h1>
         </header>
 
         <main>
@@ -53,7 +53,7 @@
         </main>
 
         <footer>
-            <p>&copy; 2024 Onemaza. All rights reserved.</p>
+            <p>&copy; 2024 Onmaza. All rights reserved.</p>
         </footer>
         <div id="body">
             

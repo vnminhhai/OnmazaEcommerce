@@ -42,10 +42,9 @@ public class CustomerDAO extends DBContext{
         return l;
     }
     public void save(Customer c) {
-        String sql = "insert into Customers (ID, User_Name, Password, First_Name,"+
+        String sql = "insert into Customers (User_Name, Password, First_Name,"+
                 " Last_Name, Email, Mobile_Phone, Address, Country)"+
-                " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        int id = c.getId();
+                " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String un = c.getUser_name();
         String pass = c.getPassword();
         String first = c.getFirst_name();
@@ -56,15 +55,14 @@ public class CustomerDAO extends DBContext{
         String phone = c.getMobile_phone();
         try {
             PreparedStatement ps  = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.setString(2, un);
-            ps.setString(3, pass);
-            ps.setString(4, first);
-            ps.setString(5, last);
-            ps.setString(6, email);
-            ps.setString(7, phone);
-            ps.setString(8, add);
-            ps.setString(9, country);
+            ps.setString(1, un);
+            ps.setString(2, pass);
+            ps.setString(3, first);
+            ps.setString(4, last);
+            ps.setString(5, email);
+            ps.setString(6, phone);
+            ps.setString(7, add);
+            ps.setString(8, country);
             ps.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,6 +144,32 @@ public class CustomerDAO extends DBContext{
             ps.setString(6, phone);
             ps.setString(7, add);
             ps.setString(8, country);
+            ps.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void update(String un, Customer c) {
+        String sql = "update Customers set Password=?, First_Name=?,"+
+                " Last_Name=?, Email=?, Mobile_Phone=?, Address=?, Country=?)"+
+                " where User_Name='"+un+"'";
+        String pass = c.getPassword();
+        String first = c.getFirst_name();
+        String last = c.getLast_name();
+        String email = c.getEmail();
+        String add = c.getAddress();
+        String country = c.getCountry();
+        String phone = c.getMobile_phone();
+        try {
+            PreparedStatement ps  = connection.prepareStatement(sql);
+            ps.setString(8, un);
+            ps.setString(1, pass);
+            ps.setString(2, first);
+            ps.setString(3, last);
+            ps.setString(4, email);
+            ps.setString(5, phone);
+            ps.setString(6, add);
+            ps.setString(7, country);
             ps.executeUpdate(sql);
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);

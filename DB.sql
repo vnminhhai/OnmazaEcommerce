@@ -75,7 +75,7 @@ Description varchar(255)
  );
 
  create table Customers(
- ID int primary key,
+ ID int primary key identity(1,1),
  User_Name varchar(255) unique not null,
  Password varchar(255) NOT NULL,
  First_Name nvarchar(255),

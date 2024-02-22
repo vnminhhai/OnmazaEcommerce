@@ -98,11 +98,12 @@ public class Register extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
         else {
-            String current=".";
-            cd.save(new Customer(0, first_name, last_name, email, phone, address, country, User_Name, Password));
-            if (request.getSession().getAttribute("current")==null||request.getSession().getAttribute("current").toString()==null)
-                response.sendRedirect(".");
-            else response.sendRedirect(request.getSession().getAttribute("current").toString());
+            Customer c = new Customer(0, first_name, last_name, email, phone, address, country, User_Name, Password);
+            cd.save(c);
+            request.getSession().setAttribute("customer", cd.getRecordByName(User_Name));
+            String current = request.getSession().getAttribute("current").toString();
+            if (current==null) response.sendRedirect("home");
+            response.sendRedirect(current);
         }
     }
 

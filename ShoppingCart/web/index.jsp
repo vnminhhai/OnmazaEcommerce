@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>${initParam['webName']}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
         <%@include file="components/headerLink.html" %>
     </head>
@@ -73,7 +74,7 @@
                                     <!-- main-right -->
                                     <div class="bg-primary-light p-3 rounded mb-3">
                                         <c:choose>
-                                            <c:when test="${sessionScope.user == null}">
+                                            <c:when test="${sessionScope.customer == null}">
                                                 <p class="d-flex mb-3 text-base">
                                                     <img src="https://bootstrap-ecommerce-web.netlify.app/images/avatars/avatar.jpg" class="img-avatar me-2" width="44" height="44" alt="">
                                                     <span>Hi, user <br> please login!</span>
@@ -82,8 +83,8 @@
                                             </c:when>
                                             <c:otherwise>
                                                 <p class="d-flex mb-3 text-base">
-                                                    <img src="image/user?id=${sessionScope.user.id}" class="img-avatar me-2" width="44" height="44" style="object-fit: cover" alt="${sessionScope.user.firstName}">
-                                                    <span>Hi, ${sessionScope.user.firstName} ${sessionScope.user.lastName} <br> let's shopping!</span>
+                                                    <img src="image/user?id=${sessionScope.customer.id}" class="img-avatar me-2" width="44" height="44" style="object-fit: cover" alt="${sessionScope.customer.first_name}">
+                                                    <span>Hi, ${sessionScope.customer.first_name} ${sessionScope.customer.last_name} <br> let's shopping!</span>
                                                 </p>
                                                 <a href="logout" class="btn btn-sm btn-primary w-100">Logout</a>
                                             </c:otherwise>

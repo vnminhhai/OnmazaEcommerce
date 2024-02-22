@@ -26,7 +26,7 @@
                     <!-- widgets-wrap  -->
                     <div class="float-lg-end">
                         <c:choose>
-                            <c:when test="${sessionScope.user == null}">
+                            <c:when test="${sessionScope.customer == null}">
                                 <div class="widget-header mx-2 text-center" style="min-width:44px">
                                     <a href="login" class="d-inline-block align-middle">
                                         <b>Login</b>

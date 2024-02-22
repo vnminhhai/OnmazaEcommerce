@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Customer;
 
 /**
  *
@@ -55,7 +57,7 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("register.jsp").forward(request, response);
     } 
 
     /** 
@@ -68,7 +70,40 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String country = request.getParameter("country");
+        String email = request.getParameter("email");
+        if (first_name==null||last_name==null||phone==null||address==null||country==null||email==null)
+            request.setAttribute("info_message", "Please fill in all the information!");
+        String User_Name = request.getParameter("User_Name");
+        String Password = request.getParameter("Password");
+        String rePassword = request.getParameter("rePassword");
+        CustomerDAO cd = new CustomerDAO();
+        if (User_Name==null||Password==null)
+        {
+            request.setAttribute("message","User name and Password is required!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }
+        else if (cd.getRecordByName(User_Name)!=null)
+        {
+            request.setAttribute("message", "User name already existed!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }
+        else if (!Password.equals(rePassword))
+        {
+            request.setAttribute("message", "Passwords not matching!");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }
+        else {
+            String current=".";
+            cd.save(new Customer(0, first_name, last_name, email, phone, address, country, User_Name, Password));
+            if (request.getSession().getAttribute("current")==null||request.getSession().getAttribute("current").toString()==null)
+                response.sendRedirect(".");
+            else response.sendRedirect(request.getSession().getAttribute("current").toString());
+        }
     }
 
     /** 

@@ -69,7 +69,6 @@ public class Login extends HttpServlet {
             request.getSession().setAttribute("customer", c);
             request.getSession().setAttribute("User_Name", request.getParameter("User_Name"));
             String current = request.getSession().getAttribute("current").toString();
-            System.out.println("current string: "+current);
             if (current==null) response.sendRedirect("home");
             response.sendRedirect(current);
         }

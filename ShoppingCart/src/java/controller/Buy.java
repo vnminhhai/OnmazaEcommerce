@@ -33,8 +33,6 @@ public class Buy extends HttpServlet {
     throws ServletException, IOException {
         ItemDAO id = new ItemDAO();
         request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item_id"))));
-        HttpSession session = request.getSession();
-        session.setAttribute("current", "buy?item_id="+request.getParameter("item_id"));
         request.getRequestDispatcher("item.jsp").forward(request, response);
     }
 

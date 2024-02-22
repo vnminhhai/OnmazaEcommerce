@@ -6,7 +6,7 @@
             <div class="row gx-2 align-items-center">
                 <div class="col-xl-2 col-lg col-6 col-sm-6  col-md flex-grow-0">
                     <a class="brand-wrap me-3" href="/">
-                        <img class="logo" height="40" src="https://bootstrap-ecommerce-web.netlify.app/images/logo.svg">
+                        <img class="logo" height="40" src="./Onmaza.png" alt="onmaza-logo">
                     </a> <!-- brand-wrap end.// -->
                 </div> <!-- col end.// -->
 

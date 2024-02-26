@@ -64,13 +64,13 @@ public class Login extends HttpServlet {
             request.setAttribute("message", "User name does not exist");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        if (c.getPassword().equals(request.getParameter("Password")))
+        else if (c.getPassword().equals(request.getParameter("Password")))
         {
             request.getSession().setAttribute("customer", c);
             request.getSession().setAttribute("User_Name", request.getParameter("User_Name"));
-            String current = request.getSession().getAttribute("current").toString();
-            if (current==null) response.sendRedirect("home");
-            response.sendRedirect(current);
+            String current = (String)request.getSession().getAttribute("current");
+            if (current==null) response.sendRedirect(".");
+            else response.sendRedirect(current);
         }
         else {
             request.setAttribute("message", "Invalid password");

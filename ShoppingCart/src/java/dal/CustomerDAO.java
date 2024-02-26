@@ -44,7 +44,7 @@ public class CustomerDAO extends DBContext{
     public void save(Customer c) {
         String sql = "insert into Customers (User_Name, Password, First_Name,"+
                 " Last_Name, Email, Mobile_Phone, Address, Country)"+
-                " values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                " values(?, ?, ?, ?, ?, ?, ?, ?)";
         String un = c.getUser_name();
         String pass = c.getPassword();
         String first = c.getFirst_name();
@@ -63,7 +63,7 @@ public class CustomerDAO extends DBContext{
             ps.setString(6, phone);
             ps.setString(7, add);
             ps.setString(8, country);
-            ps.executeUpdate(sql);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -170,7 +170,7 @@ public class CustomerDAO extends DBContext{
             ps.setString(5, phone);
             ps.setString(6, add);
             ps.setString(7, country);
-            ps.executeUpdate(sql);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

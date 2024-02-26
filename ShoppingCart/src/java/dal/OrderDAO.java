@@ -23,8 +23,7 @@ public class OrderDAO extends DBContext{
     
     public void save(Order o, int cid) {
         String sql = "INSERT INTO Orders (Customer_ID, Order_Date, Required_Date, Ship_Address)\n" +
-        "VALUES\n" +
-        "    (?, ?, ?, ?)";
+        "VALUES (?, ?, ?, ?)";
         int generatedId = -1;
         ResultSet rs =null;
         try {

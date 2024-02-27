@@ -1,30 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <header class="section-header position-fixed top-0 start-0 end-0" style="z-index: 100">
-    <section class="header-main bg-white border-bottom py-lg-3 py-2">
-        <div class="container">
+    <section class="header-main bg-dark border-bottom py-lg-3 py-2">
+        <div class="fluid-container">
             <div class="row gx-2 align-items-center">
-                <div class="col-xl-2 col-lg col-6 col-sm-6  col-md flex-grow-0">
+                <div class="col-sm-2 flex-grow-0 align-items-center justify-content-evenly text-center">
                     <a class="brand-wrap me-3" href="/">
-                        <img class="logo" height="40" src="./Onmaza.png" alt="onmaza-logo">
+                        <img class="logo" height="40" src="./LighterOnmaza.png" alt="onmaza-logo">
                     </a> <!-- brand-wrap end.// -->
                 </div> <!-- col end.// -->
 
-                <div class="col-xl-7 col-lg-6 col-12 col-sm-12 col-md">
+                <div class="col-sm-7">
                     <form action="search" class="search my-3 my-lg-0">
                         <div class="input-group">
                             <input type="search" class="form-control" style="width:30%" placeholder="Search" name="keyword" value="${param.keyword}">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-warning-light">
                                 <i class="fa fa-search"></i>
                             </button>
                         </div> <!-- input-group end.// -->
                     </form> <!-- search-wrap end.// -->
                 </div> <!-- col end.// -->
 
-                <div class="col-xl-3 col-lg col-md-12 col-12">
+                <div class="col-sm-3">
 
                     <!-- widgets-wrap  -->
-                    <div class="float-lg-end">
+                    <div class="text-light text-center">
                         <c:choose>
                             <c:when test="${sessionScope.customer == null}">
                                 <div class="widget-header mx-2 text-center" style="min-width:44px">

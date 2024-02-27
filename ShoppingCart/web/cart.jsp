@@ -1,16 +1,15 @@
 <%-- 
-    Document   : index
-    Created on : Sep 15, 2023, 1:08:46 PM
-    Author     : vnminhhai
+    Document   : cart
+    Created on : Feb 27, 2024, 11:14:43 PM
+    Author     : ADMIN
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${initParam['webName']}</title>
+        <title>JSP Page</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <%@include file="components/headerLink.html" %>
     </head>
@@ -108,120 +107,5 @@
                 </main>
             </div> <!-- container end.// -->
         </section>
-        <!-- ================ SECTION INTRO END.// ================ -->
-
-        <!-- ================ SECTION CARD CATEGORY  ================ -->
-        <section class="pb-3">
-            <div class="container">
-                <div class="card overflow-hidden">
-                    <div class="row gx-0">
-                        <aside class="col-lg-3 p-4 bg-cover" style="background-image: url(https://bootstrap-ecommerce-web.netlify.app/images/banners/interior.jpg);">
-                            <header>
-                                <h3 class="mb-3">Home and <br> outdoor items</h3>
-                                <a href="search?category=home-and-outdoor-items" class="btn btn-light">Source now</a>
-                            </header><!-- sect-heading -->
-                        </aside> <!-- col.// -->
-                        <div class="col-lg-9">
-                            <ul class="row g-0 bordered-cols m-0">
-                                <c:forEach var="product" items="${featuredProducts1}">
-                                    <li class="col-6 col-lg-3 col-md-4">
-                                        <div class="card-product p-3 pe-0">
-                                            <a href="product?slug=${product.slug}" class="title text-truncate">${product.name}</a>
-                                            <img class="size-72x72 float-end mb-2" src="image/product?id=${product.image.id}">
-                                            <p class="text-muted small">${String.format("%,d", product.minPrice)} ₫</p>
-                                        </div>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div> <!-- col.// -->
-                    </div>
-                    <!-- row .// -->
-                </div>
-            </div> <!-- container .// -->
-        </section>
-        <!-- ================ SECTION CARD CATEGORY .// ================ -->
-
-        <!-- ================ SECTION CARD CATEGORY-2  ================ -->
-        <section class="pb-3">
-            <div class="container">
-                <div class="card overflow-hidden">
-                    <div class="row gx-0">
-                        <aside class="col-lg-3 p-4 bg-cover" style="background-image: url(https://bootstrap-ecommerce-web.netlify.app/images/banners/tech.jpg);">
-                            <header>
-                                <h3 class="mb-3">Consumer <br> electronics and <br> gadgets</h3>
-                                <a href="search?category=consumer-electronics-and-gadgets" class="btn btn-light">Source now</a>
-                            </header><!-- sect-heading -->
-                        </aside> <!-- col.// -->
-                        <div class="col-lg-9">
-                            <ul class="row g-0 bordered-cols m-0">
-                                <c:forEach var="product" items="${featuredProducts2}">
-                                    <li class="col-6 col-lg-3 col-md-4">
-                                        <div class="card-product p-3 pe-0">
-                                            <a href="product?slug=${product.slug}" class="title text-truncate">${product.name}</a>
-                                            <img class="size-72x72 float-end mb-2" src="image/product?id=${product.image.id}">
-                                            <p class="text-muted small">${String.format("%,d", product.minPrice)} ₫</p>
-                                        </div>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </div> <!-- col.// -->
-                    </div>
-                    <!-- row .// -->
-                </div>
-            </div> <!-- container .// -->
-        </section>
-        <!-- ================ SECTION CARD CATEGORY-2 .// ================ -->
-
-        <!-- ================ SECTION PRODUCTS ================ -->
-        <section class="pb-3">
-            <div class="container">
-
-                <header class="section-heading">
-                    <h3>New products</h3>
-                </header>
-
-                <div class="row row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-2">
-                    <c:forEach var="product" items="${newProducts}">
-                        <div class="col">
-                            <figure class="card card-product-grid">
-                                <a href="product?slug=${product.slug}" class="img-wrap" title="${product.name}"> <img src="image/product?id=${product.image.id}"> </a>
-                                <figcaption class="p-3">
-                                    <div class="price-wrap">
-                                        <span class="price">${String.format("%,d", product.minPrice)} ₫ - ${String.format("%,d", product.maxPrice)} ₫</span>
-                                    </div> <!-- price-wrap.// -->
-                                    <a href="product?slug=${product.slug}" class="title text-truncate" title="${product.name}"><b>${product.name}</b></a>
-                                </figcaption>
-                            </figure>
-                        </div> <!-- col end.// -->
-                    </c:forEach>
-                </div> <!-- row end.// -->
-            </div> <!-- container end.// -->
-        </section>
-        <!-- ================ SECTION PRODUCTS END.// ================ -->
-
-        <!-- ================ SECTION SUBSCRIBE ================ -->
-        <section class="padding-y-lg bg-gray-light">
-            <div class="container">
-
-                <h4 class="text-center">Subscribe on our newsletter</h4>
-                <p class="pb-2 text-center">Get daily news on upcoming offers from many suppliers all over the world</p>
-
-                <div style="max-width:380px;" class="mx-auto">
-
-                    <div class="d-flex">
-                        <div class="me-1 flex-grow-1">
-                            <input class="w-100 form-control" placeholder="Your Email" type="email">
-                        </div> <!-- col.// -->
-                        <div class="">
-                            <button type="submit" class="btn btn-primary"> <i class="fa fa-envelope"></i> Subscribe
-                            </button>
-                        </div> <!-- col.// -->
-                    </div>
-                </div>
-
-
-            </div> 	<!-- container  .// -->
-        </section>
-        <%@include file="components/footerLink.html" %>
     </body>
 </html>

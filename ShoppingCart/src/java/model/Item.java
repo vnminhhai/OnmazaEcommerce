@@ -85,4 +85,11 @@ public class Item {
         }
         return q;
     }
+    
+    public String getVariant() {
+        for (Variant v : getVariants()) {
+            if (v.getStock_amount()!=0) return v.getName();
+        }
+        return null;
+    }
 }

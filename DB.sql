@@ -112,6 +112,14 @@ Description varchar(255)
  check(Amount>0)
  );
 
+ create table Cart(
+ Customer_ID int references Customers(ID),
+ Item_ID int,
+ Variant_Name nvarchar(255),
+ Quantity int,
+ Foreign key (Variant_Name, Item_ID) references Variants(Name, Item_ID)
+ )
+
 
  --------------------------------- insert data -----------------------------
  -- Inserting data into Category table
@@ -178,3 +186,10 @@ VALUES
     (1, 1100, '2024-02-15', 1),
     (2, 110, '2024-02-15', 2),
     (3, 815, '2024-02-15', 3);
+
+-- Inserting data into Cart table
+INSERT INTO Cart (Customer_ID, Item_ID, Variant_Name, Quantity)
+VALUES
+    (0, 1, 'Black', 1),
+    (0, 1, 'Blue', 2),
+    (1, 2, 'Laptop', 3);

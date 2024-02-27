@@ -12,6 +12,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import dal.CartDAO;
+import model.Customer;
 
 /**
  *
@@ -29,7 +31,12 @@ public class Cart extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+        Customer c = (Customer)request.getSession().getAttribute("customer");
+        if (c==null) response.sendRedirect("login");
+        else {
+            request.setAttribute("cart", new CartDAO().getCartByID(c.getId()));
+            request.getRequestDispatcher("cart.jsp").forward(request, response);
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

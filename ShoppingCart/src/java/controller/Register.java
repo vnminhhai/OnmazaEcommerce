@@ -101,6 +101,7 @@ public class Register extends HttpServlet {
             Customer c = new Customer(0, first_name, last_name, email, phone, address, country, User_Name, Password);
             cd.save(c);
             request.getSession().setAttribute("customer", cd.getRecordByName(User_Name));
+            request.getSession().setAttribute("User_Name", User_Name);
             String current = (String)request.getSession().getAttribute("current");
             if (current==null) response.sendRedirect(".");
             else response.sendRedirect(current);

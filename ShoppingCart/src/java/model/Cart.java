@@ -28,4 +28,12 @@ public class Cart {
         this.item_list = item_list;
     }
     
+    public float getTotal() {
+        float f=0;
+        for (Item item : item_list) {
+            f+=item.getPrice()*item.getQuantity();
+        }
+        return f;
+    }
+    
 }

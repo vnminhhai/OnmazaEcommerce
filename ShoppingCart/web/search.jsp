@@ -11,35 +11,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Browse items</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <%@include file="components/headerLink.html" %>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body>
-        <div id="header-div">
-            <span id="logo">
-                
-            </span>
-            <span id="search">
-                <form action="search">
-                    <input type="text" name="keyword">
-                    <input type="submit" value="Search">
-                </form>
-            </span>
-            <span id="login-button">
-                
-            </span>
-        </div>
-        <div id="body" style="display: flex;">
-            <c:forEach items="${requestScope.display_list}" var = "c">
-                <div class="item-container" style="margin: 5px; border: solid black 1px; width: 30%; padding: 5px;">
-                    <p>${c.name}</p>
-                    <p>${c.category.name}</p>
-                    <p>${c.description}</p>
-                    <p>${c.price}</p>
-                    <form action="buy" method="get">
-                        <input type="hidden" value="${c.id}" name="item_id">
-                        <input type="submit" value="Buy">
-                    </form>
-                </div>
-            </c:forEach>
-        </div>
+        <%@include file="components/header.jsp" %>
+        <section class="section-intro mb-3 mt-5">
+            <div class="container">
+                <main class="card p-3">
+                    <c:forEach items="${requestScope.display_list}" var = "c">
+                        <div class="item-container" style="margin: 5px; border: solid black 1px; width: 30%; padding: 5px;">
+                            <p>${c.name}</p>
+                            <p>${c.category.name}</p>
+                            <p>${c.description}</p>
+                            <p>${c.price}</p>
+                            <form action="buy" method="get">
+                                <input type="hidden" value="${c.id}" name="item_id">
+                                <input type="submit" value="Buy">
+                            </form>
+                        </div>
+                    </c:forEach>
+                </main>
+            </div> <!-- container end.// -->
+        </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

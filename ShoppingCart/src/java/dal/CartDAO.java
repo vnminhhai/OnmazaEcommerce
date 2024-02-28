@@ -23,8 +23,8 @@ import model.Variant;
 public class CartDAO extends DBContext{
     public Cart getCartByID(int id) {
         List<Item> l = new ArrayList();
-        String sql= "select distinct Customer_ID, c.Item_ID, Variant_Name, Quantity from Cart c join Variants v\n" +
-"on c.Item_ID = v.Item_ID where Customer_ID = ? order by Item_ID";
+        String sql= "select Customer_ID, c.Item_ID, Variant_Name, Quantity from Cart c join Variants v\n" +
+"on c.Item_ID = v.Item_ID and c.Variant_Name=v.Name where Customer_ID = ? order by Item_ID";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
@@ -47,5 +47,38 @@ public class CartDAO extends DBContext{
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new Cart(l);
+    }
+    public void addWithCustomerID(int cid, int iid, String variant_name, int quantity) {
+        String check= "select Quantity from Cart c join Variants v on c.Item_ID = v.Item_ID"+
+                " and c.Variant_Name=v.Name where Customer_ID = ? and Name=?";
+        boolean alreadyHas=false;
+        try {
+            PreparedStatement ps = connection.prepareStatement(check);
+            ps.setInt(1, iid);
+            ps.setString(2, variant_name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                alreadyHas=true;
+                quantity += rs.getInt("Quantity");
+            }
+            if (alreadyHas) {
+                String sql = "update Cart set Quantity = ? where Customer_ID = ? and Variant_Name = ?";
+                ps = connection.prepareStatement(sql);
+                ps.setInt(1, quantity);
+                ps.setInt(2, cid);
+                ps.setString(3, variant_name);
+                ps.executeUpdate();
+            } else {
+                String sql = "insert into Cart values (?,?,?,?)";
+                ps = connection.prepareStatement(sql);
+                ps.setInt(1, cid);
+                ps.setInt(2, iid);
+                ps.setString(3, variant_name);
+                ps.setInt(4, quantity);
+                ps.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

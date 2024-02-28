@@ -48,7 +48,7 @@
                                 </div>
 
                                 <div class="widget-header mx-2 text-center" style="min-width:44px">
-                                    <a href="/user" class="d-inline-block align-middle">
+                                    <a href="user" class="d-inline-block align-middle">
                                         <span class="fs-5 d-inline-block"> <i class="fa fa-user"></i> </span>
                                         <small style="max-width:80px;" class="d-block text-truncate"> Profile </small>
                                     </a>

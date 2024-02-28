@@ -50,12 +50,13 @@ public class CartDAO extends DBContext{
     }
     public void addWithCustomerID(int cid, int iid, String variant_name, int quantity) {
         String check= "select Quantity from Cart c join Variants v on c.Item_ID = v.Item_ID"+
-                " and c.Variant_Name=v.Name where Customer_ID = ? and Name=?";
+                " and c.Variant_Name=v.Name where v.Item_ID = ? and Customer_ID = ? and Name=?";
         boolean alreadyHas=false;
         try {
             PreparedStatement ps = connection.prepareStatement(check);
             ps.setInt(1, iid);
-            ps.setString(2, variant_name);
+            ps.setInt(2, cid);
+            ps.setString(3, variant_name);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 alreadyHas=true;

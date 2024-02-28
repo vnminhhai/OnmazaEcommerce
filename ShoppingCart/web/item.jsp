@@ -39,6 +39,7 @@
                         <div style="margin-top: 10px">
                             <input type="submit" value="Purchase">
                             <button type="button" onclick="cart()">Add to cart</button>
+                            <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
                         </div>
                     </form>
                         <script>
@@ -47,6 +48,7 @@
 
                               // Submit the form to "tocart"
                               document.getElementById("twoActionForm").action = "tocart";
+                              document.getElementById("twoActionForm").method = "post";
                               document.getElementById("twoActionForm").submit();
                             }
                       </script>

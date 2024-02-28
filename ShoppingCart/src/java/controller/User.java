@@ -5,8 +5,6 @@
 
 package controller;
 
-import dal.ItemDAO;
-import dal.CartDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import model.Customer;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="AddToCart", urlPatterns={"/tocart"})
-public class AddToCart extends HttpServlet {
+@WebServlet(name="User", urlPatterns={"/user"})
+public class User extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,22 +29,7 @@ public class AddToCart extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if (session==null|| session.getAttribute("User_Name")==null) {
-            session.setAttribute("current", "buy?item_id="+request.getParameter("item"));
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-        else {
-            ItemDAO id = new ItemDAO();
-            int cid = ((Customer)session.getAttribute("customer")).getId();
-            int iid = Integer.parseInt(request.getParameter("item"));
-            String variant = request.getParameter("variant");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            new CartDAO().addWithCustomerID(cid, iid, variant, quantity);
-            request.setAttribute("cart_message", "Added");
-            request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item"))));
-            request.getRequestDispatcher("item.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("user.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

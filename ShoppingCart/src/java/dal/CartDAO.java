@@ -82,4 +82,16 @@ public class CartDAO extends DBContext{
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void remove(int cid, int iid, String variant_name) {
+        String check= "delete from Cart where Item_ID = ? and Customer_ID = ? and Variant_Name=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(check);
+            ps.setInt(1, iid);
+            ps.setInt(2, cid);
+            ps.setString(3, variant_name);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

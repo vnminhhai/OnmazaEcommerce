@@ -21,7 +21,7 @@
         <section class="section-intro mb-3 mt-5">
             <div class="container">
                 <main class="card p-3">
-                    <%! int total = 0; %>
+                    <c:set var="total" value="0" />
                     <c:forEach items="${cart.item_list}" var="i">        
                         <div class="mb-3">
                             <table class="table-secondary m-auto justify-content-evenly text-center">
@@ -40,17 +40,28 @@
                                         <td>${i.variant}</td>
                                         <td>${i.quantity}</td>
                                         <td>${i.price}</td>
-                                        <td><button onclick="remove(${i.id})">Remove</button></td>
+                                        <td>
+                                            <form action="removefromcart">
+                                                <input type="hidden" name="item" value="${i.id}">
+                                                <input type="hidden" name="variant" value="${i.variant}">
+                                                <input type="submit" value="Remove">
+                                            </form>
+                                        </td>
                                         <c:set var="total" value="${total + i.price * i.quantity}" />
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </c:forEach>
-                    <div class="text-end fw-bold">Total: ${total}</div>
+                    <c:if test="${total>0}">
+                        <div class="text-end fw-bolder">Total: ${total}</div>
+                    </c:if>
+                    <c:if test="${total==0}">
+                        <div class="text-center fw-bold">You have no item in your cart.</div>
+                    </c:if>
                 </main>
             </div> <!-- container end.// -->
         </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

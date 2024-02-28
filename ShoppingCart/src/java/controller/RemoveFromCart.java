@@ -7,7 +7,6 @@ package controller;
 
 import dal.CartDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -41,7 +40,10 @@ public class RemoveFromCart extends HttpServlet {
             int iid = Integer.parseInt(request.getParameter("item"));
             String variant = request.getParameter("variant");
             int cid = ((Customer)session.getAttribute("customer")).getId();
-            new CartDAO().remove(cid, iid, variant);
+            CartDAO cart = new CartDAO();
+            cart.remove(cid, iid, variant);
+            Customer c = (Customer)session.getAttribute("customer");
+            request.getSession().setAttribute("cart_item_number", cart.getCartByID(c.getId()).getItemCount());
             response.sendRedirect("cart");
         }
     }

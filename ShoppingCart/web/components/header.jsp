@@ -43,6 +43,9 @@
                                 <div class="widget-header mx-2 text-center" style="min-width: 44px;">
                                     <a href="cart" class="d-inline-block align-middle">
                                         <span class="fs-5 d-inline-block"> <i class="fa fa-shopping-cart"></i> </span>
+                                        <c:if test="${cart_item_number>0}">
+                                            <span class="badge rounded-pill badge-notification bg-danger position-fixed px-1">${cart_item_number}</span>
+                                        </c:if>
                                         <small style="max-width:80px;" class="d-block text-truncate"> Cart </small>
                                     </a>
                                 </div>

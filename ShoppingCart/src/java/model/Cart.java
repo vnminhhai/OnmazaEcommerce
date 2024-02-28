@@ -36,4 +36,7 @@ public class Cart {
         return f;
     }
     
+    public int getItemCount() {
+        return item_list.size();
+    }
 }

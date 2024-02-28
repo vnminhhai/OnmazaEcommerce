@@ -44,9 +44,12 @@ public class AddToCart extends HttpServlet {
             int iid = Integer.parseInt(request.getParameter("item"));
             String variant = request.getParameter("variant");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            new CartDAO().addWithCustomerID(cid, iid, variant, quantity);
+            CartDAO cart = new CartDAO();
+            cart.addWithCustomerID(cid, iid, variant, quantity);
             request.setAttribute("cart_message", "Added");
             request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item"))));
+            Customer c = (Customer)session.getAttribute("customer");
+            request.getSession().setAttribute("cart_item_number", cart.getCartByID(c.getId()).getItemCount());
             request.getRequestDispatcher("item.jsp").forward(request, response);
         }
     } 

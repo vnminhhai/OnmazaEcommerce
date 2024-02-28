@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.CartDAO;
 import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,6 +60,7 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         CustomerDAO cd = new CustomerDAO();
+        CartDAO cart = new CartDAO();
         Customer c = cd.getRecordByName(request.getParameter("User_Name"));
         if (c==null) {
             request.setAttribute("message", "User name does not exist");
@@ -68,6 +70,7 @@ public class Login extends HttpServlet {
         {
             request.getSession().setAttribute("customer", c);
             request.getSession().setAttribute("User_Name", request.getParameter("User_Name"));
+            request.getSession().setAttribute("cart_item_number", cart.getCartByID(c.getId()).getItemCount());
             String current = (String)request.getSession().getAttribute("current");
             if (current==null) response.sendRedirect(".");
             else response.sendRedirect(current);

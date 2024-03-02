@@ -5,22 +5,25 @@
 
 package controller;
 
-import dal.CustomerDAO;
+import dal.CategoryDAO;
+import dal.ItemDAO;
+import dal.VariantDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Customer;
+import java.util.ArrayList;
+import model.Category;
+import model.Item;
+import model.Variant;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="Register", urlPatterns={"/register"})
-public class Register extends HttpServlet {
+public class AdminAddVariant extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +40,10 @@ public class Register extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Register</title>");  
+            out.println("<title>Servlet AdminAddVariant</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Register at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AdminAddVariant at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +60,8 @@ public class Register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+        request.setAttribute("Items", new ItemDAO().getItemList());
+        request.getRequestDispatcher("admin/addvariant.jsp").forward(request, response);
     } 
 
     /** 
@@ -70,44 +74,14 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String first_name = request.getParameter("first_name");
-        String last_name = request.getParameter("last_name");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String country = request.getParameter("country");
-        String email = request.getParameter("email");
-        if (first_name==null||last_name==null||phone==null||address==null||country==null||email==null)
-            request.setAttribute("info_message", "Please fill in all the information!");
-        String User_Name = request.getParameter("User_Name");
-        String Password = request.getParameter("Password");
-        String rePassword = request.getParameter("rePassword");
-        CustomerDAO cd = new CustomerDAO();
-        if (User_Name==null||Password==null)
-        {
-            request.setAttribute("message","User name and Password is required!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-        else if (cd.getRecordByName(User_Name)!=null)
-        {
-            request.setAttribute("message", "User name already existed!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-        else if (!Password.equals(rePassword))
-        {
-            request.setAttribute("message", "Passwords not matching!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }
-        else {
-            Customer c = new Customer(0, first_name, last_name, email, phone, address, country, User_Name, Password, 0);
-            cd.save(c);
-            request.getSession().setAttribute("customer", cd.getRecordByName(User_Name));
-            request.getSession().setAttribute("User_Name", User_Name);
-            String current = (String)request.getSession().getAttribute("current");
-            if (current==null) response.sendRedirect(".");
-            else response.sendRedirect(current);
-        }
+        String name = request.getParameter("name");
+        int amount = Integer.parseInt(request.getParameter("amount"));
+        String rawimg = request.getParameter("image");
+        byte[] img = (rawimg==null) ? null : request.getParameter("image").getBytes();
+        Variant v = new Variant(name, img, amount);
+        int iid = Integer.parseInt(request.getParameter("item"));
+        new VariantDAO().addVariant(v, iid);
     }
-
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

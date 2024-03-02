@@ -4,8 +4,20 @@
         <servlet-name>ConfirmOrder</servlet-name>
         <servlet-class>controller.ConfirmOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAddVariant</servlet-name>
+        <servlet-class>controller.AdminAddVariant</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConfirmOrder</servlet-name>
         <url-pattern>/confirm</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>country</param-name>
+        <param-value>Vietnam</param-value>
+    </context-param>
+    <servlet-mapping>
+        <servlet-name>AdminAddVariant</servlet-name>
+        <url-pattern>/addvariant</url-pattern>
     </servlet-mapping>
 </web-app>

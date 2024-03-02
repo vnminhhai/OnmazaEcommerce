@@ -59,4 +59,27 @@ public class VariantDAO extends DBContext{
             System.out.println(e.getMessage());
         }
     }
+    public void updateImage(int id, String name, byte[] img) {
+        String sql = "update Variants set Image=? where Item_ID="+id+"and Name='"+name+"'";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setBytes(1, img);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void addVariant(Variant v, int iid) {
+        String sql = "insert into Variants (Item_ID, Name, Image, Stock_Amount) values (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, iid);
+            ps.setString(2, v.getName());
+            ps.setBytes(3, v.getImage());
+            ps.setInt(4, v.getStock_amount());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

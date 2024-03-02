@@ -67,15 +67,14 @@ public class ItemDAO extends DBContext{
         return l;
     }
     public void save(Item c) {
-        String sql = "insert into Items(ID, Name, Description, Price, Category_ID)"
-                + "values(?,?,?,?,?)";
+        String sql = "insert into Items(Name, Description, Price, Category_ID)"
+                + "values(?,?,?,?)";
         try {
             PreparedStatement ps  = connection.prepareStatement(sql);
-            ps.setInt(1, c.getId());
-            ps.setString(2, c.getName());
-            ps.setString(3, c.getDescription());
-            ps.setFloat(4, c.getPrice());
-            ps.setInt(5, c.getCategory().getId());
+            ps.setString(1, c.getName());
+            ps.setString(2, c.getDescription());
+            ps.setFloat(3, c.getPrice());
+            ps.setInt(4, c.getCategory().getId());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);

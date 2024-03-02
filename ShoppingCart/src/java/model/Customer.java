@@ -18,11 +18,12 @@ public class Customer {
     private String country;
     private String user_name;
     private String password;
+    private int permission;
 
     public Customer() {
     }
 
-    public Customer(int id, String first_name, String last_name, String email, String mobile_phone, String address, String country, String un, String pass) {
+    public Customer(int id, String first_name, String last_name, String email, String mobile_phone, String address, String country, String un, String pass, int permission) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -32,6 +33,7 @@ public class Customer {
         this.country = country;
         this.user_name=un;
         this.password=pass;
+        this.permission=permission;
     }
 
     public int getId() {
@@ -105,5 +107,12 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public int getPermission() {
+        return permission;
+    }
+
+    public void setPermission(int permission) {
+        this.permission = permission;
+    }
 }

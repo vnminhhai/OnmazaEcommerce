@@ -34,7 +34,8 @@ public class CustomerDAO extends DBContext{
                 String add = rs.getString("Address");
                 String phone = rs.getString("Mobile_Phone");
                 String country = rs.getString("Country");
-                l.add( new Customer(id, first, last, email, phone, add, country, un, pass));
+                int permission = rs.getInt("Role_ID");
+                l.add( new Customer(id, first, last, email, phone, add, country, un, pass, permission));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,7 +84,8 @@ public class CustomerDAO extends DBContext{
                 String add = rs.getString("Address");
                 String phone = rs.getString("Mobile_Phone");
                 String country = rs.getString("Country");
-                return new Customer(id, first, last, email, phone, add, country, un, pass);
+                int permission = rs.getInt("Role_ID");
+                return new Customer(id, first, last, email, phone, add, country, un, pass, permission);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,7 +107,8 @@ public class CustomerDAO extends DBContext{
                 String add = rs.getString("Address");
                 String phone = rs.getString("Mobile_Phone");
                 String country = rs.getString("Country");
-                return new Customer(id, first, last, email, phone, add, country, un, pass);
+                int permission = rs.getInt("Role_ID");
+                return new Customer(id, first, last, email, phone, add, country, un, pass, permission);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);

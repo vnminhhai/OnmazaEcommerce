@@ -26,7 +26,7 @@
                 Variant name: <input type="text" placeholder="Name" name="name">
             </p>
             <p>
-                Image: <input type="image" placeholder="Image" name="image">
+                Image: <input type="file" accept="image/*" name="image">
             <p>
                 Stock amount: <input type="text" placeholder="Quantity" name="amount">
             </p>

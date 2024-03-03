@@ -20,7 +20,7 @@ import model.Customer;
  * @author ADMIN
  */
 @WebServlet(name="Cart", urlPatterns={"/cart"})
-public class Cart extends HttpServlet {
+public class CartController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

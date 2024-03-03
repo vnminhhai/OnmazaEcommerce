@@ -55,6 +55,10 @@
                     </c:forEach>
                     <c:if test="${total>0}">
                         <div class="text-end fw-bolder">Total: ${total}</div>
+                        <form action="purchase" class="text-end fw-bolder">
+                            <input type="hidden" value="cart" name="item">
+                            <input type="submit" value="Purchase all" class="fw-bolder text-gray-dark">
+                        </form>
                     </c:if>
                     <c:if test="${total==0}">
                         <div class="text-center fw-bold">You have no item in your cart.</div>

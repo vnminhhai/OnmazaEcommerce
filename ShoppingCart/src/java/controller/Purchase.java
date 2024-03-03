@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.CartDAO;
 import dal.ItemDAO;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
@@ -14,6 +15,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import model.Customer;
+import model.Item;
+import model.Cart;
+import model.Variant;
 
 /**
  *
@@ -37,11 +44,28 @@ public class Purchase extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         else {
-            ItemDAO id = new ItemDAO();
-            request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item"))));
-            request.setAttribute("variant", request.getParameter("variant"));
-            request.setAttribute("quantity", request.getParameter("quantity"));
-            request.getRequestDispatcher("order.jsp").forward(request, response);
+            String iraw = request.getParameter("item");
+            if (iraw.equals("cart")) {
+                Customer c = (Customer)session.getAttribute("customer");
+                request.setAttribute("cart", new CartDAO().getCartByID(c.getId()));
+                request.setAttribute("from_cart", true);
+                request.getRequestDispatcher("order.jsp").forward(request, response);
+            }
+            else {
+                String vname = request.getParameter("variant");
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                ItemDAO id = new ItemDAO();
+                Item i = id.getRecordById(Integer.parseInt(iraw));
+                for (Variant v : i.getVariants()) {
+                    if (v.getName().equals(vname)) v.setStock_amount(quantity);
+                    else v.setStock_amount(0);
+                }
+                List<Item> l = new ArrayList<>();
+                l.add(i);
+                request.setAttribute("cart", new Cart(l));
+                request.setAttribute("from_cart", false);
+                request.getRequestDispatcher("order.jsp").forward(request, response);
+            }
         }
     } 
 

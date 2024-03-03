@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.CartDAO;
 import dal.ItemDAO;
 import dal.OrderDAO;
 import dal.VariantDAO;
@@ -46,7 +47,7 @@ public class ConfirmOrder extends HttpServlet {
             session.setAttribute("current", "");
             response.sendRedirect("login");
         }
-        else {
+        else if (request.getParameter("clear_cart").equals("false")) {
             ItemDAO itd = new ItemDAO();
             VariantDAO vd = new VariantDAO();
             int id = Integer.parseInt(request.getParameter("item"));
@@ -64,11 +65,33 @@ public class ConfirmOrder extends HttpServlet {
             Detail d = new Detail(l);
             Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
                     LocalDate.now().plusDays(5), request.getParameter("address"), d);
-            try {
-                od.save(o, ((Customer)session.getAttribute("customer")).getId());
-            } catch (Exception e) {
-                System.out.println(e.getStackTrace());
+            od.save(o, ((Customer)session.getAttribute("customer")).getId());
+            request.getRequestDispatcher("done.jsp").forward(request, response);
+        }
+        else {
+            ItemDAO itd = new ItemDAO();
+            VariantDAO vd = new VariantDAO();
+            CartDAO cd = new CartDAO();
+            OrderDAO od = new OrderDAO();
+            List<Item> l = new ArrayList<>();
+            for (Item i : cd.getCartByID(((Customer)session.getAttribute("customer")).getId()).getItem_list())
+            {
+                int id = i.getId();
+                String var = i.getVariant();
+                int left = vd.getRecordByName(id, var).getStock_amount()-i.getQuantity();
+                vd.updateAmount(id, var, left);
+                Item ii = itd.getRecordById(id);
+                for (Variant v : ii.getVariants()) {
+                    if (v.getName().equals(request.getParameter("variant")))
+                        v.setStock_amount(Integer.parseInt(request.getParameter("quantity")));
+                    else v.setStock_amount(0);
+                }
+                l.add(i);
             }
+            Detail d = new Detail(l);
+            Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
+                    LocalDate.now().plusDays(5), request.getParameter("address"), d);
+            od.save(o, ((Customer)session.getAttribute("customer")).getId());
             request.getRequestDispatcher("done.jsp").forward(request, response);
         }
     }

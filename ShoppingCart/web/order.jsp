@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Customer" %>
-<%@page import="model.Item" %>
+<%@page import="model.Cart" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,22 +18,31 @@
     </head>
     <body>
         <%@include file="components/header.jsp" %>
-        <h1>Confirm your order</h1>
-        <form action="confirm" method="post">
-            <p>Item: ${item.name} (${variant})</p>
-            <p>${item.description}</p>
-            <p>Price: ${item.price}</p>
-            <p>Quantity: ${quantity}</p>
-            <p>Ship Address: <input type="text" name="address" value="<%=((Customer)session.getAttribute("customer")).getAddress()%>"></p>
-            <h2>Total: <%= Integer.parseInt((String)request.getAttribute("quantity"))*((Item)request.getAttribute("item")).getPrice()%></h2>
-            <input type="hidden" value="${item.id}" name="item">
-            <input type="hidden" value="${variant}" name="variant">
-            <input type="hidden" value="${quantity}" name="quantity">
-            <p>Payment:
-                <input type="radio" name="pay" value="After" checked="checked" /> Pay after shipment
-                <input type="radio" name="pay" value="Before" /> Pay now
-            </p>
-            <input type="submit" value="Order">
-        </form>
+        <section class="section-intro mb-3 mt-5">
+            <div class="container">
+                <main class="card p-3">
+                    <h1>Confirm your order</h1>
+                    <form action="confirm" method="get">
+                        <input type="hidden" value="${from_cart}" name="clear_cart">
+                        <c:forEach items="${cart.item_list}" var="item">
+                            <p>Item: ${item.name} (${item.variant})</p>
+                            <p>${item.description}</p>
+                            <p>Price: ${item.price}</p>
+                            <p>Quantity: ${item.quantity}</p>
+                            <input type="hidden" value="${item.id}" name="item">
+                            <input type="hidden" value="${item.variant}" name="variant">
+                            <input type="hidden" value="${item.quantity}" name="quantity">
+                        </c:forEach>
+                        <p>Ship Address: <input type="text" name="address" value="<%=((Customer)session.getAttribute("customer")).getAddress()%>"></p>
+                        <p>Payment:
+                            <input type="radio" name="pay" value="After" checked/> Pay after shipment
+                            <input type="radio" name="pay" value="Before" /> Pay now
+                        </p>
+                        <h2>Total: ${cart.total}</h2>
+                        <input type="submit" value="Order">
+                    </form>
+                </main>
+            </div>
+        </section>
     </body>
 </html>

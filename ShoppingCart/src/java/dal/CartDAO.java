@@ -94,4 +94,14 @@ public class CartDAO extends DBContext{
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void removeAll(int cid) {
+        String check= "delete from Cart where Customer_ID = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(check);
+            ps.setInt(1, cid);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

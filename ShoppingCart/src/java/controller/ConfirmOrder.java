@@ -44,7 +44,6 @@ public class ConfirmOrder extends HttpServlet {
     throws ServletException, IOException {
         HttpSession session = request.getSession();
         if (session==null || session.getAttribute("User_Name")==null) {
-            session.setAttribute("current", "");
             response.sendRedirect("login");
         }
         else if (request.getParameter("clear_cart").equals("false")) {
@@ -69,12 +68,13 @@ public class ConfirmOrder extends HttpServlet {
             request.getRequestDispatcher("done.jsp").forward(request, response);
         }
         else {
+            int cid = ((Customer)session.getAttribute("customer")).getId();
             ItemDAO itd = new ItemDAO();
             VariantDAO vd = new VariantDAO();
             CartDAO cd = new CartDAO();
             OrderDAO od = new OrderDAO();
             List<Item> l = new ArrayList<>();
-            for (Item i : cd.getCartByID(((Customer)session.getAttribute("customer")).getId()).getItem_list())
+            for (Item i : cd.getCartByID(cid).getItem_list())
             {
                 int id = i.getId();
                 String var = i.getVariant();
@@ -89,9 +89,10 @@ public class ConfirmOrder extends HttpServlet {
                 l.add(i);
             }
             Detail d = new Detail(l);
-            Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
+            Order o =  new Order(0, cid, LocalDate.now(),
                     LocalDate.now().plusDays(5), request.getParameter("address"), d);
-            od.save(o, ((Customer)session.getAttribute("customer")).getId());
+            od.save(o, cid);
+            cd.removeAll(cid);
             request.getRequestDispatcher("done.jsp").forward(request, response);
         }
     }

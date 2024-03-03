@@ -13,6 +13,7 @@
         <title>Admin</title>
     </head>
     <body>
-        <a href="//additem">Add an item</a>
+        <a href="../additem">Add an item</a>
+        <a href="../addvariant">Add an item</a>
     </body>
 </html>

@@ -28,7 +28,7 @@
                         Types:
                         <c:forEach var="i" begin="0" end="${requestScope.item.variants.size()-1}" step="1">
                             <input type="radio" name="variant" value="${requestScope.item.variants[i].name}" ${i==0?"checked":""}/>
-                            <span>${requestScope.item.variants[i].image}</span>
+                            <span>${requestScope.item.variants[i].renderedImage}</span>
                             <span>${requestScope.item.variants[i].name}</span>
                         </c:forEach>
                         <br>

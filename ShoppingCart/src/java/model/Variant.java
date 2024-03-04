@@ -4,6 +4,16 @@
  */
 package model;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author ADMIN
@@ -44,6 +54,18 @@ public class Variant {
 
     public void setStock_amount(int stock_amount) {
         this.stock_amount = stock_amount;
+    }
+    
+    public File getRenderedImage() {
+        File f = new File("output.jpg");
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream(image);
+            BufferedImage bImage2 = ImageIO.read(bis);
+            ImageIO.write(bImage2, "jpg", f);
+        } catch (IOException ex) {
+            Logger.getLogger(Variant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return f;
     }
 @Override
     public String toString() {

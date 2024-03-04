@@ -24,7 +24,7 @@
                         <aside class="col-lg-3">
                             <nav class="nav flex-column nav-pills mb-3 mb-lg-0">
                                 <c:forEach var="category" items="${categories}">
-                                    <a class="nav-link text-truncate" href="search?category=${category.slug}"><b>${category.name}</b></a>
+                                    <a class="nav-link text-truncate" href="search?category=${category.name}"><b>${category.name}</b></a>
                                         </c:forEach>
                             </nav>
                         </aside>
@@ -37,7 +37,7 @@
                                     <div id="carouselMain" class="carousel-main carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <article class="carousel-item active">
-                                                <div class="carousel-caption">
+                                                <div class="carousel-caption text-start">
                                                     <h2 class="mb-3">
                                                         <span class="fw-normal">Latest trending</span> <br> <strong>Electronic items</strong>
                                                     </h2>
@@ -46,7 +46,7 @@
                                                 <img style="height: 352px;" src="https://bootstrap-ecommerce-web.netlify.app/images/banners/main-tech.png" class="d-block w-100 img-cover" alt="Banner">
                                             </article>
                                             <article class="carousel-item">
-                                                <div class="carousel-caption">
+                                                <div class="carousel-caption text-start">
                                                     <h2 class="mb-3">
                                                         <span class="fw-normal">Latest delas</span> <br> <strong>Best Smartphones</strong>
                                                     </h2>

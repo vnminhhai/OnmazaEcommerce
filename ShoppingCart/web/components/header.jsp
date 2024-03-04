@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.Category, dal.CategoryDAO, java.util.List" %>
+<% request.setAttribute("categories", new CategoryDAO().getCategoryList()); %>
 <header class="section-header position-fixed top-0 start-0 end-0" style="z-index: 100">
     <section class="header-main bg-dark border-bottom py-lg-3 py-2">
         <div class="fluid-container">
@@ -13,7 +15,15 @@
                 <div class="col-sm-7">
                     <form action="search" class="search my-3 my-lg-0">
                         <div class="input-group">
-                            <input type="search" class="form-control" style="width:30%" placeholder="Search" name="keyword" value="${param.keyword}">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <c:forEach items="${categories}" var="c">
+                                        <li>${c.name}</li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                            <input type="search" class="form-control" style="width:30%" placeholder="Search" name="keyword" value="${param.keyword}" onkeyup="filterFunction()">
                             <button class="btn btn-warning-light">
                                 <i class="fa fa-search"></i>
                             </button>

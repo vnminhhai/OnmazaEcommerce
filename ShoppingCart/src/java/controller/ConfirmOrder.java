@@ -93,6 +93,7 @@ public class ConfirmOrder extends HttpServlet {
                     LocalDate.now().plusDays(5), request.getParameter("address"), d);
             od.save(o, cid);
             cd.removeAll(cid);
+            session.setAttribute("cart_item_number", 0);
             request.getRequestDispatcher("done.jsp").forward(request, response);
         }
     }

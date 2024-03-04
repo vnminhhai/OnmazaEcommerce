@@ -38,7 +38,7 @@
                                         <div class="carousel-inner">
                                             <article class="carousel-item active">
                                                 <div class="carousel-caption text-start">
-                                                    <h2 class="mb-3">
+                                                    <h2 class="mb-3 mt-3">
                                                         <span class="fw-normal">Latest trending</span> <br> <strong>Electronic items</strong>
                                                     </h2>
                                                     <a href="#" class="btn btn-warning"> View more </a>
@@ -46,7 +46,7 @@
                                                 <img style="height: 352px;" src="https://bootstrap-ecommerce-web.netlify.app/images/banners/main-tech.png" class="d-block w-100 img-cover" alt="Banner">
                                             </article>
                                             <article class="carousel-item">
-                                                <div class="carousel-caption text-start">
+                                                <div class="carousel-caption text-start size-200x200">
                                                     <h2 class="mb-3">
                                                         <span class="fw-normal">Latest delas</span> <br> <strong>Best Smartphones</strong>
                                                     </h2>

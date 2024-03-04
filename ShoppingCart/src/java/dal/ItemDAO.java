@@ -66,7 +66,7 @@ public class ItemDAO extends DBContext{
         }
         return l;
     }
-    public ArrayList<Item> searchItemList(String keyword, List<Category> listC, float priceFrom, float priceTo){
+    public ArrayList<Item> searchItemList(String keyword, List<String> listC, float priceFrom, float priceTo){
         String sql = "select * from Items where Name like '%"+keyword+"%'";
         ResultSet rs;
         ArrayList<Item> l = new ArrayList<>();
@@ -78,7 +78,32 @@ public class ItemDAO extends DBContext{
                 int cid = rs.getInt("Category_ID");
                 int id= rs.getInt("ID");
                 Category cat = new CategoryDAO().getRecordById(cid);
-                if (!listC.contains(cat)) continue;
+                if (!listC.contains(cat.getName())) continue;
+                float price = rs.getFloat("Price");
+                if (price>priceTo||price<priceFrom) continue;
+                String name = rs.getString("Name");
+                String des = rs.getString("Description");
+                List<Variant> var = vd.getItemVariantList(id);
+                l.add( new Item(id, name, des, price, cat, var));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return l;
+    }
+    
+    public ArrayList<Item> searchItemList(String keyword, float priceFrom, float priceTo){
+        String sql = "select * from Items where Name like '%"+keyword+"%'";
+        ResultSet rs;
+        ArrayList<Item> l = new ArrayList<>();
+        try {
+            VariantDAO vd = new VariantDAO();
+            PreparedStatement ps  = connection.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+                int cid = rs.getInt("Category_ID");
+                int id= rs.getInt("ID");
+                Category cat = new CategoryDAO().getRecordById(cid);
                 float price = rs.getFloat("Price");
                 if (price>priceTo||price<priceFrom) continue;
                 String name = rs.getString("Name");

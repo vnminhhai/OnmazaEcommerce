@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 import model.Item;
 
 /**
@@ -33,8 +34,25 @@ public class Search extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         ItemDAO id =  new ItemDAO();
-        ArrayList<Item> l = id.searchItemList(request.getParameter("keyword"));
-        request.setAttribute("display_list", l);
+        List<String> category = (List<String>)request.getAttribute("category");
+        String from = request.getParameter("priceFrom");
+        String to = request.getParameter("priceFrom");
+        String key =request.getParameter("keyword");
+        int f=Integer.MIN_VALUE,t=Integer.MAX_VALUE;
+        if (from!=null) f=Integer.parseInt(from);
+        if (to!=null) t=Integer.parseInt(to);
+        if (key==null) key = "";
+        if (category==null) {
+            if (request.getParameter("category")==null||request.getParameter("category").equals("All"))
+                request.setAttribute("display_list", id.searchItemList(key,f, t));
+            else {
+                category = new ArrayList<>();
+                category.add(request.getParameter("category"));
+                request.setAttribute("display_list", id.searchItemList(key,category, f, t));
+            }
+        }
+        else 
+            request.setAttribute("display_list", id.searchItemList(key,category, f, t));
         request.getRequestDispatcher("search.jsp").forward(request, response);
     } 
 

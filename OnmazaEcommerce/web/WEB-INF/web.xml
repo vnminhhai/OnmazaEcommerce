@@ -30,6 +30,6 @@
     </filter-mapping>
     <context-param>
         <param-name>appName</param-name>
-        <param-value>Onmaza</param-value>
+        <param-value>OnmazaEcommerce</param-value>
     </context-param>
 </web-app>

@@ -8,10 +8,6 @@
         <servlet-name>AdminAddVariant</servlet-name>
         <servlet-class>controller.AdminAddVariant</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>RegisterFail</servlet-name>
-        <servlet-class>controller.RegisterFail</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>ConfirmOrder</servlet-name>
         <url-pattern>/confirm</url-pattern>
@@ -28,6 +24,10 @@
         <servlet-name>AdminAddVariant</servlet-name>
         <url-pattern>/addVariant</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
     <filter>
         <filter-name>RegisterFilter</filter-name>
         <filter-class>filter.RegisterFilter</filter-class>
@@ -36,12 +36,49 @@
         <url-pattern>/register</url-pattern>
         <filter-name>RegisterFilter</filter-name>
     </filter-mapping>
+    <filter>
+        <filter-name>PermissionFilter1</filter-name>
+        <filter-class>filter.PermissionFilter1</filter-class>
+    </filter>
+    <filter-mapping>
+        <url-pattern>/staff</url-pattern>
+        <filter-name>PermissionFilter1</filter-name>
+    </filter-mapping>
+    <filter>
+        <filter-name>PermissionFilter2</filter-name>
+        <filter-class>filter.PermissionFilter2</filter-class>
+    </filter>
+    <filter-mapping>
+        <url-pattern>/admin</url-pattern>
+        <filter-name>PermissionFilter2</filter-name>
+    </filter-mapping>
     <context-param>
         <param-name>appName</param-name>
         <param-value>OnmazaEcommerce</param-value>
     </context-param>
-    <servlet-mapping>
-        <servlet-name>RegisterFail</servlet-name>
-        <url-pattern>/regFail</url-pattern>
-    </servlet-mapping>
+    <error-page>
+         Missing login 
+        <error-code>401</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+         Forbidden directory listing 
+        <error-code>403</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+         Missing resource 
+        <error-code>404</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+         Uncaught exception 
+        <error-code>500</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+         Unsupported servlet method 
+        <error-code>503</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
 </web-app>

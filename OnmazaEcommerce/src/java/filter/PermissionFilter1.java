@@ -10,13 +10,15 @@ import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import model.Customer;
 
 /**
  *
  * @author ADMIN
  */
-public class PermissionFilter implements Filter{
+public class PermissionFilter1 implements Filter{
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -25,7 +27,11 @@ public class PermissionFilter implements Filter{
 
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        HttpServletRequest request = (HttpServletRequest)sr;
+        if (((Customer)request.getSession().getAttribute("customer")).getPermission()<1) {
+            
+        }
+        else fc.doFilter(sr, sr1);
     }
 
     @Override

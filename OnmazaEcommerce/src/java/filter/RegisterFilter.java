@@ -30,6 +30,7 @@ public class RegisterFilter implements Filter{
         HttpServletRequest httpRequest = (HttpServletRequest) request;        
         if(httpRequest.getMethod().equalsIgnoreCase("GET")){
             fc.doFilter(request, response);
+            return;
         }
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");

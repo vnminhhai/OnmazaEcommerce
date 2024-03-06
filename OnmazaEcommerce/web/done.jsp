@@ -9,15 +9,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Order status</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <h2>Successful!</h2>
-        <button class="link-button" onclick="openURL('./home')">Home</button>
-        <script>
-            function openURL(url) {
-                window.location.href = url;
-            }
-        </script>
+        <div class="d-flex align-items-center justify-content-center vh-100">
+            <div class="text-center">
+                <h1 class="display-1 fw-bold">Successful</h1>
+                <p class="fs-3"> <span class="fw-bold text-success">Done!</span> Thanks for trusting our service.</p>
+                <p class="lead">
+                    Your order would come in a few days.
+                </p>
+                <a href="." class="btn btn-primary">Home</a>
+            </div>
+        </div>
     </body>
 </html>

@@ -20,4 +20,16 @@
         <servlet-name>AdminAddVariant</servlet-name>
         <url-pattern>/addvariant</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>RegisterFilter</filter-name>
+        <filter-class>filter.RegisterFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <url-pattern>/register</url-pattern>
+        <filter-name>RegisterFilter</filter-name>
+    </filter-mapping>
+    <context-param>
+        <param-name>appName</param-name>
+        <param-value>Onmaza</param-value>
+    </context-param>
 </web-app>

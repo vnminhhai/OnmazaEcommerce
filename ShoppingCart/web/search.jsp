@@ -20,6 +20,14 @@
         <section class="section-intro mb-3 mt-5">
             <div class="container">
                 <main class="card p-3">
+                    <div>
+                        Search with category:
+                        <select name="category">
+                            <c:forEach items="${categories}" var="c">
+                                <option>${category}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
                     <c:forEach items="${requestScope.display_list}" var = "c">
                         <div class="item-container" style="margin: 5px; border: solid black 1px; width: 30%; padding: 5px;">
                             <p>${c.name}</p>

@@ -8,6 +8,10 @@
         <servlet-name>AdminAddVariant</servlet-name>
         <servlet-class>controller.AdminAddVariant</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterFail</servlet-name>
+        <servlet-class>controller.RegisterFail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConfirmOrder</servlet-name>
         <url-pattern>/confirm</url-pattern>
@@ -17,8 +21,12 @@
         <param-value>Vietnam</param-value>
     </context-param>
     <servlet-mapping>
+        <servlet-name>AdminAddItem</servlet-name>
+        <url-pattern>/addItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AdminAddVariant</servlet-name>
-        <url-pattern>/addvariant</url-pattern>
+        <url-pattern>/addVariant</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>RegisterFilter</filter-name>
@@ -32,4 +40,8 @@
         <param-name>appName</param-name>
         <param-value>OnmazaEcommerce</param-value>
     </context-param>
+    <servlet-mapping>
+        <servlet-name>RegisterFail</servlet-name>
+        <url-pattern>/regFail</url-pattern>
+    </servlet-mapping>
 </web-app>

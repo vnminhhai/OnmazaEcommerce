@@ -19,20 +19,36 @@
         <section class="section-intro mb-3 mt-5">
             <div class="container">
                 <main class="card p-3">
-                    <form action="register" method="POST">
-                        First name: <input name="first_name" type="text" value="<%= request.getParameter("first_name")%>"><br>
-                        Last name: <input name="last_name" type="text" value="<%= request.getParameter("last_name")%>"><br>
-                        Email: <input name="email" type="text" value="<%= request.getParameter("email")%>"><br>
-                        Phone number: <input name="phone" type="text" value="<%= request.getParameter("phone")%>"><br>
-                        Address: <input name="address" type="text" value="<%= request.getParameter("address")%>"><br>
-                        Country: <input name="country" type="text" value="<%= request.getParameter("country")%>"><br>
+                    <form action="register" method="POST" class="mb-3 fw-bold">
+                        <p>
+                            First name: <input name="first_name" type="text" value="<%= (request.getAttribute("first_name")==null)? "":(String)request.getAttribute("first_name")%>"><br>
+                        </p>
+                        <p>
+                            Last name: <input name="last_name" type="text" value="<%= (request.getAttribute("last_name")==null)? "":(String)request.getAttribute("last_name")%>"><br>
+                        </p>
+                        <p>
+                            Email: <input name="email" type="text" value="<%= (request.getAttribute("email")==null)? "":(String)request.getAttribute("email")%>"><br>
+                        </p>
+                        <p>
+                            Phone number: <input name="phone" type="text" value="<%= (request.getAttribute("phone")==null)? "":request.getAttribute("phone")%>"><br>
+                        </p>
+                        <p>
+                            Address: <input name="address" type="text" value="<%= (request.getAttribute("address")==null)? "":(String)request.getAttribute("address")%>"><br>
+                        </p>
+                        <p>
+                            Country: <input name="country" type="text" value="<%= (request.getAttribute("country")==null)? "":(String)request.getAttribute("country")%>"><br>
                         <p style="color: red; display: <%= (request.getAttribute("info_message") == null) ? "none" : "inline" %>;">
                             <%= request.getAttribute("info_message") %>
                             <br>
                         </p>
-                        User name: <input name="User_Name" type="text"><br>
-                        Password: <input name="Password" type="password"><br>
-                        Re-enter password: <input name="rePassword" type="password"><br>
+                        <p>
+                            User name: <input name="User_Name" type="text"><br>
+                        </p>
+                        <p>
+                            Password: <input name="Password" type="password"><br>
+                        </p>
+                        <p>
+                            Re-enter password: <input name="rePassword" type="password"><br>
                         <p style="color: red; display: <%= (request.getAttribute("message") == null) ? "none" : "inline" %>;">
                             <%= request.getAttribute("message") %>
                             <br>

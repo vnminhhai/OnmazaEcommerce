@@ -13,7 +13,17 @@
         <title>Admin</title>
     </head>
     <body>
-        <a href="../additem">Add an item</a>
-        <a href="../addvariant">Add an item</a>
+        <p>
+            <a href=".${applicationScope.appName}/manageAccount">Add or remove staff</a>
+        </p>
+        <p>
+            <a href=".${applicationScope.appName}/checkOrder">Check orders</a>
+        </p>
+        <p>
+            <a href=".${applicationScope.appName}/addItem">Add an item</a>
+        </p>
+        <p>
+            <a href=".${applicationScope.appName}/addVariant">Add a variant</a>
+        </p>
     </body>
 </html>

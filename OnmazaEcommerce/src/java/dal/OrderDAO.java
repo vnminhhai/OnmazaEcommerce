@@ -10,6 +10,9 @@ import model.Order;
 import model.Detail;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import model.Item;
 
 /**
@@ -66,4 +69,34 @@ public class OrderDAO extends DBContext{
         }
     }
     
+    public List<Order> getAllOrdersByStatus(int s) {
+        List<Order> l = new ArrayList<>();
+        String sql = "select * from Orders where Status_ID ="+s;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()) {
+                int order_id = rs.getInt("ID");
+                List<Item> item_list = new ArrayList<>();
+                String fetch_detail = "select * from Detail where Order_ID ="+order_id;
+                ResultSet r = connection.prepareStatement(fetch_detail).executeQuery();
+                while (r.next()) {
+                    item_list.add(new ItemDAO().getRecordById(r.getInt("Order_ID")));
+                }
+                Detail detail = new Detail(item_list);
+                l.add(new Order(rs.getInt("ID"), rs.getInt("Customer_ID"), LocalDate.parse(rs.getString("Order_Date")),
+                        LocalDate.parse(rs.getString("Required_Date")), rs.getString("Ship_Address"), detail, trans(s)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+    private String trans(int i) {
+        switch (i) {
+            case 0: return "Pending";
+            case 1: return "Transporting";
+            default: return "Done";
+        }
+    }
 }

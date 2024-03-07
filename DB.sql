@@ -95,7 +95,7 @@ Description varchar(255)
 
  create table Status(
  ID int primary key,
- Label nvarchar not null
+ Label nvarchar(255) not null
  );
 
  create table Orders(
@@ -104,7 +104,7 @@ Description varchar(255)
  Order_Date date not null,
  Required_Date date not null,
  Ship_Address nvarchar(255) not null,
- Status_ID int references Status(ID),
+ Status_ID int references Status(ID) default(0),
  check (Order_Date<Required_Date)
  );
 

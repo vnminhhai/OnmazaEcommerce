@@ -8,6 +8,10 @@
         <servlet-name>AdminAddVariant</servlet-name>
         <servlet-class>controller.AdminAddVariant</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOrder</servlet-name>
+        <servlet-class>controller.CheckOrder</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConfirmOrder</servlet-name>
         <url-pattern>/confirm</url-pattern>
@@ -56,6 +60,10 @@
         <param-name>appName</param-name>
         <param-value>OnmazaEcommerce</param-value>
     </context-param>
+    <servlet-mapping>
+        <servlet-name>CheckOrder</servlet-name>
+        <url-pattern>/checkOrder</url-pattern>
+    </servlet-mapping>
     <error-page>
          Missing login 
         <error-code>401</error-code>

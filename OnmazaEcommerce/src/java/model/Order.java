@@ -18,17 +18,19 @@ public class Order {
     private LocalDate required_date;
     private String ship_address;
     private Detail detail;
+    private String status;
 
     public Order() {
     }
 
-    public Order(int id, int customer_id, LocalDate order_date, LocalDate required_date, String ship_address, Detail detail) {
+    public Order(int id, int customer_id, LocalDate order_date, LocalDate required_date, String ship_address, Detail detail, String status) {
         this.id = id;
         this.customer_id = customer_id;
         this.order_date = order_date;
         this.required_date = required_date;
         this.ship_address = ship_address;
         this.detail = detail;
+        this.status= status;
     }
 
     public int getId() {
@@ -78,5 +80,14 @@ public class Order {
     public void setDetail(Detail detail) {
         this.detail = detail;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     
 }

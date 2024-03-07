@@ -63,7 +63,7 @@ public class ConfirmOrder extends HttpServlet {
             l.add(i);
             Detail d = new Detail(l);
             Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
-                    LocalDate.now().plusDays(5), request.getParameter("address"), d);
+                    LocalDate.now().plusDays(5), request.getParameter("address"), d,"");
             od.save(o, ((Customer)session.getAttribute("customer")).getId());
             request.getRequestDispatcher("done.jsp").forward(request, response);
         }
@@ -90,7 +90,7 @@ public class ConfirmOrder extends HttpServlet {
             }
             Detail d = new Detail(l);
             Order o =  new Order(0, cid, LocalDate.now(),
-                    LocalDate.now().plusDays(5), request.getParameter("address"), d);
+                    LocalDate.now().plusDays(5), request.getParameter("address"), d,"");
             od.save(o, cid);
             cd.removeAll(cid);
             session.setAttribute("cart_item_number", 0);

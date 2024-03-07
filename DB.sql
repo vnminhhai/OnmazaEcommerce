@@ -93,12 +93,18 @@ Description varchar(255)
  Role_ID int references Roles(ID) default(0)
  );
 
+ create table Status(
+ ID int primary key,
+ Label nvarchar not null
+ );
+
  create table Orders(
  ID int primary key identity(1,1),
  Customer_ID int references Customers(ID),
  Order_Date date not null,
  Required_Date date not null,
  Ship_Address nvarchar(255) not null,
+ Status_ID int references Status(ID),
  check (Order_Date<Required_Date)
  );
 
@@ -177,12 +183,19 @@ VALUES
     ('sarah89', 'sarah123', 'Sarah', 'Johnson', 'sarah.johnson@example.com', '+9876543210', '456 Elm St', 'USA'),
     ('david22', 'david456', 'David', 'Brown', 'david.brown@example.com', '+5555555555', '789 Oak Ave', 'Canada');
 
--- Inserting data into Orders table
-INSERT INTO Orders (Customer_ID, Order_Date, Required_Date, Ship_Address)
+-- Inserting data into Status table
+INSERT INTO Status (ID, Label)
 VALUES
-    (1, '2024-02-10', '2024-02-15', '123 Main St, USA'),
-    (2, '2024-02-11', '2024-02-16', '456 Elm St, USA'),
-    (3, '2024-02-12', '2024-02-17', '789 Oak Ave, Canada');
+    (0, 'Pending'),
+    (1, 'Transporting'),
+    (2, 'Done');
+
+-- Inserting data into Orders table
+INSERT INTO Orders (Customer_ID, Order_Date, Required_Date, Ship_Address, Status_ID)
+VALUES
+    (1, '2024-02-10', '2024-02-15', '123 Main St, USA', 1),
+    (2, '2024-02-11', '2024-02-16', '456 Elm St, USA', 2),
+    (3, '2024-02-12', '2024-02-17', '789 Oak Ave, Canada', 1);
 
 -- Inserting data into Detail table
 INSERT INTO Detail (Order_ID, Item_ID, Unit_Prices, Quantity)

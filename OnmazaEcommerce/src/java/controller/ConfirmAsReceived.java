@@ -9,7 +9,6 @@ import dal.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,8 +18,7 @@ import model.Customer;
  *
  * @author ADMIN
  */
-@WebServlet(name="User", urlPatterns={"/user"})
-public class User extends HttpServlet {
+public class ConfirmAsReceived extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,6 +29,9 @@ public class User extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        int oid = Integer.parseInt(request.getParameter("id"));
+        OrderDAO od = new OrderDAO();
+        od.updateStatus(oid, 2);
         int iid = ((Customer)request.getSession().getAttribute("customer")).getId();
         request.setAttribute("orders", new OrderDAO().getAllOrdersByUserId(iid));
         request.getRequestDispatcher("user.jsp").forward(request, response);

@@ -42,17 +42,7 @@
                             ${o.ship_address}
                         </td>
                         <td>
-                            <c:choose>
-                                <c:when test="${o.status==1}">
-                                    Pending
-                                </c:when>
-                                <c:when test="${o.status==2}">
-                                    Transporting
-                                </c:when>
-                                <c:when test="${o.status==3}">
-                                    Done
-                                </c:when>
-                            </c:choose>
+                            ${o.status}
                         </td>
                         <td>
                             <a href="resolve?id=${o.id}">Resolve</a>

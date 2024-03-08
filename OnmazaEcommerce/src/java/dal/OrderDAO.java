@@ -24,6 +24,16 @@ public class OrderDAO extends DBContext{
     public OrderDAO() {
     }
     
+    public void updateStatus(int oid, int setTo) {
+        String sql = "update Orders set Status_ID ="+setTo+" where ID="+oid;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.executeUpdate();
+            }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void save(Order o, int cid) {
         String sql = "INSERT INTO Orders (Customer_ID, Order_Date, Required_Date, Ship_Address)\n" +
         "VALUES (?, ?, ?, ?)";
@@ -92,6 +102,32 @@ public class OrderDAO extends DBContext{
         }
         return l;
     }
+    
+    public List<Order> getAllOrdersByUserId(int iid) {
+        List<Order> l = new ArrayList<>();
+        String sql = "select * from Orders where Customer_ID ="+iid;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()) {
+                int order_id = rs.getInt("ID");
+                List<Item> item_list = new ArrayList<>();
+                String fetch_detail = "select * from Detail where Order_ID ="+order_id;
+                ResultSet r = connection.prepareStatement(fetch_detail).executeQuery();
+                while (r.next()) {
+                    item_list.add(new ItemDAO().getRecordById(r.getInt("Order_ID")));
+                }
+                Detail detail = new Detail(item_list);
+                int s = rs.getInt("Status_ID");
+                l.add(new Order(rs.getInt("ID"), rs.getInt("Customer_ID"), LocalDate.parse(rs.getString("Order_Date")),
+                        LocalDate.parse(rs.getString("Required_Date")), rs.getString("Ship_Address"), detail, trans(s)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+    
     private String trans(int i) {
         switch (i) {
             case 0: return "Pending";

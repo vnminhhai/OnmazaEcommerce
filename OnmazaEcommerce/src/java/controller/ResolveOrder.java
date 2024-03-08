@@ -13,14 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Customer;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="User", urlPatterns={"/user"})
-public class User extends HttpServlet {
+@WebServlet(name="ResolveOrder", urlPatterns={"/resolve"})
+public class ResolveOrder extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,9 +30,11 @@ public class User extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int iid = ((Customer)request.getSession().getAttribute("customer")).getId();
-        request.setAttribute("orders", new OrderDAO().getAllOrdersByUserId(iid));
-        request.getRequestDispatcher("user.jsp").forward(request, response);
+        int oid = Integer.parseInt(request.getParameter("id"));
+        OrderDAO od = new OrderDAO();
+        od.updateStatus(oid, 1);
+        request.setAttribute("orders", od.getAllOrdersByStatus(0));
+        request.getRequestDispatcher("admin/CheckOrder.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

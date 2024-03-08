@@ -12,6 +12,10 @@
         <servlet-name>CheckOrder</servlet-name>
         <servlet-class>controller.CheckOrder</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmAsReceived</servlet-name>
+        <servlet-class>controller.ConfirmAsReceived</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConfirmOrder</servlet-name>
         <url-pattern>/confirm</url-pattern>
@@ -64,34 +68,33 @@
         <servlet-name>CheckOrder</servlet-name>
         <url-pattern>/checkOrder</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmAsReceived</servlet-name>
+        <url-pattern>/received</url-pattern>
+    </servlet-mapping>
     <error-page>
          Missing login 
         <error-code>401</error-code>
         <location>/errorPage.jsp</location>
-        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Forbidden directory listing 
         <error-code>403</error-code>
         <location>/errorPage.jsp</location>
-        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Missing resource 
         <error-code>404</error-code>
         <location>/errorPage.jsp</location>
-        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Uncaught exception 
         <error-code>500</error-code>
         <location>/errorPage.jsp</location>
-        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Unsupported servlet method 
         <error-code>503</error-code>
         <location>/errorPage.jsp</location>
-        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
 </web-app>

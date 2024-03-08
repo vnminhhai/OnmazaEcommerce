@@ -28,8 +28,8 @@ public class PermissionFilter2 implements Filter{
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)sr;
-        if (((Customer)request.getSession().getAttribute("customer")).getPermission()<2) {
-            
+        if (request.getSession().getAttribute("customer")==null||((Customer)request.getSession().getAttribute("customer")).getPermission()<2) {
+            throw new ServletException("Permission required.");
         }
         else fc.doFilter(sr, sr1);
     }

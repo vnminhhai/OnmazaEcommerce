@@ -68,25 +68,30 @@
          Missing login 
         <error-code>401</error-code>
         <location>/errorPage.jsp</location>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Forbidden directory listing 
         <error-code>403</error-code>
         <location>/errorPage.jsp</location>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Missing resource 
         <error-code>404</error-code>
         <location>/errorPage.jsp</location>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Uncaught exception 
         <error-code>500</error-code>
         <location>/errorPage.jsp</location>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
     <error-page>
          Unsupported servlet method 
         <error-code>503</error-code>
         <location>/errorPage.jsp</location>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
     </error-page>
 </web-app>

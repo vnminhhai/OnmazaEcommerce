@@ -104,7 +104,7 @@ Description varchar(255)
  Order_Date date not null,
  Required_Date date not null,
  Ship_Address nvarchar(255) not null,
- Status_ID int references Status(ID) default(0),
+ Status_ID int references Status(ID) default(0) not null,
  check (Order_Date<Required_Date)
  );
 

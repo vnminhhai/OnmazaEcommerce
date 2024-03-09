@@ -7,7 +7,6 @@ package controller;
 
 import dal.ItemDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import model.Item;
 
 /**
  *
@@ -39,11 +37,11 @@ public class Search extends HttpServlet {
         String to = request.getParameter("priceFrom");
         String key =request.getParameter("keyword");
         int f=Integer.MIN_VALUE,t=Integer.MAX_VALUE;
-        if (from!=null) f=Integer.parseInt(from);
-        if (to!=null) t=Integer.parseInt(to);
+        if (from!=null) if (!from.equals("")) f=Integer.parseInt(from);
+        if (to!=null) if (!to.equals("")) t=Integer.parseInt(to);
         if (key==null) key = "";
         if (category==null) {
-            if (request.getParameter("category")==null||request.getParameter("category").equals("All"))
+            if (request.getParameter("category")==null||request.getParameter("category").equalsIgnoreCase("all"))
                 request.setAttribute("display_list", id.searchItemList(key,f, t));
             else {
                 category = new ArrayList<>();

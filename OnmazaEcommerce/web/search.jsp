@@ -20,13 +20,24 @@
         <section class="section-intro mb-3 mt-5">
             <div class="container">
                 <main class="card p-3">
-                    <div>
-                        Search with category:
-                        <select name="category">
-                            <c:forEach items="${categories}" var="c">
-                                <option>${category}</option>
-                            </c:forEach>
-                        </select>
+                    <div class="mb-3 text-center justify-content-around">
+                        <h2 class="text-start">Advanced option: </h2>
+                        <form>
+                            Category:
+                            <select name="category" class="d-inline-block m-lg-2">
+                                <option value="all">All categories</option>
+                                <c:forEach items="${categories}" var="c">
+                                    <option>${c.name}</option>
+                                </c:forEach>
+                            </select>
+                            <span class="d-inline-block m-lg-2">
+                                Min price: <input type="number" name="fromPrice">
+                            </span>
+                            <span class="d-inline-block m-lg-2">
+                                Max price: <input type="number" name="toPrice">
+                            </span>
+                            <input type="submit" value="search">
+                        </form>
                     </div>
                     <c:forEach items="${requestScope.display_list}" var = "c">
                         <div class="item-container" style="margin: 5px; border: solid black 1px; width: 30%; padding: 5px;">

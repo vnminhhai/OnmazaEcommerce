@@ -18,8 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-@WebServlet(name="ResolveOrder", urlPatterns={"/resolve"})
-public class ResolveOrder extends HttpServlet {
+@WebServlet(name="AdminResolveOrder", urlPatterns={"/resolve"})
+public class AdminResolveOrder extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

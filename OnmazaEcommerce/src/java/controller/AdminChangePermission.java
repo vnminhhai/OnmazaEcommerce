@@ -12,11 +12,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.WebServlet;
 
 /**
  *
  * @author ADMIN
  */
+@WebServlet(name = "AdminChangePermission", urlPatterns = {"/manageAccount"})
 public class AdminChangePermission extends HttpServlet {
     /** 
      * Handles the HTTP <code>GET</code> method.
@@ -28,7 +31,8 @@ public class AdminChangePermission extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("changePermission.jsp").forward(request, response);
+        request.setAttribute("users", new CustomerDAO().getCustomerList());
+        request.getRequestDispatcher("admin/manageAccount.jsp").forward(request, response);
     } 
 
     /** 

@@ -20,6 +20,10 @@
         <servlet-name>AdminChangePermission</servlet-name>
         <servlet-class>controller.AdminChangePermission</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminManageAccount</servlet-name>
+        <servlet-class>controller.AdminManageAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConfirmOrder</servlet-name>
         <url-pattern>/confirm</url-pattern>
@@ -75,10 +79,6 @@
     <servlet-mapping>
         <servlet-name>ConfirmAsReceived</servlet-name>
         <url-pattern>/received</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminChangePermission</servlet-name>
-        <url-pattern>/changePermission</url-pattern>
     </servlet-mapping>
     <error-page>
          Missing login 

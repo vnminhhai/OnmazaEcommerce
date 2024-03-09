@@ -178,4 +178,14 @@ public class CustomerDAO extends DBContext{
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void updatePermission(int cid, int permission) {
+        String sql = "update Customers set Role_ID="+permission+" where ID="+cid;
+        try {
+            PreparedStatement ps  = connection.prepareStatement(sql);
+            ps.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

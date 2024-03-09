@@ -62,6 +62,8 @@ public class ConfirmOrder extends HttpServlet {
             Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
                     LocalDate.now().plusDays(5), request.getParameter("address"), d,"");
             od.save(o, ((Customer)session.getAttribute("customer")).getId());
+            request.setAttribute("mess1", "Thanks for trusting our service.");
+            request.setAttribute("mess2", "Your order would come in a few days.");
             request.getRequestDispatcher("done.jsp").forward(request, response);
         }
         else {

@@ -16,9 +16,9 @@
         <div class="d-flex align-items-center justify-content-center vh-100">
             <div class="text-center">
                 <h1 class="display-1 fw-bold">Successful</h1>
-                <p class="fs-3"> <span class="fw-bold text-success">Done!</span> Thanks for trusting our service.</p>
+                <p class="fs-3"> <span class="fw-bold text-success">Done!</span> ${mess1}</p>
                 <p class="lead">
-                    Your order would come in a few days.
+                    ${mess2}
                 </p>
                 <a href="." class="btn btn-primary">Home</a>
             </div>

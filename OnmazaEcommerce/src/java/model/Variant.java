@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -66,6 +67,10 @@ public class Variant {
             Logger.getLogger(Variant.class.getName()).log(Level.SEVERE, null, ex);
         }
         return f;
+    }
+    
+    public String getEncodedImage() {
+        return Base64.getEncoder().encode(image).toString();
     }
 @Override
     public String toString() {

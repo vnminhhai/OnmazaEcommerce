@@ -128,6 +128,29 @@ public class OrderDAO extends DBContext{
         return l;
     }
     
+    public Order getOrderByID(int oid) {
+        String sql = "select * from Orders where ID ="+oid;
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs= ps.executeQuery();
+            while (rs.next()) {
+                List<Item> item_list = new ArrayList<>();
+                String fetch_detail = "select * from Detail where Order_ID ="+oid;
+                ResultSet r = connection.prepareStatement(fetch_detail).executeQuery();
+                while (r.next()) {
+                    item_list.add(new ItemDAO().getRecordById(r.getInt("Order_ID")));
+                }
+                int s = rs.getInt("Status_ID");
+                Detail detail = new Detail(item_list);
+                return new Order(oid, rs.getInt("Customer_ID"), LocalDate.parse(rs.getString("Order_Date")),
+                        LocalDate.parse(rs.getString("Required_Date")), rs.getString("Ship_Address"), detail, trans(s));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     private String trans(int i) {
         switch (i) {
             case 0: return "Pending";

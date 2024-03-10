@@ -30,7 +30,8 @@ public class ConfirmAsReceived extends HttpServlet {
     throws ServletException, IOException {
         int oid = Integer.parseInt(request.getParameter("id"));
         OrderDAO od = new OrderDAO();
-        od.updateStatus(oid, 2);
+        if (od.getOrderByID(oid).getStatus()=="Transporting")
+            od.updateStatus(oid, 2);
         int iid = ((Customer)request.getSession().getAttribute("customer")).getId();
         request.setAttribute("orders", new OrderDAO().getAllOrdersByUserId(iid));
         request.getRequestDispatcher("user.jsp").forward(request, response);

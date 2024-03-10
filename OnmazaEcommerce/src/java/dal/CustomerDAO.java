@@ -147,7 +147,7 @@ public class CustomerDAO extends DBContext{
             ps.setString(6, phone);
             ps.setString(7, add);
             ps.setString(8, country);
-            ps.executeUpdate(sql);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -183,7 +183,7 @@ public class CustomerDAO extends DBContext{
         String sql = "update Customers set Role_ID="+permission+" where ID="+cid;
         try {
             PreparedStatement ps  = connection.prepareStatement(sql);
-            ps.executeUpdate(sql);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

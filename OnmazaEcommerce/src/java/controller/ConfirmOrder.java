@@ -93,6 +93,8 @@ public class ConfirmOrder extends HttpServlet {
             od.save(o, cid);
             cd.removeAll(cid);
             session.setAttribute("cart_item_number", 0);
+            request.setAttribute("mess1", "Thanks for trusting our service.");
+            request.setAttribute("mess2", "Shipment for your order would come soon.");
             request.getRequestDispatcher("done.jsp").forward(request, response);
         }
     }

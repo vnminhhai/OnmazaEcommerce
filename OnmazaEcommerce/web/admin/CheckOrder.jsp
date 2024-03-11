@@ -48,7 +48,7 @@
                             <a href="resolve?id=${o.id}">Resolve</a>
                         </td>
                         <td>
-                            <a href="detail?id=${o.id}">See Detail</a>
+                            <a href="order?id=${o.id}">See Detail</a>
                         </td>
                     </tr>
                 </c:forEach>

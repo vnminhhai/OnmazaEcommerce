@@ -14,16 +14,16 @@
     </head>
     <body>
         <p>
-            <a href="//${initParam.appName}/manageAccount">Add or remove staff</a>
+            <a href="manageAccount">Add or remove staff</a>
         </p>
         <p>
-            <a href="//${initParam.appName}/checkOrder">Check orders</a>
+            <a href="checkOrder">Check orders</a>
         </p>
         <p>
-            <a href="//${initParam.appName}/addItem">Add an item</a>
+            <a href="addItem">Add an item</a>
         </p>
         <p>
-            <a href="//${initParam.appName}/addVariant">Add a variant</a>
+            <a href="addVariant">Add a variant</a>
         </p>
     </body>
 </html>

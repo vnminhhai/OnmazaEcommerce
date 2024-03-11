@@ -19,37 +19,37 @@
         <%@include file="components/header.jsp" %>
         <section class="section-intro mb-3 mt-5">
             <div class="fluid-container row">
-                <div class="col-3 mb-3 text-start justify-content-around borde">
-                    <div class="fw-bold text-dark fs-4 ms-3">Advanced option: </div>
+                <div class="col-sm-3 col-lg-2 mb-3 text-start">
+                    <div class="fw-bold text-dark fs-4 ps-2">Advanced option: </div>
                     <form>
-                        <div class="d-inline-block m-3">
+                        <div class="d-inline-block m-2 ps-2">
                             Category:
-                            <select name="category" class="d-inline-block">
+                            <select name="category" class="d-inline-block w-50">
                                 <option value="all">All categories</option>
                                 <c:forEach items="${categories}" var="c">
-                                    <option>${c.name}</option>
+                                    <option <c:if test="${c.name==cat}">selected</c:if> value="${c.name}">${c.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="d-inline-block m-3">
+                        <div class="d-inline-block ps-2 m-2">
                             Min price: <input class="w-50" type="number" name="fromPrice" placeholder="Min">
                         </div>
-                        <div class="d-inline-block m-3">
+                        <div class="d-inline-block ps-2 m-2">
                             Max price: <input class="w-50" type="number" name="toPrice" placeholder="Max">
                         </div>
-                        <input type="submit" class="ms-3" value="Search">
+                        <input type="submit" class="ms-2 ps-2 m-2" value="Search">
                     </form>
                 </div>
-                <main class="col-9">
+                <main class="col-sm-9 col-lg-10 m-0 border-0">
                     <c:forEach items="${requestScope.display_list}" var = "c">
-                        <div class="item-container" style="margin: 5px; border: solid black 1px; width: 30%; padding: 5px;">
+                        <div class="item-container" style="margin: 0px; border: 0px; width: 30%; padding: 0px;">
                             <p>${c.name}</p>
                             <p>${c.category.name}</p>
                             <p>${c.description}</p>
                             <p>${c.price}</p>
                             <form action="buy" method="get">
                                 <input type="hidden" value="${c.id}" name="item_id">
-                                <input type="submit" value="Buy">
+                                <input type="submit" value="Buy" class="m-0">
                             </form>
                         </div>
                     </c:forEach>

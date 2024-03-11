@@ -1,11 +1,12 @@
+package dal;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
 
-import dal.VariantDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +14,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import model.Variant;
-import java.util.Base64;
-        
+
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="test", urlPatterns={"/test"})
-public class test extends HttpServlet {
+@WebServlet(name="ImageRetriver", urlPatterns={"/getImg"})
+public class ImageRetriver extends HttpServlet{
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,8 +35,31 @@ public class test extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.setAttribute("imgData", Base64.getEncoder().encodeToString(new VariantDAO().getRecordByName(1, "1").getImage()));
-        request.getRequestDispatcher("testimg.jsp").forward(request, response);
+        int id =Integer.parseInt(request.getParameter("id"));
+        String var = request.getParameter("variant");
+        System.out.println("Id in imageretirve="+id);
+        VariantDAO vd = new VariantDAO();
+        try {
+            byte[] imgLen = vd.getRecordByName(id, var).getImage();
+            System.out.println(imgLen.length);
+            if(true){
+                int len = imgLen.length;
+                byte [] rb = new byte[len];
+                InputStream readImg = new ByteArrayInputStream(vd.getRecordByName(id, var).getImage());
+
+                int index=readImg.read(rb, 0, len);  
+                System.out.println("index"+index);
+
+                response.reset();
+                response.setContentType("image/jpg");
+                response.getOutputStream().write(rb,0,len);
+                response.getOutputStream().flush();
+                response.getOutputStream().close();
+            }
+        }
+        catch (Exception e){
+          e.printStackTrace();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

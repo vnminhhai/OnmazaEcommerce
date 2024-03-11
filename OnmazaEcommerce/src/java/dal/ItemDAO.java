@@ -120,12 +120,15 @@ public class ItemDAO extends DBContext{
         String sql = "insert into Items(Name, Description, Price, Category_ID)"
                 + "values(?,?,?,?)";
         try {
-            PreparedStatement ps  = connection.prepareStatement(sql);
+            PreparedStatement ps  = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, c.getName());
             ps.setString(2, c.getDescription());
             ps.setFloat(3, c.getPrice());
             ps.setInt(4, c.getCategory().getId());
             ps.executeUpdate();
+            ResultSet new_id = ps.getGeneratedKeys();
+            if (new_id.next()) c.setId(new_id.getInt(1));
+            else System.err.println("No id fetched.");
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

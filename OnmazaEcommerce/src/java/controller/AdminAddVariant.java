@@ -81,6 +81,9 @@ public class AdminAddVariant extends HttpServlet {
         Variant v = new Variant(name, img, amount);
         int iid = Integer.parseInt(request.getParameter("item"));
         new VariantDAO().addVariant(v, iid);
+        request.setAttribute("mess1", "Added a new variant for ID: "+iid);
+        request.setAttribute("mess2", "The new variant has name "+name+".");
+        request.getRequestDispatcher("done.jsp").forward(request, response);
     }
     /** 
      * Returns a short description of the servlet.

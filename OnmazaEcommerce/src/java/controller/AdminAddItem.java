@@ -63,6 +63,9 @@ public class AdminAddItem extends HttpServlet {
         Category c = new CategoryDAO().getRecordById(Integer.parseInt(request.getParameter("category")));
         Item i = new Item(0, name, description, price, c, new ArrayList<Variant>());
         new ItemDAO().save(i);
+        request.setAttribute("mess1", "Added a new item.");
+        request.setAttribute("mess2", "The new item has ID "+i.getId()+".");
+        request.getRequestDispatcher("done.jsp").forward(request, response);
     }
 
     /** 

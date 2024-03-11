@@ -13,12 +13,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        Image:
-        <c:forEach items="variants" var="v">
-
-            <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
-    AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
-        9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
-        </c:forEach>
+        Image (base64 data):
+        <img src="data:image/png;base64, ${imgData}" alt="test 1 cai anh" />
+        <br>
+        <br>
+        Image (servlet):
+        <img src="getImg?id=1&variant=2" alt="test 1 cai anh khac" />
+        
     </body>
 </html>

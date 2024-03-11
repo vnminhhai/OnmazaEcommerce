@@ -13,7 +13,7 @@
         <title>Add Item</title>
     </head>
     <body>
-        <form action="additem" method="post">
+        <form action="addItem" method="post">
             <p>
                 Item name: <input type="text" placeholder="Name" name="name">
             </p>

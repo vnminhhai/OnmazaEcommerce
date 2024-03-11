@@ -13,7 +13,7 @@
         <title>Add a variant</title>
     </head>
     <body>
-        <form action="addvariant" method="post">
+        <form action="addVariant" method="post">
             <p>    
                 Item:
                 <select id="items" name="item">

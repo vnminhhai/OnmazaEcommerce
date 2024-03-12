@@ -33,8 +33,8 @@ public class Search extends HttpServlet {
     throws ServletException, IOException {
         ItemDAO id =  new ItemDAO();
         List<String> category = (List<String>)request.getAttribute("category");
-        String from = request.getParameter("priceFrom");
-        String to = request.getParameter("priceFrom");
+        String from = request.getParameter("fromPrice");
+        String to = request.getParameter("toPrice");
         String key =request.getParameter("keyword");
         int f=Integer.MIN_VALUE,t=Integer.MAX_VALUE;
         if (from!=null) if (!from.equals("")) f=Integer.parseInt(from);

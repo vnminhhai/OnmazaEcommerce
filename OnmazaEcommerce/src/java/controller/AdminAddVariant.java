@@ -30,6 +30,7 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import util.InputStreamHelper;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import model.Image;
 /**
  *
  * @author ADMIN
@@ -44,24 +45,6 @@ public class AdminAddVariant extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminAddVariant</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminAddVariant at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
      * @param request servlet request
@@ -87,11 +70,9 @@ public class AdminAddVariant extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         boolean isMultiPart = JakartaServletFileUpload.isMultipartContent(request);
-//        File tempFile = new File("C:\\Users\\ADMIN\\Onmaza\\OnmazaEcommerce\\web\\img\\temp");
         
         String name = request.getParameter("name");
         int amount = Integer.parseInt(request.getParameter("amount"));
-//        String realPath = request.getServletContext().getRealPath("/uploads");
         String realPath = request.getServletContext().getRealPath("/img/temp");
         Part part = request.getPart("image");
         String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
@@ -99,21 +80,16 @@ public class AdminAddVariant extends HttpServlet {
         if (!Files.exists(Paths.get(realPath))) {
             Files.createDirectory(Paths.get(realPath));
         }
-        part.write(realPath+"/"+fileName);
-        PrintWriter out = response.getWriter();
-        try {
-            response.setContentType("text/html;charset=UTF-8");
-            out.print("<h2>Ten: "+name+" </h2>");
-            out.print("<img src='img/temp/"+fileName+"'>");
-        } catch (Exception e) {
-            System.out.println("Loi");
-        }
-//        Variant v = new Variant(name, fis, amount);
-//        int iid = Integer.parseInt(request.getParameter("item"));
-//        new VariantDAO().addVariant(v, iid);
-//        request.setAttribute("mess1", "Added a new variant for ID: "+iid);
-//        request.setAttribute("mess2", "The new variant has name "+name+".");
-//        request.getRequestDispatcher("done.jsp").forward(request, response);
+        VariantDAO vd =new VariantDAO();
+        Image im = new Image(0, "variant");
+        Variant v = new Variant(name, im, amount);
+        int iid = Integer.parseInt(request.getParameter("item"));
+        int newid = vd.addVariant(v, iid);
+        part.write(realPath+"/"+newid+".jpg");
+        
+        request.setAttribute("mess1", "Added a new variant for ID: "+iid);
+        request.setAttribute("mess2", "The new variant has name "+name+".");
+        request.getRequestDispatcher("done.jsp").forward(request, response);
     }
     /** 
      * Returns a short description of the servlet.

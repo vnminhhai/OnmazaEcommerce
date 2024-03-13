@@ -4,16 +4,13 @@
  */
 package dal;
 
-import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.List;
 import model.Variant;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import model.Image;
 
 /**
  *
@@ -28,7 +25,7 @@ public class VariantDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 l.add(new Variant(rs.getString("Name"),
-                        rs.getString("Image_URL"),
+                        new Image(rs.getInt("Image_ID"), "variant"),
                         rs.getInt("Stock_Amount")));
             }
         } catch (SQLException e) {
@@ -43,7 +40,7 @@ public class VariantDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return (new Variant(rs.getString("Name"),
-                        rs.getString("Image_URL"),
+                        new Image(rs.getInt("Image_ID"), name),
                         rs.getInt("Stock_Amount")));
             }
         } catch (SQLException e) {
@@ -61,7 +58,7 @@ public class VariantDAO extends DBContext{
         }
     }
     public void updateImage(int id, String name, String img) {
-        String sql = "update Variants set Image_URL=? where Item_ID="+id+"and Name='"+name+"'";
+        String sql = "update Variants set Image_ID=? where Item_ID="+id+"and Name='"+name+"'";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, img);
@@ -70,17 +67,19 @@ public class VariantDAO extends DBContext{
             System.out.println(e.getMessage());
         }
     }
-    public void addVariant(Variant v, int iid) {
-        String sql = "insert into Variants (Item_ID, Name, Image_URL, Stock_Amount) values (?, ?, ?, ?)";
+    public int addVariant(Variant v, int iid) {
+        String sql = "insert into Variants (Item_ID, Name, Image_ID, Stock_Amount) values (?, ?, ?, ?)";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, iid);
             ps.setString(2, v.getName());
-            ps.setString(3, v.getImage_URL());
+            ps.setInt(3, v.getImage().getId());
             ps.setInt(4, v.getStock_amount());
             ps.executeUpdate();
+            return ps.getGeneratedKeys().getInt(1);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return -1;
     }
 }

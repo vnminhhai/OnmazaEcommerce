@@ -17,6 +17,7 @@ public class Item {
     private float price;
     private Category category;
     private List<Variant> variants;
+    private Image image;
 
     public Item() {
     }
@@ -28,6 +29,7 @@ public class Item {
         this.price = price;
         this.category = category;
         this.variants = variants;
+        this.image=Image.DEFAULT_PRODUCT;
     }
 
     public int getId() {
@@ -92,4 +94,13 @@ public class Item {
         }
         return null;
     }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+    
 }

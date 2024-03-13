@@ -19,6 +19,7 @@ public class Customer {
     private String user_name;
     private String password;
     private int permission;
+    private Image image;
 
     public Customer() {
     }
@@ -34,6 +35,7 @@ public class Customer {
         this.user_name=un;
         this.password=pass;
         this.permission=permission;
+        this.image=Image.DEFAULT_USER;
     }
 
     public int getId() {
@@ -115,4 +117,13 @@ public class Customer {
     public void setPermission(int permission) {
         this.permission = permission;
     }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+    
 }

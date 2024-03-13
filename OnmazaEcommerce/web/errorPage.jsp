@@ -22,7 +22,7 @@
                     <br>
                     Or maybe the back-end was fked-up.
                   </p>
-                <a href="//${initParam.appName}" class="btn btn-primary">Go Home</a>
+                <a href="${pageContext.request.contextPath}" class="btn btn-primary">Go Home</a>
             </div>
         </div>
     </body>

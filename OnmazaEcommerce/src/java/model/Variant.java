@@ -4,29 +4,18 @@
  */
 package model;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author ADMIN
  */
 public class Variant {
     private String name;
-    private String image_url;
+    private Image image;
     private int stock_amount;
 
-    public Variant(String name, String image, int stock_amount) {
+    public Variant(String name, Image image, int stock_amount) {
         this.name = name;
-        this.image_url = image;
+        this.image = image;
         this.stock_amount = stock_amount;
     }
 
@@ -41,12 +30,12 @@ public class Variant {
         this.name = name;
     }
 
-    public String getImage_URL() {
-        return image_url;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImage(String image) {
-        this.image_url = image;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public int getStock_amount() {
@@ -74,6 +63,6 @@ public class Variant {
 //    }
 @Override
     public String toString() {
-        return "Variant [name=" + name + ", image=" + image_url + "]";
+        return "Variant [name=" + name + ", image=" + image + "]";
     }
 }

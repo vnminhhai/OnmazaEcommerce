@@ -8,18 +8,21 @@ package model;
  *
  * @author ADMIN
  */
+
 public class Image {
     private int id;
-    private String image_url;
-    private String alt;
+    private String type;
 
+    public final static Image DEFAULT_USER = new Image(0, "user");
+    public final static Image DEFAULT_PRODUCT = new Image(0, "product");
+    public final static Image DEFAULT_VARIANT = new Image(0, "variant");
+    
     public Image() {
     }
 
-    public Image(int id, String image_url, String alt) {
+    public Image(int id, String type) {
         this.id = id;
-        this.image_url = image_url;
-        this.alt = alt;
+        this.type=type;
     }
 
     public int getId() {
@@ -30,21 +33,12 @@ public class Image {
         this.id = id;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getType() {
+        return type;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setType(String type) {
+        this.type = type;
     }
-
-    public String getAlt() {
-        return alt;
-    }
-
-    public void setAlt(String alt) {
-        this.alt = alt;
-    }
-    
     
 }

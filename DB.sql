@@ -67,12 +67,11 @@ Description varchar(255)
  );
  
  create table Variants(
- Name nvarchar(255),
- Image_URL nvarchar(255),
  Item_ID int references Items(ID),
+ Name nvarchar(255),
  Stock_Amount int not null,
  check(Stock_Amount>=0),
- Image_ID INT default(0) not null,
+ Image_ID INT identity(1,1) not null,
  primary key(Name, Item_ID)
  );
 
@@ -159,21 +158,21 @@ VALUES
     ('Shampoo', 'Demo', 10, 4);
 
 	-- Inserting data into Variants table
-INSERT INTO Variants (Name, Image_URL, Stock_Amount, Item_ID)
+INSERT INTO Variants (Item_ID, Name, Stock_Amount)
 VALUES
-    ('Black', '1', 500, 1),
-	('Blue', '3', 200, 1),
-	('White', '4', 500, 1),
-	('Gray', '2', 200, 1),
-	('Silver', '6', 500, 1),
-	('Gradient', '5', 200, 1),
-    ('Laptop', '0', 1000, 2),
-    ('T-Shirt', '0', 20, 3),
-    ('Jeans', '0', 50, 4),
-    ('Sofa', '0', 800, 5),
-    ('Bed Frame', '0', 600, 6),
-    ('Lipstick', '0', 15, 7),
-    ('Shampoo', '0', 10, 8);
+    (1, 'Black', 25),
+	(1, 'Gray', 7),
+	(1, 'Blue', 12),
+	(1, 'White', 5),
+	(1, 'Gradient', 20),
+	(1, 'Silver', 15),
+	(2, 'Laptop', 8),
+	(3, 'T-Shirt', 20),
+	(4, 'Jeans', 50),
+	(5, 'Sofa', 83),
+	(6, 'Bed Frame', 61),
+	(7, 'Lipstick', 45),
+	(8, 'Shampoo', 106);
 
 -- Inserting data into Roles table
 INSERT INTO Roles (ID, Name, Description)
@@ -181,13 +180,6 @@ VALUES
     (0, 'Customer', 'Normal user'),
     (1, 'Staff', 'Staff'),
     (2, 'Admin', 'Admin');
-
--- Inserting data into Avatars table
-INSERT INTO Images (Type, Alt)
-VALUES
-    ('user', 'Unset avatar'),
-    ('variant', 'Test1'),
-    ('product', 'Test2');
 
 -- Inserting data into Customers table
 INSERT INTO Customers (User_Name, Password, First_Name, Last_Name, Email, Mobile_phone, Address, Country)

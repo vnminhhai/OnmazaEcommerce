@@ -54,7 +54,7 @@
                                 <div class="swiper-slide">
                                     <div class="product-card position-relative">
                                     <div class="image-holder">
-                                        <img src="getImg?id=${requestScope.item.variants[i].image_URL}&type=variant" alt="product-item" class="img-fluid">
+                                        <img src="getImg?id=${requestScope.item.variants[i].image.id}&type=variant" alt="product-item" class="img-fluid">
                                     </div>
                                     <div class="cart-concern position-absolute">
                                       <div class="cart-button d-flex">

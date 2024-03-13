@@ -20,7 +20,7 @@
                 <p class="lead">
                     ${mess2}
                 </p>
-                <a href="." class="btn btn-primary">Home</a>
+                <a href="${pageContext.request.contextPath}" class="btn btn-primary">Home</a>
             </div>
         </div>
     </body>

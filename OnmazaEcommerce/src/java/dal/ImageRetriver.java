@@ -40,22 +40,27 @@ public class ImageRetriver extends HttpServlet{
         System.out.println("Id in imageretirve="+id);
         VariantDAO vd = new VariantDAO();
         try {
-            byte[] imgLen = vd.getRecordByName(id, var).getImage();
-            System.out.println(imgLen.length);
-            if(true){
-                int len = imgLen.length;
-                byte [] rb = new byte[len];
-                InputStream readImg = new ByteArrayInputStream(vd.getRecordByName(id, var).getImage());
+//            byte[] imgLen = vd.getRecordByName(id, var).getImage();
+//            System.out.println(imgLen.length);
+//            if(true){
+//                int len = imgLen.length;
+//                byte [] rb = new byte[len];
+//                InputStream readImg = new ByteArrayInputStream(vd.getRecordByName(id, var).getImage());
+//
+//                int index=readImg.read(rb, 0, len);  
+//                System.out.println("index"+index);
+//
+//                response.reset();
+//                response.setContentType("image/jpg");
+//                response.getOutputStream().write(rb,0,len);
+//                response.getOutputStream().flush();
+//                response.getOutputStream().close();
+//            }
 
-                int index=readImg.read(rb, 0, len);  
-                System.out.println("index"+index);
-
-                response.reset();
-                response.setContentType("image/jpg");
-                response.getOutputStream().write(rb,0,len);
-                response.getOutputStream().flush();
-                response.getOutputStream().close();
-            }
+            response.setContentType("image/jpg");
+            response.getOutputStream().write(vd.getRecordByName(id, var).getImage().readAllBytes());
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
         }
         catch (Exception e){
           e.printStackTrace();

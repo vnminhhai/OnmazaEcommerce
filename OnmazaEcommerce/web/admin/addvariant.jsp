@@ -13,7 +13,7 @@
         <title>Add a variant</title>
     </head>
     <body>
-        <form action="addVariant" method="post">
+        <form action="addVariant" method="post" enctype="multipart/form-data">
             <p>    
                 Item:
                 <select id="items" name="item">
@@ -26,9 +26,10 @@
                 Variant name: <input type="text" placeholder="Name" name="name">
             </p>
             <p>
-                Image: <input type="file" accept="image/*" name="image">
+                Stock amount: <input type="number" placeholder="Quantity" name="amount">
+            </p>
             <p>
-                Stock amount: <input type="text" placeholder="Quantity" name="amount">
+                Image: <input type="file" accept="image/*" name="image">
             </p>
             <input type="submit" value="Add">
         </form>

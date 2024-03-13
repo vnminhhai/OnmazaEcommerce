@@ -4,6 +4,7 @@
  */
 package dal;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import model.Variant;
@@ -27,7 +28,7 @@ public class VariantDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 l.add(new Variant(rs.getString("Name"),
-                        rs.getBytes("Image"),
+                        rs.getBinaryStream("Image"),
                         rs.getInt("Stock_Amount")));
             }
         } catch (SQLException e) {
@@ -42,7 +43,7 @@ public class VariantDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return (new Variant(rs.getString("Name"),
-                        rs.getBytes("Image"),
+                        rs.getBinaryStream("Image"),
                         rs.getInt("Stock_Amount")));
             }
         } catch (SQLException e) {
@@ -75,7 +76,7 @@ public class VariantDAO extends DBContext{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, iid);
             ps.setString(2, v.getName());
-            ps.setBytes(3, v.getImage());
+            ps.setBinaryStream(3, v.getImage());
             ps.setInt(4, v.getStock_amount());
             ps.executeUpdate();
         } catch (SQLException e) {

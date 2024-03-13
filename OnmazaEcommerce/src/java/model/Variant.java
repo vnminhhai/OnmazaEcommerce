@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
@@ -21,10 +22,10 @@ import javax.imageio.ImageIO;
  */
 public class Variant {
     private String name;
-    private byte[] image;
+    private InputStream image;
     private int stock_amount;
 
-    public Variant(String name, byte[] image, int stock_amount) {
+    public Variant(String name, InputStream image, int stock_amount) {
         this.name = name;
         this.image = image;
         this.stock_amount = stock_amount;
@@ -41,11 +42,11 @@ public class Variant {
         this.name = name;
     }
 
-    public byte[] getImage() {
+    public InputStream getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(FileInputStream image) {
         this.image = image;
     }
 
@@ -57,21 +58,21 @@ public class Variant {
         this.stock_amount = stock_amount;
     }
     
-    public File getRenderedImage() {
-        File f = new File("output.jpg");
-        try {
-            ByteArrayInputStream bis = new ByteArrayInputStream(image);
-            BufferedImage bImage2 = ImageIO.read(bis);
-            ImageIO.write(bImage2, "jpg", f);
-        } catch (IOException ex) {
-            Logger.getLogger(Variant.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return f;
-    }
+//    public File getRenderedImage() {
+//        File f = new File("output.jpg");
+//        try {
+//            ByteArrayInputStream bis = new ByteArrayInputStream(image);
+//            BufferedImage bImage2 = ImageIO.read(bis);
+//            ImageIO.write(bImage2, "jpg", f);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Variant.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return f;
+//    }
     
-    public String getEncodedImage() {
-        return Base64.getEncoder().encode(image).toString();
-    }
+//    public String getEncodedImage() {
+//        return Base64.getEncoder().encode(image).toString();
+//    }
 @Override
     public String toString() {
         return "Variant [name=" + name + ", image=" + image + "]";

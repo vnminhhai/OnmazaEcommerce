@@ -33,7 +33,7 @@
                         <span>Don't have account?</span>
                         <a
                             href="/register"
-                            class="text-blue-600 hover:text-blue-700 transition-all"
+                            class="text-primary transition-all"
                         >
                             Register now
                         </a>

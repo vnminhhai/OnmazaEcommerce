@@ -18,7 +18,10 @@
         <br>
         <br>
         Image (servlet):
-        <img src="getImg?id=1&variant=2" alt="test 1 cai anh khac" />
-        
+        <img src="getImg?id=1&variant=5" alt="test 1 cai anh khac" />
+        <br>
+        <br>
+        Image (base64 data):
+        <img src="data:image/png;base64, ${imgData2}" alt="test 1 cai anh nua" />
     </body>
 </html>

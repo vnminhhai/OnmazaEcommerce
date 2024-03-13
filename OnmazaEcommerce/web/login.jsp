@@ -38,6 +38,14 @@
                             Register now
                         </a>
                     </div>
+                    <div class="text-sm flex items-center justify-center gap-1">
+                        <a
+                            href="${pageContext.request.contextPath}/forgot"
+                            class="text-primary transition-all"
+                        >
+                            I forgot my password.
+                        </a>
+                    </div>
                 </main>
             </div> <!-- container end.// -->
         </section>

@@ -32,22 +32,23 @@ public class ForgotPasswordServlet extends HttpServlet {
             String emailAddress = request.getParameter("email");
             String username = request.getParameter("username");
             CustomerDAO dao = new CustomerDAO();
-            if (!dao.matchUsernameAndEmail(username, emailAddress)) {
-                request.setAttribute("error", "Email hoặc tên đăng nhập sai!");
+            Customer c = dao.getRecordByName(username);
+            if (!c.getEmail().equals(emailAddress)) {
+                request.setAttribute("error", "Invalid email or user name!");
             } else {
                 Email email = new Email();
                 email.setFrom("kagaminelenvy@gmail.com");
                 email.setFromPassword("hfpxzwcbtovedqem");
                 email.setTo(emailAddress);
-                email.setSubject("<BONG FAMILY>QUEN MAT KHAU");
+                email.setSubject("[ONMAZA ECOMMERCE] RESET YOUR PASSWORD");
                 StringBuilder sb = new StringBuilder();
-                sb.append("Xin chào, ").append(username).append("<br>");
-                sb.append("Mật khẩu của bạn là <b>").append(account.getPass()).append(" </b> <br>");
-                sb.append("Trân trọng,<br>");
-                sb.append("Bống Family");
+                sb.append("Hi, ").append(username).append("<br>");
+                sb.append("Your password is <b>").append(c.getPassword()).append(" </b> <br>");
+                sb.append("Thanks for trusting our service,<br>");
+                sb.append("Onmaza Team");
                 email.setContent(sb.toString());
                 EmailUtils.send(email);
-                request.setAttribute("mess", "Mật khẩu đã được gửi đến mail của bạn. Xin vui lòng kiểm tra!");
+                request.setAttribute("mess", "A mail was send to your email address!");
             }
         } catch (Exception e) {
         }

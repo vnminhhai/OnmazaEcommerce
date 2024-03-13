@@ -19,10 +19,21 @@
         <section class="section-intro mb-3 mt-5">
             <div class="container">
                 <main class="card p-3">
-                    <p> Name: ${customer.first_name} ${customer.last_name} </p>
-                    <p> Address: ${customer.address} </p>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-9 m-0">
+                            <p class="text-dark mt-3 ms-2"> Name: ${customer.first_name} ${customer.last_name} </p>
+                            <p class="text-dark ms-2"> Address: ${customer.address} </p>
+                            <p class="text-dark mt-3 ms-2"> Email: ${customer.email} </p>
+                            <p class="text-dark ms-2"> Phone number: ${customer.mobile_phone} </p>
+                            <a class="text-primary fs-5 ms-2" href="updateInfo">Update personal info</a>
+                            <a class="text-primary fs-5 ms-5" href="updateAvatar">Upload new avatar</a>
+                        </div>
+                        <div class="col-3 m-0">
+                            <img src="getImg?id=${customer.id}&type=user" alt="alt" class="img-fluid pe-5 "/>
+                        </div>
+                    </div>
+                    <div class="row text-center mt-3">
+                        <div class="col-4 fs-4">
                             <c:if test="${customer.permission == 1}">
                                 You are a staff.
                             </c:if>
@@ -30,14 +41,14 @@
                                 You are a manager.
                             </c:if>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 text-primary fs-4">
                             <c:if test="${customer.permission >= 1}">
-                                <a href="staff">Staff site</a>
+                                <a class="text-primary hover\:bg-light" href="staff">Staff site</a>
                             </c:if>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 text-primary fs-4">
                             <c:if test="${customer.permission >= 2}">
-                                <a href="admin">Manager site</a>
+                                <a class="text-primary hover\:opacity-1" href="admin">Manager site</a>
                             </c:if>
                         </div>
                     </div>

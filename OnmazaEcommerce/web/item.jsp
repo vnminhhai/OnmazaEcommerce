@@ -19,52 +19,61 @@
         <%@include file="components/header.jsp" %>
             <section id="mobile-products" class="product-store position-relative padding-large no-padding-top mt-5">
                 <div class="container">
-                  <div class="row">
-                    <div class="display-header d-flex justify-content-between pb-3">
-                        <h2 class="display-7 text-dark text-uppercase">${item.name}</h2>
-                        <p>Category: ${item.category.name}</p>
-                        <p>Description: ${item.description}</p>
-                        <p>Price: ${item.price}</p>
-                        <form name="var" action="purchase" method="get" id="twoActionForm">
-                            <br>
-                            Quantity: <input type="number" value="1" name="quantity">
-                            <br>
-                            <input type="hidden" name="item" value="${item.id}">
-                            <br>
-                            <div style="margin-top: 10px">
-                                <input type="submit" value="Purchase">
-                                <button type="button" onclick="cart()">Add to cart</button>
-                                <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
+                    <form name="var" action="purchase" method="get" id="twoActionForm">
+                        <div class="display-header d-flex justify-content-between pb-3 pt-3 mt-3">
+                            <div class="text-dark">
+                                <h2 class="display-7 text-dark text-uppercase">${item.name}</h2>
+                                <p class="text-dark">Category: ${item.category.name}</p>
+                                <p class="text-dark">Description: ${item.description}</p>
+                                <p class="text-dark">Price: ${item.price}</p>
                             </div>
-                        </form>
-                    </div>
-                        Types:
-                    <div class="swiper product-swiper">
-                      <div class="swiper-wrapper">
-                        <c:forEach var="i" begin="0" end="${requestScope.item.variants.size()-1}" step="1">
-                            <div class="swiper-slide">
-                              <div class="product-card position-relative">
-                                <div class="image-holder">
-                                    <img src="getImg?id=${requestScope.item.variants[i].image_URL}&type=variant" alt="product-item" class="img-fluid">
+                            <div>
+                                ${item.name} variants:
+                                <select name="variant">
+                                    <c:forEach items="${requestScope.item.variants}" var="i">
+                                        <option value="${i.name}">${i.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div>
+                                Quantity: <input type="number" value="1" name="quantity">
+                                <br>
+                                <input type="hidden" name="item" value="${item.id}">
+                                <br>
+                                <div style="margin-top: 10px">
+                                    <input type="submit" value="Purchase">
+                                    <button type="button" onclick="cart()">Add to cart</button>
+                                    <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
                                 </div>
-                                <div class="cart-concern position-absolute">
-                                  <div class="cart-button d-flex">
-                                    <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                            </div>
+                        </div>
+                        <h3>See all variants:</h3>
+                        <div class="swiper product-swiper">
+                          <div class="swiper-wrapper">
+                            <c:forEach var="i" begin="0" end="${requestScope.item.variants.size()-1}" step="1">
+                                <div class="swiper-slide">
+                                    <div class="product-card position-relative">
+                                    <div class="image-holder">
+                                        <img src="getImg?id=${requestScope.item.variants[i].image_URL}&type=variant" alt="product-item" class="img-fluid">
+                                    </div>
+                                    <div class="cart-concern position-absolute">
+                                      <div class="cart-button d-flex">
+                                        <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                                      </div>
+                                    </div>
+                                    <div class="card-detail d-flex justify-content-around align-items-baseline pt-3">
+                                        <h3 class="card-title text-uppercase">
+                                            <a href="#">${requestScope.item.variants[i].name}</a>
+                                        </h3>
+                                        <input type="radio" name="variant" value="${requestScope.item.variants[i].name}" ${i==0?"checked":""}/>
+                                        <span>${requestScope.item.variants[i].stock_amount} left</span>
+                                    </div>
                                   </div>
                                 </div>
-                                <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                                    <h3 class="card-title text-uppercase">
-                                        <a href="#">${requestScope.item.variants[i].name}</a>
-                                    </h3>
-                                    <input type="radio" name="variant" value="${requestScope.item.variants[i].name}" ${i==0?"checked":""}/>
-                                    <span>${requestScope.item.variants[i].name}</span>
-                                </div>
-                              </div>
-                            </div>
-                        </c:forEach>
-                      </div>
-                    </div>
-                  </div>
+                            </c:forEach>
+                          </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="swiper-pagination position-absolute text-center"></div>
               </section>

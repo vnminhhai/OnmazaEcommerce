@@ -61,6 +61,7 @@ Description varchar(255)
  Description varchar(255),
  Price float not null,
  Category_ID int,
+ Image_ID INT default(0) not null,
  FOREIGN KEY (Category_ID) REFERENCES Category(ID),
  check(Price>=0)
  );
@@ -71,6 +72,7 @@ Description varchar(255)
  Item_ID int references Items(ID),
  Stock_Amount int not null,
  check(Stock_Amount>=0),
+ Image_ID INT default(0) not null,
  primary key(Name, Item_ID)
  );
 
@@ -78,12 +80,6 @@ Description varchar(255)
  ID int primary key,
  Name nvarchar(255) not null,
  Description nvarchar(255)
- )
-
- create table Images(
-	ID int primary key identity(0,1),
-	Image_URL nvarchar(255) not null,
-	Alt nvarchar(255)
  )
 
  create table Customers(
@@ -96,7 +92,7 @@ Description varchar(255)
  Mobile_Phone varchar(255),
  Address nvarchar(255),
  Country nvarchar(255),
- Avatar_ID int references Images(ID) default(0),
+ Image_ID INT default(0) not null,
  Role_ID int references Roles(ID) default(0)
  );
 
@@ -187,11 +183,11 @@ VALUES
     (2, 'Admin', 'Admin');
 
 -- Inserting data into Avatars table
-INSERT INTO Images (Image_URL, Alt)
+INSERT INTO Images (Type, Alt)
 VALUES
-    ('/user/0.jpg', 'Unset avatar'),
-    ('/cart_item1.jpg', 'Test1'),
-    ('/cart_item2.jpg', 'Test2');
+    ('user', 'Unset avatar'),
+    ('variant', 'Test1'),
+    ('product', 'Test2');
 
 -- Inserting data into Customers table
 INSERT INTO Customers (User_Name, Password, First_Name, Last_Name, Email, Mobile_phone, Address, Country)

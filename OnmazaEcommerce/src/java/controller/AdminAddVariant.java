@@ -73,7 +73,7 @@ public class AdminAddVariant extends HttpServlet {
         
         String name = request.getParameter("name");
         int amount = Integer.parseInt(request.getParameter("amount"));
-        String realPath = request.getServletContext().getRealPath("/img/temp");
+        String realPath = request.getServletContext().getRealPath("/img/variant");
         Part part = request.getPart("image");
         String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
         

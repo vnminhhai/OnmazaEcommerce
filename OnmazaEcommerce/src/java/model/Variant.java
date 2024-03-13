@@ -46,21 +46,6 @@ public class Variant {
         this.stock_amount = stock_amount;
     }
     
-//    public File getRenderedImage() {
-//        File f = new File("output.jpg");
-//        try {
-//            ByteArrayInputStream bis = new ByteArrayInputStream(image);
-//            BufferedImage bImage2 = ImageIO.read(bis);
-//            ImageIO.write(bImage2, "jpg", f);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Variant.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return f;
-//    }
-    
-//    public String getEncodedImage() {
-//        return Base64.getEncoder().encode(image).toString();
-//    }
 @Override
     public String toString() {
         return "Variant [name=" + name + ", image=" + image + "]";

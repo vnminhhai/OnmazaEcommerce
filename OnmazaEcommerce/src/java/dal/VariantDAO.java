@@ -68,15 +68,16 @@ public class VariantDAO extends DBContext{
         }
     }
     public int addVariant(Variant v, int iid) {
-        String sql = "insert into Variants (Item_ID, Name, Image_ID, Stock_Amount) values (?, ?, ?, ?)";
+        String sql = "insert into Variants (Item_ID, Name, Stock_Amount) values (?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, iid);
             ps.setString(2, v.getName());
-            ps.setInt(3, v.getImage().getId());
-            ps.setInt(4, v.getStock_amount());
+            ps.setInt(3, v.getStock_amount());
             ps.executeUpdate();
-            return ps.getGeneratedKeys().getInt(1);
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next())
+            return rs.getInt(1);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -104,4 +104,16 @@ public class CartDAO extends DBContext{
             Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void updateItemQuantity(int cid, int iid, String var, int num) {
+        String check= "update Cart set Quantity = "+num+" where Item_ID = ? and Customer_ID = ? and Variant_Name=?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(check);
+            ps.setInt(1, iid);
+            ps.setInt(2, cid);
+            ps.setString(3, var);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

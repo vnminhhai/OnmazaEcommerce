@@ -44,7 +44,7 @@
                                 <input type="hidden" name="item" value="${item.id}">
                                 <br>
                                 <div style="margin-top: 10px">
-                                    <input class="btn btn-gray fs-5 fw-bold" type="submit" value="Quick purchase">
+                                    <input class="btn btn-warning-light border-gray-dark fs-5 fw-bold" type="submit" value="Quick purchase">
                                 </div>
                             </div>
                         </div>

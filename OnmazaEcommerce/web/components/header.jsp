@@ -9,7 +9,7 @@
         <div class="fluid-container">
             <div class="row gx-2 align-items-center">
                 <div class="col-sm-2 flex-grow-0 align-items-center justify-content-evenly text-center">
-                    <a class="brand-wrap me-3" href="home">
+                    <a class="brand-wrap me-3" href="${pageContext.request.contextPath}">
                         <img class="logo" height="40" src="./LighterOnmaza.png" alt="onmaza-logo">
                     </a> <!-- brand-wrap end.// -->
                 </div> <!-- col end.// -->

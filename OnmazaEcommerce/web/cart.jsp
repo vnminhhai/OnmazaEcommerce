@@ -58,15 +58,15 @@
                                             <td><strong>${o.price}</strong></td>
                                             <td><strong>${o.variant}</strong></td>
                                             <td>
-                                                <a href="subamountcart?pID=${o.id}&amount=${o.quantity}">
+                                                <a href="changenumber?item=${o.id}&variant=${o.variant}&new=${o.quantity-1}">
                                                     <button class="btn btn-gray-light p-2 m-2 text-center">-</button>
                                                 </a> 
                                                 <strong>${o.quantity}</strong>
-                                                <a href="addamountcart?pID=${o.id}&amount=${o.quantity}">
+                                                <a href="changenumber?item=${o.id}&variant=${o.variant}&new=${o.quantity+1}">
                                                     <button class="btn btn-gray-light p-2 m-2 text-center">+</button>
                                                 </a>
                                             </td>
-                                            <td><a href="deletecart?pID=${o.id}">
+                                            <td><a href="removefromcart?item=${o.id}&variant=${o.variant}">
                                                     <button type="button" class="btn btn-sm btn-danger">Remove</button>
                                                 </a>
                                             </td>

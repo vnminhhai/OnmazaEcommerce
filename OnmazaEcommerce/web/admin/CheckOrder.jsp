@@ -11,48 +11,55 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Manage Orders</title>
+        <%@include file="../components/headerLink.html" %>
     </head>
     <body>
-        <table>
-            <thead>
-                <tr>
-                    <th>Order date</th>
-                    <th>Required date</th>
-                    <th>Ship address</th>
-                    <th>Status</th>
-                    <th>Resolve</th>
-                    <th>Detail</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:if test="${orders.size()==0}">
-                    <tr>
-                        <td colspan="6" style="text-align: center">No pending order</td>
+        <%@include file="../components/header.jsp" %>
+        <main class="card p-3 mt-lg-5 m-5">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr class="">
+                        <th colspan="6" class="fw-bolder bg-warning-light">Your orders</th>
                     </tr>
-                </c:if>
-                <c:forEach items="${orders}" var="o">
                     <tr>
-                        <td>
-                            ${o.order_date}
-                        </td>
-                        <td>
-                            ${o.required_date}
-                        </td>
-                        <td>
-                            ${o.ship_address}
-                        </td>
-                        <td>
-                            ${o.status}
-                        </td>
-                        <td>
-                            <a href="resolve?id=${o.id}">Resolve</a>
-                        </td>
-                        <td>
-                            <a href="order?id=${o.id}">See Detail</a>
-                        </td>
+                        <th>Order date</th>
+                        <th>Required date</th>
+                        <th>Ship address</th>
+                        <th>Status</th>
+                        <th>Resolve</th>
+                        <th>Detail</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:if test="${orders.size()==0}">
+                        <tr>
+                            <td colspan="6" style="text-align: center">No pending order</td>
+                        </tr>
+                    </c:if>
+                    <c:forEach items="${orders}" var="o">
+                        <tr>
+                            <td>
+                                ${o.order_date}
+                            </td>
+                            <td>
+                                ${o.required_date}
+                            </td>
+                            <td>
+                                ${o.ship_address}
+                            </td>
+                            <td>
+                                ${o.status}
+                            </td>
+                            <td>
+                                <a href="resolve?id=${o.id}">Resolve</a>
+                            </td>
+                            <td>
+                                <a href="order?id=${o.id}">See Detail</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </main>
     </body>
 </html>

@@ -27,23 +27,24 @@
                                 <p class="text-dark">Description: ${item.description}</p>
                                 <p class="text-dark">Price: ${item.price}</p>
                             </div>
-                            <div>
+                            <div class="text-dark fs-3 text-center">
                                 ${item.name} variants:
-                                <select name="variant">
+                                <br>
+                                <select name="variant" class="text-center select-list" id="select">
                                     <c:forEach items="${requestScope.item.variants}" var="i">
-                                        <option value="${i.name}">${i.name}</option>
+                                        <option value="${i.name}" class="select-item fs-5">${i.name}</option>
                                     </c:forEach>
                                 </select>
+                                <br>
+                                <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
                             </div>
-                            <div>
-                                Quantity: <input type="number" value="1" name="quantity">
+                            <div class="text-dark fs-3 text-center">
+                                Quantity: <input type="number" value="1" name="quantity" class="w-25">
                                 <br>
                                 <input type="hidden" name="item" value="${item.id}">
                                 <br>
                                 <div style="margin-top: 10px">
-                                    <input type="submit" value="Purchase">
-                                    <button type="button" onclick="cart()">Add to cart</button>
-                                    <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
+                                    <input class="btn btn-gray fs-5 fw-bold" type="submit" value="Quick purchase">
                                 </div>
                             </div>
                         </div>
@@ -54,11 +55,11 @@
                                 <div class="swiper-slide">
                                     <div class="product-card position-relative">
                                     <div class="image-holder">
-                                        <img src="getImg?id=${requestScope.item.variants[i].image.id}&type=variant" alt="product-item" class="img-fluid">
+                                        <img src="getImg?id=${requestScope.item.variants[i].image.id}&type=variant" alt="product-item" class="img-fluid" onclick="pick('${requestScope.item.variants[i].name}')">
                                     </div>
                                     <div class="cart-concern position-absolute">
                                       <div class="cart-button d-flex">
-                                        <a href="#" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                                          <a href="#" onclick="cart('${requestScope.item.variants[i].name}')" class="btn btn-medium btn-black">Add to Cart<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
                                       </div>
                                     </div>
                                     <div class="card-detail d-flex justify-content-around align-items-baseline pt-3">
@@ -79,13 +80,30 @@
               </section>
             </div> <!-- container end.// -->
         <script>
-            function cart() {
+            function cart(s) {
               // Perform any necessary validation or preprocessing here
-
+              var selectElement = document.getElementById("select");
+                for (var i = 0; i < selectElement.options.length; i++) {
+                    var option = selectElement.options[i];
+                    if (option.value === s) {
+                        option.selected = true;
+                        break;
+                    }
+                }
               // Submit the form to "tocart"
               document.getElementById("twoActionForm").action = "tocart";
               document.getElementById("twoActionForm").method = "post";
               document.getElementById("twoActionForm").submit();
+            }
+            function pick(s) {
+                var selectElement = document.getElementById("select");
+                for (var i = 0; i < selectElement.options.length; i++) {
+                    var option = selectElement.options[i];
+                    if (option.value === s) {
+                        option.selected = true;
+                        break;
+                    }
+                }
             }
         </script>
         <script src="js/jquery-1.11.0.min.js"></script>

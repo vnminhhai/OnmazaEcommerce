@@ -14,7 +14,6 @@ import java.io.InputStream;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -22,12 +21,12 @@ import javax.imageio.ImageIO;
  */
 public class Variant {
     private String name;
-    private InputStream image;
+    private String image_url;
     private int stock_amount;
 
-    public Variant(String name, InputStream image, int stock_amount) {
+    public Variant(String name, String image, int stock_amount) {
         this.name = name;
-        this.image = image;
+        this.image_url = image;
         this.stock_amount = stock_amount;
     }
 
@@ -42,12 +41,12 @@ public class Variant {
         this.name = name;
     }
 
-    public InputStream getImage() {
-        return image;
+    public String getImage_URL() {
+        return image_url;
     }
 
-    public void setImage(FileInputStream image) {
-        this.image = image;
+    public void setImage(String image) {
+        this.image_url = image;
     }
 
     public int getStock_amount() {
@@ -75,6 +74,6 @@ public class Variant {
 //    }
 @Override
     public String toString() {
-        return "Variant [name=" + name + ", image=" + image + "]";
+        return "Variant [name=" + name + ", image=" + image_url + "]";
     }
 }

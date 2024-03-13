@@ -16,7 +16,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import model.Variant;
 
 /**
@@ -35,36 +38,50 @@ public class ImageRetriver extends HttpServlet{
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int id =Integer.parseInt(request.getParameter("id"));
-        String var = request.getParameter("variant");
-        System.out.println("Id in imageretirve="+id);
-        VariantDAO vd = new VariantDAO();
-        try {
-//            byte[] imgLen = vd.getRecordByName(id, var).getImage();
-//            System.out.println(imgLen.length);
-//            if(true){
-//                int len = imgLen.length;
-//                byte [] rb = new byte[len];
-//                InputStream readImg = new ByteArrayInputStream(vd.getRecordByName(id, var).getImage());
-//
-//                int index=readImg.read(rb, 0, len);  
-//                System.out.println("index"+index);
-//
-//                response.reset();
-//                response.setContentType("image/jpg");
-//                response.getOutputStream().write(rb,0,len);
-//                response.getOutputStream().flush();
-//                response.getOutputStream().close();
+        String id = request.getParameter("id");
+        String type = request.getParameter("type");
+        System.out.println("Id in imageretirve="+id+", type: "+type);
+        String path="";
+        String realPath = request.getServletContext().getRealPath("/");
+        path = switch (type.toLowerCase().trim()) {
+            case "user" -> realPath+"img/user/";
+            case "variant" -> realPath+"img/variant/";
+            default -> realPath+"img/product/";
+        };
+        
+        response.setContentType("image/jpeg");
+        String imagePath = path + id + ".jpg";
+        
+        if (Files.exists(Paths.get(imagePath))) {
+            FileInputStream fis = new FileInputStream(imagePath);
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+            fis.close();
+        } else {
+            FileInputStream defaultImage = new FileInputStream(path + "0.jpg");
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = defaultImage.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer, 0, bytesRead);
+            }
+            defaultImage.close();
+        }
+//        try {
+//            PrintWriter out = response.getWriter();
+//            response.setContentType("text/html;charset=UTF-8");
+//            if (!Files.exists(Paths.get(path+id+".jpg"))) {
+//                out.print("<img src='"+path+0+".jpg'>");
 //            }
-
-            response.setContentType("image/jpg");
-            response.getOutputStream().write(vd.getRecordByName(id, var).getImage().readAllBytes());
-            response.getOutputStream().flush();
-            response.getOutputStream().close();
-        }
-        catch (Exception e){
-          e.printStackTrace();
-        }
+//            else out.print("<img src='"+path+id+".jpg'>");
+//            response.getOutputStream().flush();
+//            response.getOutputStream().close();
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

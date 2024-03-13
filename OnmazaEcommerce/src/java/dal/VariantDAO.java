@@ -28,7 +28,7 @@ public class VariantDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 l.add(new Variant(rs.getString("Name"),
-                        rs.getBinaryStream("Image"),
+                        rs.getString("Image_URL"),
                         rs.getInt("Stock_Amount")));
             }
         } catch (SQLException e) {
@@ -43,7 +43,7 @@ public class VariantDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return (new Variant(rs.getString("Name"),
-                        rs.getBinaryStream("Image"),
+                        rs.getString("Image_URL"),
                         rs.getInt("Stock_Amount")));
             }
         } catch (SQLException e) {
@@ -60,23 +60,23 @@ public class VariantDAO extends DBContext{
             System.out.println(e.getMessage());
         }
     }
-    public void updateImage(int id, String name, byte[] img) {
-        String sql = "update Variants set Image=? where Item_ID="+id+"and Name='"+name+"'";
+    public void updateImage(int id, String name, String img) {
+        String sql = "update Variants set Image_URL=? where Item_ID="+id+"and Name='"+name+"'";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setBytes(1, img);
+            ps.setString(1, img);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     public void addVariant(Variant v, int iid) {
-        String sql = "insert into Variants (Item_ID, Name, Image, Stock_Amount) values (?, ?, ?, ?)";
+        String sql = "insert into Variants (Item_ID, Name, Image_URL, Stock_Amount) values (?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, iid);
             ps.setString(2, v.getName());
-            ps.setBinaryStream(3, v.getImage());
+            ps.setString(3, v.getImage_URL());
             ps.setInt(4, v.getStock_amount());
             ps.executeUpdate();
         } catch (SQLException e) {

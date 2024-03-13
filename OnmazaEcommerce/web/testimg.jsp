@@ -10,18 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Display anh</title>
     </head>
     <body>
-        Image (base64 data):
-        <img src="data:image/png;base64, ${imgData}" alt="test 1 cai anh" />
-        <br>
-        <br>
         Image (servlet):
-        <img src="getImg?id=1&variant=5" alt="test 1 cai anh khac" />
-        <br>
-        <br>
-        Image (base64 data):
-        <img src="data:image/png;base64, ${imgData2}" alt="test 1 cai anh nua" />
+        <img src="getImg?id=1&type=user" alt="test 1 cai anh khac" />
     </body>
 </html>

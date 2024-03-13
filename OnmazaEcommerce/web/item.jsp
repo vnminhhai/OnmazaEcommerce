@@ -21,36 +21,31 @@
                 <div class="container">
                   <div class="row">
                     <div class="display-header d-flex justify-content-between pb-3">
-                      <h2 class="display-7 text-dark text-uppercase">${item.name}</h2>
-                      <p>Category: ${item.category.name}</p>
-                    <p>Description: ${item.description}</p>
-                    <p>Price: ${item.price}</p>
-                    <form name="var" action="purchase" method="get" id="twoActionForm">
-                        Types:
-                        <c:forEach var="i" begin="0" end="${requestScope.item.variants.size()-1}" step="1">
-                            <input type="radio" name="variant" value="${requestScope.item.variants[i].name}" ${i==0?"checked":""}/>
-                            <span>${requestScope.item.variants[i].image}</span>
-                            <span>${requestScope.item.variants[i].name}</span>
-                        </c:forEach>
-                        <br>
-                        Quantity: <input type="number" value="1" name="quantity">
-                        <br>
-                        <input type="hidden" name="item" value="${item.id}">
-                        <br>
-                        <div style="margin-top: 10px">
-                            <input type="submit" value="Purchase">
-                            <button type="button" onclick="cart()">Add to cart</button>
-                            <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
-                        </div>
-                    </form>
+                        <h2 class="display-7 text-dark text-uppercase">${item.name}</h2>
+                        <p>Category: ${item.category.name}</p>
+                        <p>Description: ${item.description}</p>
+                        <p>Price: ${item.price}</p>
+                        <form name="var" action="purchase" method="get" id="twoActionForm">
+                            <br>
+                            Quantity: <input type="number" value="1" name="quantity">
+                            <br>
+                            <input type="hidden" name="item" value="${item.id}">
+                            <br>
+                            <div style="margin-top: 10px">
+                                <input type="submit" value="Purchase">
+                                <button type="button" onclick="cart()">Add to cart</button>
+                                <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
+                            </div>
+                        </form>
                     </div>
+                        Types:
                     <div class="swiper product-swiper">
                       <div class="swiper-wrapper">
                         <c:forEach var="i" begin="0" end="${requestScope.item.variants.size()-1}" step="1">
                             <div class="swiper-slide">
                               <div class="product-card position-relative">
                                 <div class="image-holder">
-                                  <img src="img/product-item1.jpg" alt="product-item" class="img-fluid">
+                                    <img src="getImg?id=${requestScope.item.variants[i].image_URL}&type=variant" alt="product-item" class="img-fluid">
                                 </div>
                                 <div class="cart-concern position-absolute">
                                   <div class="cart-button d-flex">
@@ -58,9 +53,11 @@
                                   </div>
                                 </div>
                                 <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                                  <h3 class="card-title text-uppercase">
-                                    <a href="#">${requestScope.item.variants[i].name}</a>
-                                  </h3>
+                                    <h3 class="card-title text-uppercase">
+                                        <a href="#">${requestScope.item.variants[i].name}</a>
+                                    </h3>
+                                    <input type="radio" name="variant" value="${requestScope.item.variants[i].name}" ${i==0?"checked":""}/>
+                                    <span>${requestScope.item.variants[i].name}</span>
                                 </div>
                               </div>
                             </div>

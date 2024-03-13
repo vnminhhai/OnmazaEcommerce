@@ -14,7 +14,7 @@
     </head>
     <body>
         <form action="addVariant" method="post" enctype="multipart/form-data">
-            <p>    
+            <p>
                 Item:
                 <select id="items" name="item">
                     <c:forEach items="${Items}" var="i">

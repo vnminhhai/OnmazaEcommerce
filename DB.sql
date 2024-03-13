@@ -165,15 +165,19 @@ VALUES
 	-- Inserting data into Variants table
 INSERT INTO Variants (Name, Image_URL, Stock_Amount, Item_ID)
 VALUES
-    ('Black', '', 500, 1),
-	('Blue', '', 200, 1),
-    ('Laptop', '', 1000, 2),
-    ('T-Shirt', '', 20, 3),
-    ('Jeans', '', 50, 4),
-    ('Sofa', '', 800, 5),
-    ('Bed Frame', '', 600, 6),
-    ('Lipstick', '', 15, 7),
-    ('Shampoo', '', 10, 8);
+    ('Black', '1', 500, 1),
+	('Blue', '3', 200, 1),
+	('White', '4', 500, 1),
+	('Gray', '2', 200, 1),
+	('Silver', '6', 500, 1),
+	('Gradient', '5', 200, 1),
+    ('Laptop', '0', 1000, 2),
+    ('T-Shirt', '0', 20, 3),
+    ('Jeans', '0', 50, 4),
+    ('Sofa', '0', 800, 5),
+    ('Bed Frame', '0', 600, 6),
+    ('Lipstick', '0', 15, 7),
+    ('Shampoo', '0', 10, 8);
 
 -- Inserting data into Roles table
 INSERT INTO Roles (ID, Name, Description)

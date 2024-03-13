@@ -16,18 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import model.Category;
-import model.Item;
 import model.Variant;
-import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import util.InputStreamHelper;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import model.Image;
@@ -69,7 +58,6 @@ public class AdminAddVariant extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        boolean isMultiPart = JakartaServletFileUpload.isMultipartContent(request);
         
         String name = request.getParameter("name");
         int amount = Integer.parseInt(request.getParameter("amount"));

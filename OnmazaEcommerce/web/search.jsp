@@ -116,7 +116,7 @@
                         <div class="item-container row">
                             <div class="product-card position-relative col-4">
                                 <div class="image-holder">
-                                    <img src="img/product-item1.jpg" alt="product-item" class="img-fluid" width="80%">
+                                    <img src="getImg?id=${c.variants.get(0).image.id}&type=variant" alt="product-item" class="img-fluid" width="80%">
                                 </div>
                                 <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                                 </div>

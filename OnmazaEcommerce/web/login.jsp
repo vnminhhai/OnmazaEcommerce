@@ -32,7 +32,7 @@
                     <div class="text-sm flex items-center justify-center gap-1">
                         <span>Don't have account?</span>
                         <a
-                            href="/register"
+                            href="${pageContext.request.contextPath}/register"
                             class="text-primary transition-all"
                         >
                             Register now

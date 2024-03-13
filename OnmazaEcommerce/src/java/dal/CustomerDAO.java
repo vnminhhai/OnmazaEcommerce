@@ -188,4 +188,11 @@ public class CustomerDAO extends DBContext{
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public boolean matchUsernameAndEmail(String un, String em) {
+        Customer c = getRecordByName(un);
+        if (c==null) return false;
+        else if (!c.getEmail().equalsIgnoreCase(em)) return false;
+        else return true;
+    }
 }

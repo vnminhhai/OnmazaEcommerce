@@ -7,6 +7,14 @@
         <title>Shopping cart</title>
         <%@include file="components/headerLink.html" %>
     </head>
+    <%@page import="model.Customer, dal.CustomerDAO, dal.CartDAO" %>
+    <%
+        Customer c = (Customer)request.getSession().getAttribute("customer");
+        if (c==null) response.sendRedirect("login");
+        else {
+            request.setAttribute("cart", new CartDAO().getCartByID(c.getId()));
+        }
+    %>
     <%@include file="components/header.jsp" %>
     <body>
             <div class="container py-5"></div>

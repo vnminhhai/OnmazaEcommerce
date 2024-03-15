@@ -33,7 +33,7 @@
                             </button>
                         </div>
                         <div class="col-3 m-0">
-                            <img src="getImg?id=${customer.id}&type=user" alt="alt" class="img-fluid pe-5 "/>
+                            <img src="getImg?id=${customer.id}&type=user" alt="alt" class="img-fluid pe-5" id="currentAva"/>
                         </div>
                     </div>
                     <div class="row text-center mt-3">
@@ -112,79 +112,55 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
-                            <form method="POST">
+                              <form method="POST" id="infoform" action="updateinformation">
                                 <div class="form-row m-b-55">
-                                    <div class="name">Name</div>
+                                    <div class="mt-2 form-label">Name</div>
                                     <div class="value">
                                         <div class="row row-space">
-                                            <div class="col-2">
+                                            <div class="col-6">
                                                 <div class="input-group-desc">
-                                                    <input class="input--style-5" type="text" name="first_name">
-                                                    <label class="label--desc">first name</label>
+                                                    <input class="input--style-5 form-control" value="${customer.first_name}" type="text" name="first_name" placeholder="First Name">
                                                 </div>
                                             </div>
-                                            <div class="col-2">
+                                            <div class="col-6">
                                                 <div class="input-group-desc">
-                                                    <input class="input--style-5" type="text" name="last_name">
-                                                    <label class="label--desc">last name</label>
+                                                    <input class="input--style-5 form-control" value="${customer.last_name}" type="text" name="last_name" placeholder="Last Name">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="name">Company</div>
+                                    <div class="mt-2 form-label">Address</div>
                                     <div class="value">
                                         <div class="input-group">
-                                            <input class="input--style-5" type="text" name="company">
+                                            <input class="input--style-5 form-control" value="${customer.address}" type="text" name="address" placeholder="Address">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="name">Email</div>
+                                    <div class="mt-2 form-label">Email</div>
                                     <div class="value">
                                         <div class="input-group">
-                                            <input class="input--style-5" type="email" name="email">
+                                            <input class="input--style-5 form-control" value="${customer.email}" type="email" name="email" placeholder="Email">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row m-b-55">
-                                    <div class="name">Phone</div>
+                                    <div class="mt-2 form-label">Phone</div>
                                     <div class="value">
                                         <div class="row row-refine">
-                                            <div class="col-3">
-                                                <div class="input-group-desc">
-                                                    <input class="input--style-5" type="text" name="area_code">
-                                                    <label class="label--desc">Area Code</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-9">
-                                                <div class="input-group-desc">
-                                                    <input class="input--style-5" type="text" name="phone">
-                                                    <label class="label--desc">Phone Number</label>
-                                                </div>
+                                            <div class="input-group-desc">
+                                                <input class="input--style-5 form-control" type="text" value="${customer.mobile_phone}" name="phone" placeholder="Phone">
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-row p-t-20">
-                                    <label class="label label--block">Are you an existing customer?</label>
-                                    <div class="p-t-15">
-                                        <label class="radio-container m-r-55">Yes
-                                            <input type="radio" checked="checked" name="exist">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">No
-                                            <input type="radio" name="exist">
-                                            <span class="checkmark"></span>
-                                        </label>
                                     </div>
                                 </div>
                             </form>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" onclick="document.getElementById('infoform').submit()">Save changes</button>
                           </div>
                         </div>
                       </div>
@@ -194,22 +170,22 @@
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">New Information</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Update avatar</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
                             <div class="wrapper wrapper--w790">
-                                <form method="POST">
+                                <form method="POST" id="avaform" action="updateavatar" enctype="multipart/form-data">
                                     <div class="form-row p-t-20 text-dark fs-4">
                                         Upload an image (.JPG)
                                     </div>
-                                    <input type="file" accept="image/jpeg" value="Browse files" name="img">
+                                    <input type="file" accept="image/jpeg" name="img" id="imgvalue">
                                 </form> 
                             </div>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary" onclick="document.getElementById('avaform').submit()">Save changes</button>
                           </div>
                         </div>
                       </div>
@@ -218,18 +194,6 @@
                 <div id="div1"></div>
             </div> <!-- container end.// -->
         </section>
-<!--        <script>
-            $(document).ready(function(){
-                $("#ava").click(function(){
-                    $("#div1").load("components/informationForm.html");
-                });
-            });
-            $(document).ready(function(){
-                $("#info").click(function(){
-                    $("#div1").load("components/informationForm.html");
-                });
-            });
-        </script>-->
         <%@include file="components/footerLink.html" %>
     </body>
 </html>

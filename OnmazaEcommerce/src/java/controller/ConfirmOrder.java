@@ -40,64 +40,61 @@ public class ConfirmOrder extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session==null || session.getAttribute("User_Name")==null) {
-            response.sendRedirect("login");
+        if (request.getParameter("clear_cart").equals("false")) {
+        ItemDAO itd = new ItemDAO();
+        VariantDAO vd = new VariantDAO();
+        int id = Integer.parseInt(request.getParameter("item"));
+        int left = vd.getRecordByName(id, request.getParameter("variant")).getStock_amount()-Integer.parseInt(request.getParameter("quantity"));
+        vd.updateAmount(id, request.getParameter("variant"), left);
+        OrderDAO od = new OrderDAO();
+        Item i = itd.getRecordById(id);
+        for (Variant v : i.getVariants()) {
+            if (v.getName().equals(request.getParameter("variant")))
+                v.setStock_amount(Integer.parseInt(request.getParameter("quantity")));
+            else v.setStock_amount(0);
         }
-        else if (request.getParameter("clear_cart").equals("false")) {
-            ItemDAO itd = new ItemDAO();
-            VariantDAO vd = new VariantDAO();
-            int id = Integer.parseInt(request.getParameter("item"));
-            int left = vd.getRecordByName(id, request.getParameter("variant")).getStock_amount()-Integer.parseInt(request.getParameter("quantity"));
-            vd.updateAmount(id, request.getParameter("variant"), left);
-            OrderDAO od = new OrderDAO();
-            Item i = itd.getRecordById(id);
-            for (Variant v : i.getVariants()) {
+        List<Item> l = new ArrayList<>();
+        l.add(i);
+        Detail d = new Detail(l);
+        Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
+                LocalDate.now().plusDays(5), request.getParameter("address"), d,"");
+        od.save(o, ((Customer)session.getAttribute("customer")).getId());
+        request.setAttribute("mess1", "Thanks for trusting our service.");
+        request.setAttribute("mess2", "Your order would come in a few days.");
+        request.getRequestDispatcher("done.jsp").forward(request, response);
+    }
+    else {
+        int cid = ((Customer)session.getAttribute("customer")).getId();
+        ItemDAO itd = new ItemDAO();
+        VariantDAO vd = new VariantDAO();
+        CartDAO cd = new CartDAO();
+        OrderDAO od = new OrderDAO();
+        List<Item> l = new ArrayList<>();
+        for (Item i : cd.getCartByID(cid).getItem_list())
+        {
+            int id = i.getId();
+            String var = i.getVariant();
+            int left = vd.getRecordByName(id, var).getStock_amount()-i.getQuantity();
+            vd.updateAmount(id, var, left);
+            Item ii = itd.getRecordById(id);
+            for (Variant v : ii.getVariants()) {
                 if (v.getName().equals(request.getParameter("variant")))
                     v.setStock_amount(Integer.parseInt(request.getParameter("quantity")));
                 else v.setStock_amount(0);
             }
-            List<Item> l = new ArrayList<>();
             l.add(i);
-            Detail d = new Detail(l);
-            Order o =  new Order(0, ((Customer)session.getAttribute("customer")).getId(), LocalDate.now(),
-                    LocalDate.now().plusDays(5), request.getParameter("address"), d,"");
-            od.save(o, ((Customer)session.getAttribute("customer")).getId());
-            request.setAttribute("mess1", "Thanks for trusting our service.");
-            request.setAttribute("mess2", "Your order would come in a few days.");
-            request.getRequestDispatcher("done.jsp").forward(request, response);
         }
-        else {
-            int cid = ((Customer)session.getAttribute("customer")).getId();
-            ItemDAO itd = new ItemDAO();
-            VariantDAO vd = new VariantDAO();
-            CartDAO cd = new CartDAO();
-            OrderDAO od = new OrderDAO();
-            List<Item> l = new ArrayList<>();
-            for (Item i : cd.getCartByID(cid).getItem_list())
-            {
-                int id = i.getId();
-                String var = i.getVariant();
-                int left = vd.getRecordByName(id, var).getStock_amount()-i.getQuantity();
-                vd.updateAmount(id, var, left);
-                Item ii = itd.getRecordById(id);
-                for (Variant v : ii.getVariants()) {
-                    if (v.getName().equals(request.getParameter("variant")))
-                        v.setStock_amount(Integer.parseInt(request.getParameter("quantity")));
-                    else v.setStock_amount(0);
-                }
-                l.add(i);
-            }
-            Detail d = new Detail(l);
-            Order o =  new Order(0, cid, LocalDate.now(),
-                    LocalDate.now().plusDays(5), request.getParameter("address"), d,"");
-            od.save(o, cid);
-            cd.removeAll(cid);
-            session.setAttribute("cart_item_number", 0);
-            request.setAttribute("mess1", "Thanks for trusting our service.");
-            request.setAttribute("mess2", "Shipment for your order would come soon.");
-            request.getRequestDispatcher("done.jsp").forward(request, response);
-        }
+        Detail d = new Detail(l);
+        Order o =  new Order(0, cid, LocalDate.now(),
+                LocalDate.now().plusDays(5), request.getParameter("address"), d,"");
+        od.save(o, cid);
+        cd.removeAll(cid);
+        session.setAttribute("cart_item_number", 0);
+        request.setAttribute("mess1", "Thanks for trusting our service.");
+        request.setAttribute("mess2", "Shipment for your order would come soon.");
+        request.getRequestDispatcher("done.jsp").forward(request, response);
     }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

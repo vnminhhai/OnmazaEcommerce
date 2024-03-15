@@ -34,24 +34,18 @@ public class AddToCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session==null|| session.getAttribute("User_Name")==null) {
-            session.setAttribute("current", "buy?item_id="+request.getParameter("item"));
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-        else {
-            ItemDAO id = new ItemDAO();
-            int cid = ((Customer)session.getAttribute("customer")).getId();
-            int iid = Integer.parseInt(request.getParameter("item"));
-            String variant = request.getParameter("variant");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            CartDAO cart = new CartDAO();
-            cart.addWithCustomerID(cid, iid, variant, quantity);
-            request.setAttribute("cart_message", "Added");
-            request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item"))));
-            Customer c = (Customer)session.getAttribute("customer");
-            request.getSession().setAttribute("cart_item_number", cart.getCartByID(c.getId()).getItemCount());
-            request.getRequestDispatcher("item.jsp").forward(request, response);
-        }
+        ItemDAO id = new ItemDAO();
+        int cid = ((Customer)session.getAttribute("customer")).getId();
+        int iid = Integer.parseInt(request.getParameter("item"));
+        String variant = request.getParameter("variant");
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+        CartDAO cart = new CartDAO();
+        cart.addWithCustomerID(cid, iid, variant, quantity);
+        request.setAttribute("cart_message", "Added");
+        request.setAttribute("item", id.getRecordById(Integer.parseInt(request.getParameter("item"))));
+        Customer c = (Customer)session.getAttribute("customer");
+        request.getSession().setAttribute("cart_item_number", cart.getCartByID(c.getId()).getItemCount());
+        request.getRequestDispatcher("item.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

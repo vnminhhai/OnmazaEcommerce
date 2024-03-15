@@ -66,6 +66,20 @@
         <url-pattern>/user</url-pattern>
         <url-pattern>/updateavatar</url-pattern>
         <url-pattern>/updateinformation</url-pattern>
+        <url-pattern>/tocart</url-pattern>
+        <url-pattern>/confirm</url-pattern>
+        <url-pattern>/cart</url-pattern>
+        <url-pattern>/changenumber</url-pattern>
+        <url-pattern>/removefromcart</url-pattern>
+        <url-pattern>/order</url-pattern>
+        <url-pattern>/staff</url-pattern>
+        <url-pattern>/admin</url-pattern>
+        <url-pattern>/checkOrder</url-pattern>
+        <url-pattern>/received</url-pattern>
+        <url-pattern>/addItem</url-pattern>
+        <url-pattern>/addVariant</url-pattern>
+        <url-pattern>/resolve</url-pattern>
+        <url-pattern>/manageAccount</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>PermissionFilter1</filter-name>
@@ -73,6 +87,10 @@
     </filter>
     <filter-mapping>
         <url-pattern>/staff</url-pattern>
+        <url-pattern>/checkOrder</url-pattern>
+        <url-pattern>/resolve</url-pattern>
+        <url-pattern>/addItem</url-pattern>
+        <url-pattern>/addVariant</url-pattern>
         <filter-name>PermissionFilter1</filter-name>
     </filter-mapping>
     <filter>
@@ -81,6 +99,8 @@
     </filter>
     <filter-mapping>
         <url-pattern>/admin</url-pattern>
+        <url-pattern>/manageAccount</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
         <filter-name>PermissionFilter2</filter-name>
     </filter-mapping>
     <context-param>

@@ -39,33 +39,27 @@ public class Purchase extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session==null|| session.getAttribute("User_Name")==null) {
-            session.setAttribute("current", "buy?item_id="+request.getParameter("item"));
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        String iraw = request.getParameter("item");
+        if (iraw.equals("cart")) {
+            Customer c = (Customer)session.getAttribute("customer");
+            request.setAttribute("cart", new CartDAO().getCartByID(c.getId()));
+            request.setAttribute("from_cart", true);
+            request.getRequestDispatcher("order.jsp").forward(request, response);
         }
         else {
-            String iraw = request.getParameter("item");
-            if (iraw.equals("cart")) {
-                Customer c = (Customer)session.getAttribute("customer");
-                request.setAttribute("cart", new CartDAO().getCartByID(c.getId()));
-                request.setAttribute("from_cart", true);
-                request.getRequestDispatcher("order.jsp").forward(request, response);
+            String vname = request.getParameter("variant");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            ItemDAO id = new ItemDAO();
+            Item i = id.getRecordById(Integer.parseInt(iraw));
+            for (Variant v : i.getVariants()) {
+                if (v.getName().equals(vname)) v.setStock_amount(quantity);
+                else v.setStock_amount(0);
             }
-            else {
-                String vname = request.getParameter("variant");
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
-                ItemDAO id = new ItemDAO();
-                Item i = id.getRecordById(Integer.parseInt(iraw));
-                for (Variant v : i.getVariants()) {
-                    if (v.getName().equals(vname)) v.setStock_amount(quantity);
-                    else v.setStock_amount(0);
-                }
-                List<Item> l = new ArrayList<>();
-                l.add(i);
-                request.setAttribute("cart", new Cart(l));
-                request.setAttribute("from_cart", false);
-                request.getRequestDispatcher("order.jsp").forward(request, response);
-            }
+            List<Item> l = new ArrayList<>();
+            l.add(i);
+            request.setAttribute("cart", new Cart(l));
+            request.setAttribute("from_cart", false);
+            request.getRequestDispatcher("order.jsp").forward(request, response);
         }
     } 
 

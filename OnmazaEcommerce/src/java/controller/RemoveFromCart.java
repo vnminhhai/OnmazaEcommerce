@@ -32,20 +32,14 @@ public class RemoveFromCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if (session==null|| session.getAttribute("User_Name")==null) {
-            session.setAttribute("current", "cart");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-        else {
-            int iid = Integer.parseInt(request.getParameter("item"));
-            String variant = request.getParameter("variant");
-            int cid = ((Customer)session.getAttribute("customer")).getId();
-            CartDAO cart = new CartDAO();
-            cart.remove(cid, iid, variant);
-            Customer c = (Customer)session.getAttribute("customer");
-            request.getSession().setAttribute("cart_item_number", cart.getCartByID(c.getId()).getItemCount());
-            response.sendRedirect("cart");
-        }
+        int iid = Integer.parseInt(request.getParameter("item"));
+        String variant = request.getParameter("variant");
+        int cid = ((Customer)session.getAttribute("customer")).getId();
+        CartDAO cart = new CartDAO();
+        cart.remove(cid, iid, variant);
+        Customer c = (Customer)session.getAttribute("customer");
+        request.getSession().setAttribute("cart_item_number", cart.getCartByID(c.getId()).getItemCount());
+        response.sendRedirect("cart");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

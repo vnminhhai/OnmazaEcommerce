@@ -25,8 +25,12 @@
                             <p class="text-dark ms-2"> Address: ${customer.address} </p>
                             <p class="text-dark mt-3 ms-2"> Email: ${customer.email} </p>
                             <p class="text-dark ms-2"> Phone number: ${customer.mobile_phone} </p>
-                            <a class="text-primary fs-5 ms-2" href="updateInfo">Update personal info</a>
-                            <a class="text-primary fs-5 ms-5" href="updateAvatar">Upload new avatar</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Update personal info
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                Upload new avatar
+                            </button>
                         </div>
                         <div class="col-3 m-0">
                             <img src="getImg?id=${customer.id}&type=user" alt="alt" class="img-fluid pe-5 "/>
@@ -98,8 +102,134 @@
                             </c:forEach>
                         </tbody>
                     </table>
+
+                    <!-- Modal 1 -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <form method="POST">
+                                <div class="form-row m-b-55">
+                                    <div class="name">Name</div>
+                                    <div class="value">
+                                        <div class="row row-space">
+                                            <div class="col-2">
+                                                <div class="input-group-desc">
+                                                    <input class="input--style-5" type="text" name="first_name">
+                                                    <label class="label--desc">first name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="input-group-desc">
+                                                    <input class="input--style-5" type="text" name="last_name">
+                                                    <label class="label--desc">last name</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Company</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <input class="input--style-5" type="text" name="company">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="name">Email</div>
+                                    <div class="value">
+                                        <div class="input-group">
+                                            <input class="input--style-5" type="email" name="email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row m-b-55">
+                                    <div class="name">Phone</div>
+                                    <div class="value">
+                                        <div class="row row-refine">
+                                            <div class="col-3">
+                                                <div class="input-group-desc">
+                                                    <input class="input--style-5" type="text" name="area_code">
+                                                    <label class="label--desc">Area Code</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="input-group-desc">
+                                                    <input class="input--style-5" type="text" name="phone">
+                                                    <label class="label--desc">Phone Number</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row p-t-20">
+                                    <label class="label label--block">Are you an existing customer?</label>
+                                    <div class="p-t-15">
+                                        <label class="radio-container m-r-55">Yes
+                                            <input type="radio" checked="checked" name="exist">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">No
+                                            <input type="radio" name="exist">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal 2 -->
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">New Information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="wrapper wrapper--w790">
+                                <form method="POST">
+                                    <div class="form-row p-t-20 text-dark fs-4">
+                                        Upload an image (.JPG)
+                                    </div>
+                                    <input type="file" accept="image/jpeg" value="Browse files" name="img">
+                                </form> 
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </main>
+                <div id="div1"></div>
             </div> <!-- container end.// -->
         </section>
+<!--        <script>
+            $(document).ready(function(){
+                $("#ava").click(function(){
+                    $("#div1").load("components/informationForm.html");
+                });
+            });
+            $(document).ready(function(){
+                $("#info").click(function(){
+                    $("#div1").load("components/informationForm.html");
+                });
+            });
+        </script>-->
+        <%@include file="components/footerLink.html" %>
     </body>
 </html>

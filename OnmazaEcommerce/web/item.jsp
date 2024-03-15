@@ -55,7 +55,7 @@
                                 <div class="swiper-slide">
                                     <div class="product-card position-relative">
                                     <div class="image-holder">
-                                        <img src="getImg?id=${requestScope.item.variants[i].image.id}&type=variant" alt="product-item" class="img-fluid" onclick="pick('${requestScope.item.variants[i].name}')">
+                                        <img src="getImg?id=${requestScope.item.variants[i].image.id}&type=variant" alt="product-item" class="img-fluid w-100" style="width:310px; height:400px;" onclick="pick('${requestScope.item.variants[i].name}')">
                                     </div>
                                     <div class="cart-concern position-absolute">
                                       <div class="cart-button d-flex">

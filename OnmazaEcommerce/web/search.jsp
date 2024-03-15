@@ -223,7 +223,7 @@
               <div class="swiper-slide">
                 <div class="product-card position-relative">
                   <div class="image-holder">
-                    <img src="img/product-item10.jpg" alt="product-item" class="img-fluid">
+                      <img src="img/product-item10.jpg" alt="product-item" class="img-fluid">
                   </div>
                   <div class="cart-concern position-absolute">
                     <div class="cart-button d-flex">

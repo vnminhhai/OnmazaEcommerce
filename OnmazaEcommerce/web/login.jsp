@@ -21,13 +21,15 @@
             <div class="container">
                 <main class="card p-3">
                     <form action="login" method="post">
-                        User name: <input name="User_Name" type="text"><br>
-                        Password: <input name="Password" type="password"><br>
-                        <p style="color: red; display: <%= (request.getAttribute("message") == null) ? "none" : "inline" %>;">
-                            <%= request.getAttribute("message") %>
-                            <br>
-                        </p>
-                        <input type="submit" value="Login">
+                        <p class="form-label text-black mb-0 mt-1">User name: </p>
+                        <input class="form-control p-1" name="User_Name" type="text">
+                        
+                        <p class="form-label text-dark mb-0 mt-1">Password: </p>
+                        <input class="form-control p-1" name="Password" type="password">
+                        <div class="text-start">
+                            <p class="text-danger mb-0">${message}</p>
+                            <input class="btn btn-dark mt-2" type="submit" value="Login">
+                        </div>
                     </form>
                     <div class="text-sm flex items-center justify-center gap-1">
                         <span>Don't have account?</span>

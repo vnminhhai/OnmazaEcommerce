@@ -241,4 +241,10 @@ VALUES
  update Customers set Role_ID = 2 where User_Name = 'admin'
  update Customers set Role_ID = 1 where User_Name = 'staff'
 
-/* select * from Customers */
+/*
+	select * from Customers
+	select * from Items
+	select * from Variants
+	update Items set Name='Laptops', Description='?', Price=1000.0 where ID =2
+	update Items set Name=?, Description=?, Price=? where ID =?
+*/

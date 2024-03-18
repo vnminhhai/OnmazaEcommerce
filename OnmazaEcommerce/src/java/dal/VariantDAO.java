@@ -83,4 +83,15 @@ public class VariantDAO extends DBContext{
         }
         return -1;
     }
+    public void updateVariant(int id, String name, Variant v) {
+        String sql = "update Variants set Stock_Amount=?, Name=? where Item_ID="+id+"and Name='"+name+"'";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, v.getStock_amount());
+            ps.setString(2, v.getName());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -164,16 +164,13 @@ public class ItemDAO extends DBContext{
         }
     }
     public void update(int id, Item c) {
-        String sql = "update Items set Name='?', Description='?', "+
-                " Price=?, Category_ID=?)"+
-                " where ID="+id;
+        String sql = "update Items set Name=?, Description=?, Price=? where ID ="+id;
         try {
-            PreparedStatement ps  = connection.prepareStatement(sql); ps.setInt(4, id);
+            PreparedStatement ps  = connection.prepareStatement(sql);
             ps.setString(1, c.getName());
             ps.setString(2, c.getDescription());
             ps.setFloat(3, c.getPrice());
-            ps.setInt(4, c.getCategory().getId());
-            ps.executeUpdate(sql);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ItemDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

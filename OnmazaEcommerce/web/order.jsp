@@ -40,6 +40,7 @@
                         </p>
                         <h2>Total: ${cart.total}</h2>
                         <input type="submit" value="Order">
+                        <p class="text-danger fw-bold">${mess}</p>
                     </form>
                 </main>
             </div>

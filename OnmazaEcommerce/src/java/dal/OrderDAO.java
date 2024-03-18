@@ -138,7 +138,7 @@ public class OrderDAO extends DBContext{
                 String fetch_detail = "select * from Detail where Order_ID ="+oid;
                 ResultSet r = connection.prepareStatement(fetch_detail).executeQuery();
                 while (r.next()) {
-                    item_list.add(new ItemDAO().getRecordById(r.getInt("Order_ID")));
+                    item_list.add(new ItemDAO().getRecordById(r.getInt("Item_ID")));
                 }
                 int s = rs.getInt("Status_ID");
                 Detail detail = new Detail(item_list);

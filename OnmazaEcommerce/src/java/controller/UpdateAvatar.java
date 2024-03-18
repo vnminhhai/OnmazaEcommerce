@@ -37,8 +37,7 @@ public class UpdateAvatar extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String realPath = request.getServletContext().getRealPath("/img/user");
-//        int id = ((Customer)request.getSession().getAttribute("customer")).getId();
-        int id =4;
+        int id = ((Customer)request.getSession().getAttribute("customer")).getId();
         if (!Files.exists(Paths.get(realPath))) {
             Files.createDirectory(Paths.get(realPath));
         }

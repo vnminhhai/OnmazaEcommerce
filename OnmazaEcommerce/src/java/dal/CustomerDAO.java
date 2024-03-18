@@ -126,7 +126,7 @@ public class CustomerDAO extends DBContext{
     }
     public void update(int id, Customer c) {
         String sql = "update Customers set User_Name=?, Password=?, First_Name=?,"+
-                " Last_Name=?, Email=?, Mobile_Phone=?, Address=?, Country=?)"+
+                " Last_Name=?, Email=?, Mobile_Phone=?, Address=?, Country=?"+
                 " where ID="+id;
         String un = c.getUser_name();
         String pass = c.getPassword();
@@ -138,7 +138,6 @@ public class CustomerDAO extends DBContext{
         String phone = c.getMobile_phone();
         try {
             PreparedStatement ps  = connection.prepareStatement(sql);
-            ps.setInt(9, id);
             ps.setString(1, un);
             ps.setString(2, pass);
             ps.setString(3, first);

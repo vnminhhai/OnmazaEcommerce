@@ -9,17 +9,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Add an item</title>
+        <%@include file="../components/headerLink.html" %>
     </head>
     <body>
-        <p>
-            <a href=".${applicationScope.appName}/checkOrder">Check orders</a>
-        </p>
-        <p>
-            <a href=".${applicationScope.appName}/addItem">Add an item</a>
-        </p>
-        <p>
-            <a href=".${applicationScope.appName}/addVariant">Add a variant</a>
-        </p>
+        <%@include file="../components/header.jsp" %>
+        <div class="container mt-5">
+            <p>
+                <a href=".${applicationScope.appName}/checkOrder" >Check orders</a>
+            </p>
+            <p>
+                <a href=".${applicationScope.appName}/addItem">Add an item</a>
+            </p>
+            <p>
+                <a href=".${applicationScope.appName}/addVariant">Add a variant</a>
+            </p>
+        </div>
     </body>
 </html>

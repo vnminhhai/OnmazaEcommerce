@@ -40,7 +40,6 @@ public class ImageRetriver extends HttpServlet{
     throws ServletException, IOException {
         String id = request.getParameter("id");
         String type = request.getParameter("type");
-        System.out.println("Id in imageretirve="+id+", type: "+type);
         String path="";
         String realPath = request.getServletContext().getRealPath("/");
         path = switch (type.toLowerCase().trim()) {

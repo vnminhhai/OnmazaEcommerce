@@ -195,6 +195,7 @@ VALUES
 INSERT INTO Customers (User_Name, Password, First_Name, Last_Name, Email, Mobile_phone, Address, Country)
 VALUES
 	('admin', '$2a$10$Fpbdz7wWS/0RrL6ab9pF/OI6FfOGItV9WA1Fwj6a3EbyQKVpWLmXO', 'Minh', 'Hai', 'haivmhe181099@fpt.edu.vn', '+0848524304', '20/42 thi tran Tien Lang, Tien Lang, Haiphong', 'VN'),
+	('staff', '$2a$10$Fpbdz7wWS/0RrL6ab9pF/OI6FfOGItV9WA1Fwj6a3EbyQKVpWLmXO', 'Thai Le', 'Hieu', 'staff@fpt.edu.vn', '+0849994304', 'phuong Hung Phuc, Vinh, Nghe An', 'VN'),
     ('quynh4', '$2a$10$z1DMLZnjixymhozT9tmhA.FWepT2ub/jLgvo1IwOGufj0BWJvB2vW', 'Nhu Quynh', 'Nguyen Thi', 'nofomtre@gmal.com', '+817263450', 'Viet Doan Tien Du Bac Ninh', 'VN'),
 	('customer', '$2a$10$Fpbdz7wWS/0RrL6ab9pF/OI6FfOGItV9WA1Fwj6a3EbyQKVpWLmXO', 'Kim Long', 'Nguyen', 'longnkhe181500@fpt.edu.vn', '+0848512345', 'Khoai Chau, Hung Yen', 'VN');
 
@@ -209,7 +210,7 @@ VALUES
 INSERT INTO Orders (Customer_ID, Order_Date, Required_Date, Ship_Address, Status_ID)
 VALUES
     (2, '2024-02-10', '2024-02-15', 'Dai Hoc FPT Ha Noi', 1),
-    (2, '2024-02-11', '2024-02-16', 'Viet Doan, Tien Du, Bac Ninh', 2),
+    (3, '2024-02-11', '2024-02-16', 'Viet Doan, Tien Du, Bac Ninh', 2),
     (1, '2024-02-12', '2024-02-17', 'An coffee, Hoa Lac', 1);
 
 -- Inserting data into Detail table
@@ -238,3 +239,6 @@ VALUES
 
  -- Update roles
  update Customers set Role_ID = 2 where User_Name = 'admin'
+ update Customers set Role_ID = 1 where User_Name = 'staff'
+
+/* select * from Customers */

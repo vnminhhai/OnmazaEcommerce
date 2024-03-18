@@ -15,67 +15,64 @@
                 </div> <!-- col end.// -->
 
                 <div class="col-sm-7">
-                    <form action="search" class="search my-3 my-lg-0">
-                        <div class="input-group">
-                            <select name="category" class="form-select bg-gray-light" aria-label="All" style="max-width: 15%">
-                                <option selected>All</option>
-                                <c:forEach items="${categories}" var="c">
-                                    <option value="${c.name}" <c:if test="${c.name==cat}">selected</c:if>>${c.name}</option>
-                                </c:forEach>
-                            </select>
-                            <input type="search" class="form-control" style="width:30%" placeholder="Search" name="keyword" value="${param.keyword}" onkeyup="filterFunction()">
-                            <button class="btn btn-warning-light">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div> <!-- input-group end.// -->
-                    </form> <!-- search-wrap end.// -->
+                    <div class="text-light text-center">
+                        <div class="widget-header mx-2 text-center" style="min-width:44px">
+                            <a href="" class="d-inline-block align-middle">
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-bar-chart"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Profile </small>
+                            </a>
+                        </div>
+
+                        <div class="widget-header mx-2 text-center" style="min-width: 44px;">
+                            <a href="" class="d-inline-block align-middle">
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-newspaper"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Logout </small>
+                            </a>
+                        </div>
+                        
+                        <div class="widget-header mx-2 text-center" style="min-width:44px">
+                            <a href="" class="d-inline-block align-middle">
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-bar-chart"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Profile </small>
+                            </a>
+                        </div>
+
+                        <div class="widget-header mx-2 text-center" style="min-width: 44px;">
+                            <a href="" class="d-inline-block align-middle">
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-newspaper"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Logout </small>
+                            </a>
+                        </div>
+                    </div>
                 </div> <!-- col end.// -->
 
                 <div class="col-sm-3">
 
                     <!-- widgets-wrap  -->
                     <div class="text-light text-center">
-                        <c:choose>
-                            <c:when test="${sessionScope.customer == null}">
-                                <div class="widget-header mx-2 text-center" style="min-width:44px">
-                                    <a href="login" class="d-inline-block align-middle">
-                                        <b>Login</b>
-                                    </a>
-                                </div>
+                        <div class="widget-header mx-2 text-center" style="min-width: 44px;">
+                            <a href="cart" class="d-inline-block align-middle">
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-shopping-cart"></i> </span>
+                                <c:if test="${cart_item_number>0}">
+                                    <span class="badge rounded-pill badge-notification bg-danger position-fixed px-1">${cart_item_number}</span>
+                                </c:if>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Cart </small>
+                            </a>
+                        </div>
 
-                                <div class="widget-header mx-2 text-center" style="min-width: 44px;">
-                                    <a href="register" class="d-inline-block align-middle">
-                                        <b>Register</b>
-                                    </a>
-                                </div>
-                            </c:when>
-                            <c:otherwise>
-                                <div class="widget-header mx-2 text-center" style="min-width: 44px;">
-                                    <a href="cart" class="d-inline-block align-middle">
-                                        <span class="fs-5 d-inline-block"> <i class="fa fa-shopping-cart"></i> </span>
-                                        <c:if test="${cart_item_number>0}">
-                                            <span class="badge rounded-pill badge-notification bg-danger position-fixed px-1">${cart_item_number}</span>
-                                        </c:if>
-                                        <small style="max-width:80px;" class="d-block text-truncate"> Cart </small>
-                                    </a>
-                                </div>
+                        <div class="widget-header mx-2 text-center" style="min-width:44px">
+                            <a href="user" class="d-inline-block align-middle">
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-user"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Profile </small>
+                            </a>
+                        </div>
 
-                                <div class="widget-header mx-2 text-center" style="min-width:44px">
-                                    <a href="user" class="d-inline-block align-middle">
-                                        <span class="fs-5 d-inline-block"> <i class="fa fa-user"></i> </span>
-                                        <small style="max-width:80px;" class="d-block text-truncate"> Profile </small>
-                                    </a>
-                                </div>
-
-                                <div class="widget-header mx-2 text-center" style="min-width: 44px;">
-                                    <a href="logout" class="d-inline-block align-middle">
-                                        <span class="fs-5 d-inline-block"> <i class="fas fa-sign-out-alt"></i> </span>
-                                        <small style="max-width:80px;" class="d-block text-truncate"> Logout </small>
-                                    </a>
-                                </div>
-
-                            </c:otherwise>
-                        </c:choose>
+                        <div class="widget-header mx-2 text-center" style="min-width: 44px;">
+                            <a href="logout" class="d-inline-block align-middle">
+                                <span class="fs-5 d-inline-block"> <i class="fas fa-sign-out-alt"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Logout </small>
+                            </a>
+                        </div>
                     </div>
                 </div> <!-- col end.// -->
             </div> <!-- row end.// -->

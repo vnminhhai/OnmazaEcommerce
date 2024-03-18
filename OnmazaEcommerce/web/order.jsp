@@ -24,23 +24,42 @@
                     <h1>Confirm your order</h1>
                     <form action="confirm" method="get">
                         <input type="hidden" value="${from_cart}" name="clear_cart">
-                        <c:forEach items="${cart.item_list}" var="item">
-                            <p>Item: ${item.name} (${item.variant})</p>
-                            <p>${item.description}</p>
-                            <p>Price: ${item.price}</p>
-                            <p>Quantity: ${item.quantity}</p>
-                            <input type="hidden" value="${item.id}" name="item">
-                            <input type="hidden" value="${item.variant}" name="variant">
-                            <input type="hidden" value="${item.quantity}" name="quantity">
-                        </c:forEach>
-                        <p>Ship Address: <input type="text" name="address" value="<%=((Customer)session.getAttribute("customer")).getAddress()%>"></p>
-                        <p>Payment:
-                            <input type="radio" name="pay" value="After" checked/> Pay after shipment
-                            <input type="radio" name="pay" value="Before" /> Pay now
-                        </p>
-                        <h2>Total: ${cart.total}</h2>
-                        <input type="submit" value="Order">
-                        <p class="text-danger fw-bold">${mess}</p>
+                        <table class="table table-hover">
+                            <thead>
+                                <th>Item</th>
+                                <th>Variant</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                            </thead>
+                            <c:forEach items="${cart.item_list}" var="item">
+                                <tr>
+                                    <td>${item.name}</td>
+                                    <td>${item.variant}</td>
+                                    <td>${item.description}</td>
+                                    <td>${item.price}</td>
+                                    <td>${item.quantity}</td>
+                                    <input type="hidden" value="${item.id}" name="item">
+                                    <input type="hidden" value="${item.variant}" name="variant">
+                                    <input type="hidden" value="${item.quantity}" name="quantity">
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <div class="row mb-3">
+                            <p class="form-label col-2 text-center text-black fw-bold mt-2">Ship Address: </p>
+                            <div class="col-5 pe-5">
+                                <input class="form-control" type="text" name="address" value="<%=((Customer)session.getAttribute("customer")).getAddress()%>">
+                            </div>
+                            <div class="col-5 d-flex justify-content-around">
+                                <input type="radio" class="btn-check" name="pay" id="option1" autocomplete="off" checked>
+                                <label class="btn btn-secondary" for="option2">Pay after shipment</label>
+                                <input type="radio" class="btn-check" name="pay" id="option2" autocomplete="off" disabled>
+                                <label class="btn btn-secondary" for="option2">Pay now</label>
+                            </div>
+                        </div>
+                                <h2 class="text-start">Total: ${cart.total}</h2>
+                                <input type="submit" value="Order" class="btn btn-black">
+                        <p class="text-danger fw-bold mt-5">${mess}</p>
                     </form>
                 </main>
             </div>

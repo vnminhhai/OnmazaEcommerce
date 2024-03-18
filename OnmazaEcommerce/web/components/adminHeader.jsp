@@ -16,31 +16,31 @@
 
                 <div class="col-sm-7">
                     <div class="text-light text-center">
-                        <div class="widget-header mx-2 text-center" style="min-width:44px">
+                        <div class="widget-header mx-5 px-4 text-center" style="min-width:44px">
                             <a href="" class="d-inline-block align-middle">
                                 <span class="fs-5 d-inline-block"> <i class="fa fa-bar-chart"></i> </span>
-                                <small style="max-width:80px;" class="d-block text-truncate"> Profile </small>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Statistic </small>
                             </a>
                         </div>
 
-                        <div class="widget-header mx-2 text-center" style="min-width: 44px;">
+                        <div class="widget-header mx-5 px-4 text-center" style="min-width: 44px;">
                             <a href="" class="d-inline-block align-middle">
                                 <span class="fs-5 d-inline-block"> <i class="fa fa-newspaper"></i> </span>
-                                <small style="max-width:80px;" class="d-block text-truncate"> Logout </small>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Dashboard </small>
                             </a>
                         </div>
                         
-                        <div class="widget-header mx-2 text-center" style="min-width:44px">
+                        <div class="widget-header mx-5 px-4 text-center" style="min-width:44px">
                             <a href="" class="d-inline-block align-middle">
-                                <span class="fs-5 d-inline-block"> <i class="fa fa-bar-chart"></i> </span>
-                                <small style="max-width:80px;" class="d-block text-truncate"> Profile </small>
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-id-card"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Manage account </small>
                             </a>
                         </div>
 
-                        <div class="widget-header mx-2 text-center" style="min-width: 44px;">
+                        <div class="widget-header mx-5 px-4 text-center" style="min-width: 44px;">
                             <a href="" class="d-inline-block align-middle">
-                                <span class="fs-5 d-inline-block"> <i class="fa fa-newspaper"></i> </span>
-                                <small style="max-width:80px;" class="d-block text-truncate"> Logout </small>
+                                <span class="fs-5 d-inline-block"> <i class="fa fa-sitemap"></i> </span>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Features </small>
                             </a>
                         </div>
                     </div>

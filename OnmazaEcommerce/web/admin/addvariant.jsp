@@ -11,8 +11,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add a variant</title>
+        <%@include file="../components/headerLink.html" %>
     </head>
     <body>
+        <%@include file="../components/header.jsp" %>
         <form action="addVariant" method="post" enctype="multipart/form-data">
             <p>
                 Item:

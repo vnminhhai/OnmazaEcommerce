@@ -194,10 +194,9 @@ VALUES
 -- Inserting data into Customers table
 INSERT INTO Customers (User_Name, Password, First_Name, Last_Name, Email, Mobile_phone, Address, Country)
 VALUES
-	('admin', '1', 'Minh', 'Hai', 'haivmhe181099@fpt.edu.vn', '+0848524304', '20/42 thi tran Tien Lang, Tien Lang, Haiphong', 'VN'),
-    ('john123', 'pass123', 'John', 'Smith', 'john.smith@example.com', '+1234567890', '123 Main St', 'USA'),
-    ('sarah89', 'sarah123', 'Sarah', 'Johnson', 'sarah.johnson@example.com', '+9876543210', '456 Elm St', 'USA'),
-    ('david22', 'david456', 'David', 'Brown', 'david.brown@example.com', '+5555555555', '789 Oak Ave', 'Canada');
+	('admin', '$2a$10$Fpbdz7wWS/0RrL6ab9pF/OI6FfOGItV9WA1Fwj6a3EbyQKVpWLmXO', 'Minh', 'Hai', 'haivmhe181099@fpt.edu.vn', '+0848524304', '20/42 thi tran Tien Lang, Tien Lang, Haiphong', 'VN'),
+    ('quynh4', '$2a$10$z1DMLZnjixymhozT9tmhA.FWepT2ub/jLgvo1IwOGufj0BWJvB2vW', 'Nhu Quynh', 'Nguyen Thi', 'nofomtre@gmal.com', '+817263450', 'Viet Doan Tien Du Bac Ninh', 'VN'),
+	('customer', '$2a$10$Fpbdz7wWS/0RrL6ab9pF/OI6FfOGItV9WA1Fwj6a3EbyQKVpWLmXO', 'Kim Long', 'Nguyen', 'longnkhe181500@fpt.edu.vn', '+0848512345', 'Khoai Chau, Hung Yen', 'VN');
 
 -- Inserting data into Status table
 INSERT INTO Status (ID, Label)
@@ -209,9 +208,9 @@ VALUES
 -- Inserting data into Orders table
 INSERT INTO Orders (Customer_ID, Order_Date, Required_Date, Ship_Address, Status_ID)
 VALUES
-    (1, '2024-02-10', '2024-02-15', '123 Main St, USA', 1),
-    (2, '2024-02-11', '2024-02-16', '456 Elm St, USA', 2),
-    (3, '2024-02-12', '2024-02-17', '789 Oak Ave, Canada', 1);
+    (2, '2024-02-10', '2024-02-15', 'Dai Hoc FPT Ha Noi', 1),
+    (2, '2024-02-11', '2024-02-16', 'Viet Doan, Tien Du, Bac Ninh', 2),
+    (1, '2024-02-12', '2024-02-17', 'An coffee, Hoa Lac', 1);
 
 -- Inserting data into Detail table
 INSERT INTO Detail (Order_ID, Item_ID, Unit_Prices, Quantity)

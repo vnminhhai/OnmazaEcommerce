@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="col-8 text-dark">
-                                <p class="fw-bold mt-2 text-dark">${c.name}</p>
+                                <p class="fw-bold mt-2 text-dark m-0 fs-3"><a class="m-0" href="buy?item_id=${c.id}">${c.name}</a></p>
                                 <p class="text-dark">Category: ${c.category.name}</p>
                                 <p class="text-dark">${c.description}</p>
                                 <p class="fw-bold item-price text-dark">Price: <span class="text-primary">${c.price}</span></p>

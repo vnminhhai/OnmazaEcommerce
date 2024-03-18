@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Customer;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -66,7 +67,7 @@ public class Login extends HttpServlet {
             request.setAttribute("message", "User name does not exist");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        else if (c.getPassword().equals(request.getParameter("Password")))
+        else if (BCrypt.checkpw(request.getParameter("Password"),c.getPassword()))
         {
             request.getSession().setAttribute("customer", c);
             request.getSession().setAttribute("User_Name", request.getParameter("User_Name"));

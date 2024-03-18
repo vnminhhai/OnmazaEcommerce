@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Customer;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -57,7 +58,7 @@ public class Register extends HttpServlet {
         String country =(String) request.getAttribute("country");
         String email =(String) request.getAttribute("email");
         String User_Name = (String)request.getAttribute("User_Name");
-        String Password = (String)request.getAttribute("Password");
+        String Password = BCrypt.hashpw((String)request.getAttribute("Password"),BCrypt.gensalt(10));
         CustomerDAO cd = new CustomerDAO();
         
         Customer c = new Customer(0, first_name, last_name, email, phone, address, country, User_Name, Password, 0);

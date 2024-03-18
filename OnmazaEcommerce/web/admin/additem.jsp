@@ -10,9 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Item</title>
+        <title>Add an item</title>
+        <%@include file="../components/headerLink.html" %>
     </head>
     <body>
+        <%@include file="../components/header.jsp" %>
         <form action="addItem" method="post">
             <p>
                 Item name: <input type="text" placeholder="Name" name="name">

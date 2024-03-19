@@ -247,4 +247,5 @@ VALUES
 	select * from Variants
 	update Items set Name='Laptops', Description='?', Price=1000.0 where ID =2
 	update Items set Name=?, Description=?, Price=? where ID =?
+	select * from Detail
 */

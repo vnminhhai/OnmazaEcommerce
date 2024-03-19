@@ -10,9 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manage User accounts</title>
+        <title>Admin site</title>
+        <%@include file="../components/headerLink.html" %>
     </head>
     <body>
+        <%@include file="../components/adminHeader.jsp" %>
         <table>
             <thead>
                 <tr>

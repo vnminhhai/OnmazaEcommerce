@@ -4,6 +4,19 @@
     Author     : ADMIN
 --%>
 
+<%@page import="model.Item" %>
+<%
+   Object displayListObj = request.getAttribute("display_list");
+   int lsize = 0, pageSize=4;
+   if (displayListObj instanceof List) {
+      List<Item> displayList = (List<Item>) displayListObj;
+      lsize = displayList.size();
+   }
+   request.setAttribute("numPage", lsize/pageSize + ((lsize%pageSize==0)? 0:1));
+   request.setAttribute("pageSize", pageSize);
+   if (request.getParameter("page")==null) request.setAttribute("page", 1);
+   else request.setAttribute("page", Integer.parseInt(request.getParameter("page")));
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -109,30 +122,42 @@
                         <input type="submit" class="ms-2 ps-2 m-2" value="Search">
                     </form>
                 </section>
-            
+                
                 <section id="display-section" class="col-sm-9 col-lg-10 m-0 border-0">
                     <h2 class="display-7 text-dark text-uppercase mt-2">Search result:</h2>
-                    <c:forEach items="${requestScope.display_list}" var = "c">
+                    <p class="text-center">Page ${page+1} out of ${numPage}</p>
+                    <c:forEach begin="${page*pageSize}" end="${Math.min(page*pageSize+pageSize, display_list.size()-1)}" var="i">
                         <div class="item-container row">
                             <div class="product-card position-relative col-4">
                                 <div class="image-holder">
-                                    <img src="getImg?id=${c.variants.get(0).image.id}&type=variant" alt="product-item" class="img-fluid" width="80%">
+                                    <img src="getImg?id=${display_list.get(i).variants.get(0).image.id}&type=variant" alt="product-item" class="img-fluid" width="80%">
                                 </div>
                                 <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                                 </div>
                             </div>
                             <div class="col-8 text-dark">
-                                <p class="fw-bold mt-2 text-dark m-0 fs-3"><a class="m-0" href="buy?item_id=${c.id}">${c.name}</a></p>
-                                <p class="text-dark">Category: ${c.category.name}</p>
+                                <p class="fw-bold mt-2 text-dark m-0 fs-3"><a class="m-0" href="buy?item_id=${display_list.get(i).id}">${display_list.get(i).name}</a></p>
+                                <p class="text-dark">Category: ${display_list.get(i).category.name}</p>
                                 <p class="text-dark">${c.description}</p>
-                                <p class="fw-bold item-price text-dark">Price: <span class="text-primary">${c.price}</span></p>
+                                <p class="fw-bold item-price text-dark">Price: <span class="text-primary">${display_list.get(i).price}</span></p>
                                 <form action="buy" method="get">
-                                    <input type="hidden" value="${c.id}" name="item_id">
+                                    <input type="hidden" value="${display_list.get(i).id}" name="item_id">
                                     <input type="submit" value="Detail" class="m-0 btn btn-left btn-gray d-inline-block">
                                 </form>
                             </div>
                         </div>
                     </c:forEach>
+                    <div class="container d-flex justify-content-around mt-3">
+                        <nav aria-label="...">
+                            <ul class="pagination pagination-lg">
+                                <c:forEach begin="0" end="${numPage-1}" var="i">
+                                    <li class="page-item active" aria-current="page">
+                                        <a href="?&page=${i}" class="page-link">${i+1}</a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </nav>
+                    </div>
                 </section>
             </div>
         </div>

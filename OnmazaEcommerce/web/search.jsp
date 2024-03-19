@@ -14,7 +14,7 @@
    }
    request.setAttribute("numPage", lsize/pageSize + ((lsize%pageSize==0)? 0:1));
    request.setAttribute("pageSize", pageSize);
-   if (request.getParameter("page")==null) request.setAttribute("page", 1);
+   if (request.getParameter("page")==null) request.setAttribute("page", 0);
    else request.setAttribute("page", Integer.parseInt(request.getParameter("page")));
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

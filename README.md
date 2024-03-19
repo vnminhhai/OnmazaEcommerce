@@ -44,9 +44,9 @@ Only Users with (or higher) permission can use this features
  - View leaderboard of users and products
 # Preview images
 ## Home page
-![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/afce5668-e76c-4442-8d71-3df9cdd8c0c7)
+![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/61db04ed-68d5-4ca8-9ab9-2cb131c90981)
 ## Search page
-![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/04215de9-a5b1-4dda-8ad3-88c58c1a29e8)
+![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/de7d1434-0761-4e20-a9b3-fb29aa9ae287)
 ## Item detail
 ![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/866dd758-3368-4e91-9beb-7ad89af83c23)
 ## Items add to Cart (login required)

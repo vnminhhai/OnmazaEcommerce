@@ -7,15 +7,15 @@
 <%@page import="model.Item" %>
 <%
    Object displayListObj = request.getAttribute("display_list");
-   int lsize = 0, pageSize=4;
+   int lsize = 0, pageSize=2;
    if (displayListObj instanceof List) {
       List<Item> displayList = (List<Item>) displayListObj;
       lsize = displayList.size();
    }
    request.setAttribute("numPage", lsize/pageSize + ((lsize%pageSize==0)? 0:1));
    request.setAttribute("pageSize", pageSize);
-   if (request.getParameter("page")==null) request.setAttribute("page", 0);
-   else request.setAttribute("page", Integer.parseInt(request.getParameter("page")));
+   if (request.getParameter("page")==null) request.setAttribute("pageNo", 0);
+   else request.setAttribute("pageNo", Integer.parseInt(request.getParameter("page"))-1);
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -123,41 +123,85 @@
                     </form>
                 </section>
                 
-                <section id="display-section" class="col-sm-9 col-lg-10 m-0 border-0">
-                    <h2 class="display-7 text-dark text-uppercase mt-2">Search result:</h2>
-                    <p class="text-center">Page ${page+1} out of ${numPage}</p>
-                    <c:forEach begin="${page*pageSize}" end="${Math.min(page*pageSize+pageSize-1, display_list.size()-1)}" var="i">
-                        <div class="item-container row">
-                            <div class="product-card position-relative col-4">
-                                <div class="image-holder">
-                                    <img src="getImg?id=${display_list.get(i).variants.get(0).image.id}&type=variant" alt="product-item" class="img-fluid" width="80%">
-                                </div>
-                                <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
-                                </div>
-                            </div>
-                            <div class="col-8 text-dark">
-                                <p class="fw-bold mt-2 text-dark m-0 fs-3"><a class="m-0" href="buy?item_id=${display_list.get(i).id}">${display_list.get(i).name}</a></p>
-                                <p class="text-dark">Category: ${display_list.get(i).category.name}</p>
-                                <p class="text-dark">${c.description}</p>
-                                <p class="fw-bold item-price text-dark">Price: <span class="text-primary">${display_list.get(i).price}</span></p>
-                                <form action="buy" method="get">
-                                    <input type="hidden" value="${display_list.get(i).id}" name="item_id">
-                                    <input type="submit" value="Detail" class="m-0 btn btn-left btn-gray d-inline-block">
-                                </form>
-                            </div>
+                <section id="display-section" class="col-sm-9 col-lg-10 m-0 border-0 align-middle">
+                    <c:if test="${numPage==0}">
+                        <div class="align-middle">
+                            <h2 class="display-7 text-dark text-uppercase mt-2 text-center d-block my-auto pt-5">No result.</h2>
                         </div>
-                    </c:forEach>
-                    <div class="container d-flex justify-content-around mt-3">
-                        <nav aria-label="...">
-                            <ul class="pagination pagination-lg">
-                                <c:forEach begin="0" end="${numPage-1}" var="i">
-                                    <li class="page-item active" aria-current="page">
-                                        <a href="?&page=${i}" class="page-link">${i+1}</a>
-                                    </li>
-                                </c:forEach>
-                            </ul>
-                        </nav>
-                    </div>
+                    </c:if>
+                    <c:if test="${numPage!=0}">
+                        <h2 class="display-7 text-dark text-uppercase mt-2">Search result:</h2>
+                        <p class="text-center">Page ${pageNo+1} out of ${numPage}</p>
+                        <c:forEach begin="${pageNo*pageSize}" end="${Math.min(pageNo*pageSize+pageSize-1, display_list.size()-1)}" var="i">
+                            <div class="item-container row">
+                                <div class="product-card position-relative col-4">
+                                    <div class="image-holder">
+                                        <img src="getImg?id=${display_list.get(i).variants.get(0).image.id}&type=variant" alt="product-item" class="img-fluid" width="80%">
+                                    </div>
+                                    <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
+                                    </div>
+                                </div>
+                                <div class="col-8 text-dark">
+                                    <p class="fw-bold mt-2 text-dark m-0 fs-3"><a class="m-0" href="buy?item_id=${display_list.get(i).id}">${display_list.get(i).name}</a></p>
+                                    <p class="text-dark">Category: ${display_list.get(i).category.name}</p>
+                                    <p class="text-dark">${c.description}</p>
+                                    <p class="fw-bold item-price text-dark">Price: <span class="text-primary">${display_list.get(i).price}</span></p>
+                                    <form action="buy" method="get">
+                                        <input type="hidden" value="${display_list.get(i).id}" name="item_id">
+                                        <input type="submit" value="Detail" class="m-0 btn btn-left btn-gray d-inline-block">
+                                    </form>
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <div class="container d-flex justify-content-around mt-3">
+                            <nav aria-label="Page navigation example" class="">
+                                <ul class="pagination pagination justify-content-center">
+                                    <c:if test="${numPage<=6}">
+                                        <li class="page-item disabled">
+                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                        </li>
+                                        <c:forEach begin="1" end="${numPage}" var="i">
+                                            <li class="page-item" aria-current="page">
+                                                <a href="?&page=${i}" class="page-link">${i}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#">Next</a>
+                                        </li>
+                                    </c:if>
+                                    <c:if test="${numPage>6}">
+                                        <li class="page-item ${pageNo==0?'disabled':''}">
+                                            <a class="page-link" href="?&page=1" tabindex="-1" aria-disabled="true">First</a>
+                                        </li>
+                                        <li class="page-item ${pageNo==0?'disabled':''}">
+                                            <a class="page-link" href="?&page=${pageNo}" tabindex="-1" aria-disabled="true">Previous</a>
+                                        </li>
+                                        <c:if test="${pageNo>=2}">
+                                            <li class="page-item">
+                                                <a class="page-link" tabindex="-1" aria-disabled="true">...</a>
+                                            </li>
+                                        </c:if>
+                                        <c:forEach begin="${Math.max(1, pageNo+0)}" end="${Math.min(numPage+0,pageNo+2)}" var="i">
+                                            <li class="page-item" aria-current="page">
+                                                <a href="?&page=${i}" class="page-link">${i}</a>    
+                                            </li>
+                                        </c:forEach>
+                                        <c:if test="${pageNo<=numPage-3}">
+                                            <li class="page-item">
+                                                <a class="page-link" tabindex="-1" aria-disabled="true">...</a>
+                                            </li>
+                                        </c:if>
+                                        <li class="page-item ${pageNo==(numPage-1)?'disabled':''}">
+                                            <a class="page-link" href="?&page=${pageNo+2}" tabindex="-1" aria-disabled="true">Next</a>
+                                        </li>
+                                        <li class="page-item ${pageNo==(numPage-1)?'disabled':''}">
+                                            <a class="page-link" href="?&page=${numPage}" tabindex="-1" aria-disabled="true">Last</a>
+                                        </li>
+                                    </c:if>
+                                </ul>
+                            </nav>
+                        </div>
+                    </c:if>
                 </section>
             </div>
         </div>

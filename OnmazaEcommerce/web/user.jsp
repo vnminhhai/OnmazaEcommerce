@@ -57,18 +57,18 @@
                         </div>
                     </div>
                 </main>
-                <main class="card p-3 mt-lg-5">
-                    <table class="table table-bordered text-center align-middle">
+                <main class="card p-3 mt-5">
+                    <table id="table" class="table table-bordered text-center align-middle">
                         <thead>
                             <tr class="">
                                 <th colspan="6" class="fw-bolder bg-warning-light">Your orders</th>
                             </tr>
                             <tr>
-                                <th>Order date</th>
-                                <th>Required date</th>
-                                <th>Ship address</th>
-                                <th>Status</th>
-                                <th>Received</th>
+                                <th onclick="sortTable(0)" style="cursor: pointer">Order date <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
+                                <th onclick="sortTable(1)" style="cursor: pointer">Required date <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
+                                <th onclick="sortTable(2)" style="cursor: pointer">Ship address <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
+                                <th onclick="sortTable(3)" style="cursor: pointer">Status <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
+                                <th>Confirm</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
@@ -90,7 +90,7 @@
                                         ${o.ship_address}
                                     </td>
                                     <td>
-                                        <span class="badge rounded-pill bg-<c:choose><c:when test="${o.getStatus().toLowerCase().startsWith('p')}">info</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('t')}">warning</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('d')}">success</c:when><c:otherwise>secondary</c:otherwise></c:choose>">${o.status}</span></td>
+                                        <span class="fs-6 badge rounded-pill bg-<c:choose><c:when test="${o.getStatus().toLowerCase().startsWith('p')}">info</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('t')}">warning</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('d')}">success</c:when><c:otherwise>secondary</c:otherwise></c:choose>">${o.status}</span></td>
                                     </td>
                                     <td>
                                         <a role="button" href="received?id=${o.id}" class="btn btn-primary-light ${o.status.toLowerCase().startsWith("t")?"":"disabled"}">Confirm</a>
@@ -195,5 +195,43 @@
             </div> <!-- container end.// -->
         </section>
         <%@include file="components/footerLink.html" %>
+        
+        <script>
+        function sortTable(col) {
+          var table, rows, switching, i, x, y, shouldSwitch;
+          table = document.getElementById("table");
+          switching = true;
+          /*Make a loop that will continue until
+          no switching has been done:*/
+          while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 2; i < (rows.length - 1); i++) {
+              //start by saying there should be no switching:
+              shouldSwitch = false;
+              /*Get the two elements you want to compare,
+              one from current row and one from the next:*/
+              x = rows[i].getElementsByTagName("TD")[col];
+              y = rows[i + 1].getElementsByTagName("TD")[col];
+              //check if the two rows should switch place:
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            }
+            if (shouldSwitch) {
+              /*If a switch has been marked, make the switch
+              and mark that a switch has been done:*/
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }
+          }
+        }
+        </script>
+
     </body>
 </html>

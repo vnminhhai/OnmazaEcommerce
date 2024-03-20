@@ -12,6 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Order;
 
 /**
  *
@@ -28,7 +30,9 @@ public class CheckOrder extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.setAttribute("orders", new OrderDAO().getAllOrdersByStatus(0));
+        OrderDAO od = new OrderDAO();
+        List<Order> l = od.getAllOrdersByStatus(0);
+        request.setAttribute("orders", l);
         request.getRequestDispatcher("admin/CheckOrder.jsp").forward(request, response);
     } 
 

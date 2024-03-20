@@ -42,16 +42,16 @@
                     <label class="form-check-label fs-6" for="flexSwitchCheckChecked">View transporting orders</label>
                 </div>
             </div>
-            <table class="table table-bordered text-center align-middle">
+            <table class="table table-bordered text-center align-middle" id="table">
                 <thead>
                     <tr class="">
                         <th colspan="6" class="fw-bolder bg-warning-light">All orders</th>
                     </tr>
                     <tr>
-                        <th>Order date</th>
-                        <th>Required date</th>
-                        <th>Ship address</th>
-                        <th>Status</th>
+                        <th onclick="sortTable(0)" style="cursor: pointer">Order date <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
+                        <th onclick="sortTable(1)" style="cursor: pointer">Required date <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
+                        <th onclick="sortTable(2)" style="cursor: pointer">Ship address <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
+                        <th onclick="sortTable(3)" style="cursor: pointer">Status <span class="d-inline float-end"><i class="fa fa-filter me-1"></i></span></th>
                         <th>Resolve</th>
                         <th>Detail</th>
                     </tr>
@@ -137,5 +137,41 @@
                 </nav>
             </div>
         </main>
+        <script>
+        function sortTable(col) {
+          var table, rows, switching, i, x, y, shouldSwitch;
+          table = document.getElementById("table");
+          switching = true;
+          /*Make a loop that will continue until
+          no switching has been done:*/
+          while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 2; i < (rows.length - 1); i++) {
+              //start by saying there should be no switching:
+              shouldSwitch = false;
+              /*Get the two elements you want to compare,
+              one from current row and one from the next:*/
+              x = rows[i].getElementsByTagName("TD")[col];
+              y = rows[i + 1].getElementsByTagName("TD")[col];
+              //check if the two rows should switch place:
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            }
+            if (shouldSwitch) {
+              /*If a switch has been marked, make the switch
+              and mark that a switch has been done:*/
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }
+          }
+        }
+        </script>
     </body>
 </html>

@@ -15,19 +15,37 @@
     </head>
     <body>
         <%@include file="../components/adminHeader.jsp" %>
-        <div class="container mt-5">
-            <p>
-                <a href="manageAccount">Add or remove staff</a>
-            </p>
-            <p>
-                <a href="checkOrder">Check orders</a>
-            </p>
-            <p>
-                <a href="addItem">Add an item</a>
-            </p>
-            <p>
-                <a href="addVariant">Add a variant</a>
-            </p>
+        <div class="container mt-5 d-flex justify-content-around">
+            <div class="card p-2 mt-3">
+                <span class="fs-5 d-inline-block">
+                    <i class="fa fa-id-card"></i>
+                    <a href="manageAccount">Add or remove staff</a>
+                </span>
+            </div>
+            <div class="card p-2 mt-3">
+                <span class="fs-5 d-inline-block">
+                    <i class="fa fa-credit-card"></i>
+                    <a href="checkOrder">Check orders</a>
+                </span>
+            </div>
+            <div class="card p-2 mt-3">
+                <span class="fs-5 d-inline-block">
+                    <i class="fa fa-cube"></i>
+                    <a href="updateItem">Update items</a>
+                </span>
+            </div>
+            <div class="card p-2 mt-3">
+                <span class="fs-5 d-inline-block">
+                    <i class="fa fa-plus-square"></i>
+                    <a href="addItem">Add an item</a>
+                </span>
+            </div>
+            <div class="card p-2 mt-3">
+                <span class="fs-5 d-inline-block">
+                    <i class="fa fa-tags"></i>
+                    <a href="addVariant">Add a variant</a>
+                </span>
+            </div>
         </div>
     </body>
 </html>

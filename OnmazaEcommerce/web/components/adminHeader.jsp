@@ -31,9 +31,9 @@
                         </div>
                         
                         <div class="widget-header mx-5 px-4 text-center" style="min-width:44px">
-                            <a href="" class="d-inline-block align-middle">
+                            <a href="${pageContext.request.contextPath}/manageAccount" class="d-inline-block align-middle">
                                 <span class="fs-5 d-inline-block"> <i class="fa fa-id-card"></i> </span>
-                                <small style="max-width:80px;" class="d-block text-truncate"> Manage account </small>
+                                <small style="max-width:80px;" class="d-block text-truncate"> Accounts </small>
                             </a>
                         </div>
 

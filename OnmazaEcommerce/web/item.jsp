@@ -39,7 +39,7 @@
                                 <c:if test="${cart_message!=null}"><p class="text-success">${cart_message}</p></c:if>
                             </div>
                             <div class="text-dark fs-3 text-center">
-                                Quantity: <input type="number" value="1" name="quantity" class="w-25">
+                                Quantity: <input type="number" value="1" name="quantity" class="w-25" min="1">
                                 <br>
                                 <input type="hidden" name="item" value="${item.id}">
                                 <br>

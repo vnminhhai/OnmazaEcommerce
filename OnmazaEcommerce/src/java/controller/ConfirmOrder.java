@@ -45,8 +45,8 @@ public class ConfirmOrder extends HttpServlet {
         VariantDAO vd = new VariantDAO();
         int id = Integer.parseInt(request.getParameter("item"));
         int left = vd.getRecordByName(id, request.getParameter("variant")).getStock_amount()-Integer.parseInt(request.getParameter("quantity"));
-        if (left <0) {
-            request.setAttribute("mess", "You ordered too many items.");
+        if (left <0||Integer.parseInt(request.getParameter("quantity"))<=0) {
+            request.setAttribute("mess", "Invalid number of item.");
             request.getRequestDispatcher("order.jsp").forward(request, response);
             return;
         }

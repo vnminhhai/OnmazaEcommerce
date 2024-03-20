@@ -155,7 +155,8 @@ public class OrderDAO extends DBContext{
         switch (i) {
             case 0: return "Pending";
             case 1: return "Transporting";
-            default: return "Done";
+            case 2: return "Done";
+            default: return "Cancelled";
         }
     }
 }

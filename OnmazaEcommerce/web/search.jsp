@@ -126,7 +126,7 @@
                 <section id="display-section" class="col-sm-9 col-lg-10 m-0 border-0">
                     <h2 class="display-7 text-dark text-uppercase mt-2">Search result:</h2>
                     <p class="text-center">Page ${page+1} out of ${numPage}</p>
-                    <c:forEach begin="${page*pageSize}" end="${Math.min(page*pageSize+pageSize, display_list.size()-1)}" var="i">
+                    <c:forEach begin="${page*pageSize}" end="${Math.min(page*pageSize+pageSize-1, display_list.size()-1)}" var="i">
                         <div class="item-container row">
                             <div class="product-card position-relative col-4">
                                 <div class="image-holder">

@@ -48,10 +48,9 @@
                                 ${o.ship_address}
                             </td>
                             <td>
-                                ${o.status}
-                            </td>
+                                <span class="badge rounded-pill bg-<c:choose><c:when test="${o.getStatus().toLowerCase().startsWith('p')}">info</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('t')}">warning</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('d')}">success</c:when><c:otherwise>secondary</c:otherwise></c:choose>">${o.status}</span></td>
                             <td>
-                                <a href="resolve?id=${o.id}">Resolve</a>
+                                <a href="resolve?id=${o.id}" class="btn btn-primary-light ${o.status.toLowerCase().startsWith("p")?"":"disabled"}">Resolve</a>
                             </td>
                             <td>
                                 <a href="order?id=${o.id}">See Detail</a>

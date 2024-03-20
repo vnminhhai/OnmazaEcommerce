@@ -58,7 +58,7 @@
                     </div>
                 </main>
                 <main class="card p-3 mt-lg-5">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered text-center align-middle">
                         <thead>
                             <tr class="">
                                 <th colspan="6" class="fw-bolder bg-warning-light">Your orders</th>
@@ -90,10 +90,10 @@
                                         ${o.ship_address}
                                     </td>
                                     <td>
-                                        ${o.status}
+                                        <span class="badge rounded-pill bg-<c:choose><c:when test="${o.getStatus().toLowerCase().startsWith('p')}">info</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('t')}">warning</c:when><c:when test="${o.getStatus().toLowerCase().startsWith('d')}">success</c:when><c:otherwise>secondary</c:otherwise></c:choose>">${o.status}</span></td>
                                     </td>
                                     <td>
-                                        <a href="received?id=${o.id}">Confirm</a>
+                                        <a role="button" href="received?id=${o.id}" class="btn btn-primary-light ${o.status.toLowerCase().startsWith("t")?"":"disabled"}">Confirm</a>
                                     </td>
                                     <td>
                                         <a href="order?id=${o.id}">See Detail</a>

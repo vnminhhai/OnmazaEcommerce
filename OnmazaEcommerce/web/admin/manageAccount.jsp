@@ -15,34 +15,35 @@
     </head>
     <body>
         <%@include file="../components/adminHeader.jsp" %>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Permission</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${users}" var="u">
+        <div class="container mt-5">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>${u.id}</td>
-                        <td>${u.first_name} ${u.last_name}</td>
-                        <td>${u.mobile_phone}</td>
-                        <td>${u.address}</td>
-                        <td>
-                            <form action="manageAccount" method="post">
-                                <input type="hidden" value="${u.id}" name="cid">
-                                <input type="number" value="${u.permission}" name="permission">
-                                <input type="submit" value="Change">
-                            </form>
-                        </td>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Permission</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                    <c:forEach items="${users}" var="u">
+                        <tr>
+                            <td>${u.id}</td>
+                            <td>${u.first_name} ${u.last_name}</td>
+                            <td>${u.mobile_phone}</td>
+                            <td>${u.address}</td>
+                            <td>
+                                <form action="manageAccount" method="post">
+                                    <input type="hidden" value="${u.id}" name="cid">
+                                    <input type="number" value="${u.permission}" name="permission">
+                                    <input type="submit" value="Change">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

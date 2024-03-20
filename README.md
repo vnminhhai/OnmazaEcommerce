@@ -14,6 +14,7 @@ The website has 3 role: Customer, Staff and Manager (Admin)
 ## Basic web functions
  - Create new acount
  - Log in to the web as the role of the account
+ - Send an email to retrieve forgotten password
  - Browse and search products
  - Apply filter (category, price, item name) to search for specification products
  - See the detail of a product (Information, Price, Images,...)
@@ -42,11 +43,18 @@ Only Users with (or higher) permission can use this features
  - Choose an image as the default Avatar of all User
  - Read all statistics of the website
  - View leaderboard of users and products
+# Database design
+## Relationship Diagram
+![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/3353c21b-e985-40d8-bb40-44b02a9f575b)
+## Sample Accounts
+### Admin: Username: admin - Password: 1
+### Staff: Username: staff - Password: 1
+### Customer: Username: customer - Password: 1
 # Preview images
 ## Home page
-![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/afce5668-e76c-4442-8d71-3df9cdd8c0c7)
+![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/61db04ed-68d5-4ca8-9ab9-2cb131c90981)
 ## Search page
-![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/04215de9-a5b1-4dda-8ad3-88c58c1a29e8)
+![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/e829b8f0-7d38-463e-a282-5d1f6e5047d8)
 ## Item detail
 ![image](https://github.com/vnminhhai/OnmazaEcommerce/assets/142912018/866dd758-3368-4e91-9beb-7ad89af83c23)
 ## Items add to Cart (login required)

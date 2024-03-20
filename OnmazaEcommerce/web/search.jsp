@@ -104,22 +104,24 @@
                 <section class="col-sm-3 col-lg-2 mb-3 text-start m-0" id="search-section">
                     <div class="fw-bold text-dark fs-4 ps-2">Advanced option: </div>
                     <form>
-                        <div class="d-inline-block m-2 ps-2">
-                            Category:
-                            <select name="category" class="d-inline-block w-50">
+                        <div class="ps-2 my-2 row mt-3 d-flex align-middle">
+                            <div class="form-label col-5 pt-2">Category:</div>
+                            <select name="category" class="col-7 w-50 form-select">
                                 <option value="all">All categories</option>
                                 <c:forEach items="${categories}" var="c">
                                     <option <c:if test="${c.name==cat}">selected</c:if> value="${c.name}">${c.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
-                        <div class="d-inline-block ps-2 m-2">
-                            Min price: <input class="w-50" type="number" name="fromPrice" placeholder="Min">
+                        <div class="ps-2 my-2 row">
+                            <div class="form-label col-5 pt-2">Min price: </div>
+                            <input class="w-50 form-control col-7" type="number" name="fromPrice" placeholder="Min">
                         </div>
-                        <div class="d-inline-block ps-2 m-2">
-                            Max price: <input class="w-50" type="number" name="toPrice" placeholder="Max">
+                        <div class="ps-2 my-2 row">
+                            <div class="form-label col-5 pt-2">Max price: </div>
+                            <input class="w-50 form-control col-7" type="number" name="toPrice" placeholder="Max">
                         </div>
-                        <input type="submit" class="ms-2 ps-2 m-2" value="Search">
+                        <input type="submit" class="ms-2 ps-2 m-2 btn btn-dark" value="Search">
                     </form>
                 </section>
                 

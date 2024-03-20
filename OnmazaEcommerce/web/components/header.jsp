@@ -39,13 +39,13 @@
                             <c:when test="${sessionScope.customer == null}">
                                 <div class="widget-header mx-2 text-center" style="min-width:44px">
                                     <a href="login" class="d-inline-block align-middle">
-                                        <b>Login</b>
+                                        <b class="fs-6">Login</b>
                                     </a>
                                 </div>
 
                                 <div class="widget-header mx-2 text-center" style="min-width: 44px;">
                                     <a href="register" class="d-inline-block align-middle">
-                                        <b>Register</b>
+                                        <b class="fs-6">Register</b>
                                     </a>
                                 </div>
                             </c:when>

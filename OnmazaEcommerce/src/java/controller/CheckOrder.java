@@ -34,7 +34,7 @@ public class CheckOrder extends HttpServlet {
         List<Order> l = od.getAllOrdersByStatus(0);
         request.setAttribute("orders", l);
         request.getRequestDispatcher("admin/CheckOrder.jsp").forward(request, response);
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

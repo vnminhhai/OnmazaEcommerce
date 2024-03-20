@@ -7,7 +7,7 @@
 <%@page import="model.Item" %>
 <%
    Object displayListObj = request.getAttribute("display_list");
-   int lsize = 0, pageSize=2;
+   int lsize = 0, pageSize=4;
    if (displayListObj instanceof List) {
       List<Item> displayList = (List<Item>) displayListObj;
       lsize = displayList.size();
@@ -157,16 +157,16 @@
                             <nav aria-label="Page navigation example" class="">
                                 <ul class="pagination pagination justify-content-center">
                                     <c:if test="${numPage<=6}">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                        <li class="page-item ${pageNo==0?'disabled':''}">
+                                            <a class="page-link" href="?&page=${pageNo}" tabindex="-1" aria-disabled="true">Previous</a>
                                         </li>
                                         <c:forEach begin="1" end="${numPage}" var="i">
                                             <li class="page-item" aria-current="page">
                                                 <a href="?&page=${i}" class="page-link">${i}</a>
                                             </li>
                                         </c:forEach>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
+                                        <li class="page-item ${pageNo==(numPage-1)?'disabled':''}">
+                                            <a class="page-link" href="?&page=${pageNo+2}">Next</a>
                                         </li>
                                     </c:if>
                                     <c:if test="${numPage>6}">
@@ -183,7 +183,7 @@
                                         </c:if>
                                         <c:forEach begin="${Math.max(1, pageNo+0)}" end="${Math.min(numPage+0,pageNo+2)}" var="i">
                                             <li class="page-item" aria-current="page">
-                                                <a href="?&page=${i}" class="page-link">${i}</a>    
+                                                <a href="?&page=${i}" class="page-link">${i}</a>
                                             </li>
                                         </c:forEach>
                                         <c:if test="${pageNo<=numPage-3}">

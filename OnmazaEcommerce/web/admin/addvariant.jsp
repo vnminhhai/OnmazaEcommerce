@@ -15,6 +15,7 @@
     </head>
     <body>
         <%@include file="../components/header.jsp" %>
+        <main class="m-5">
         <form action="addVariant" method="post" enctype="multipart/form-data">
             <p>
                 Item:
@@ -34,6 +35,6 @@
                 Image: <input type="file" accept="image/*" name="image">
             </p>
             <input type="submit" value="Add">
-        </form>
+        </form></main>
     </body>
 </html>

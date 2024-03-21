@@ -15,6 +15,7 @@
     </head>
     <body>
         <%@include file="../components/header.jsp" %>
+        <main class="m-5">
         <form action="addItem" method="post">
             <p>
                 Item name: <input type="text" placeholder="Name" name="name">
@@ -33,6 +34,6 @@
                 </select>
             </p>
             <input type="submit" value="Add">
-        </form>
+        </form></main>
     </body>
 </html>
